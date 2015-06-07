@@ -1,0 +1,755 @@
+
+% *****************************************************************************
+% 	General commands
+% *****************************************************************************
+
+% un ambiente ad hoc per le citazioni
+\newenvironment{citazione}%
+  {\begin{quotation}\small\ignorespaces}%
+  {\end{quotation}}
+
+% [...] ;-)
+\newcommand{\omissis}{[\dots\negthinspace]}
+
+% Indica a LaTeX la cartella dove sono riposti i file delle immagini
+\graphicspath{{./},{./Asymptote/}, {./Images/}, {./Metapost/}}
+
+% Eccezioni all'algoritmo di sillabazione
+\hyphenation{Fortran ma-cro-istru-zio-ne nitro-idrossil-amminico}
+
+% Un ambiente ad hoc per gli approfondimenti 
+\newenvironment{approfondimento}%
+  {\begin{quotation}\small\ignorespaces}%
+  {\end{quotation}}
+
+% i.e.
+\newcommand{\ie}{i.\,e.}
+\newcommand{\Ie}{I.\,e.}
+\newcommand{\eg}{e.\,g.}
+\newcommand{\Eg}{E.\,g.} 
+
+% th
+\newcommand{\ordth}{\textsuperscript{th}}
+
+% Cpp 
+\def\cpp{\mbox{C++}}
+
+% Additional minitoc stuff
+\newif\ifminitoc
+\makeatletter
+\@ifpackageloaded{minitoc}{\minitoctrue}{\minitocfalse}
+\ifminitoc
+  \let\myoldminitoc\minitoc
+  \def\minitoc{
+     \myoldminitoc\mtcskip
+     \@afterheading
+  }
+\fi
+\makeatother
+
+
+% *****************************************************************************
+% 	Additional hyperref stuff
+% *****************************************************************************
+\hypersetup{%
+    colorlinks=true, linktocpage=true, pdfstartpage=1, pdfstartview=FitV,%
+    breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,%
+    plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
+    hypertexnames=true, pdfhighlight=/O,%
+    urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=RoyalBlue, pagecolor=RoyalBlue,%
+   hyperfootnotes=true,%
+% uncomment the following line if you want to have black links (e.g., for printing)
+% urlcolor=Black, linkcolor=Black, citecolor=Black, pagecolor=Black,%
+    pdftitle={\myTitle},%
+    pdfauthor={\textcopyright\ \myName},%
+    pdfsubject={},%
+    pdfkeywords={},%
+    pdfcreator={pdfLaTeX},%
+    pdfproducer={LaTeX con hyperref e ClassicThesis}%
+}
+
+
+\hypersetup{citecolor=webblue}
+
+\newcommand{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+% *****************************************************************************
+% 	Mathematica Packages
+% *****************************************************************************
+
+% A.M.S. standard packages.
+\usepackage{amssymb}
+
+% Numerical sets (amssymb package required).
+\newcommand{\numberset}{\mathbb} 
+\newcommand{\N}{\numberset{N}} 
+\newcommand{\Z}{\numberset{Z}} 
+\newcommand{\Q}{\numberset{Q}} 
+\newcommand{\R}{\numberset{R}} 
+\newcommand{\C}{\numberset{C}} 
+
+% Dirac notation (braket package required).
+\usepackage{braket} 
+\usepackage{functan} 
+\newcommand{\modul}[1]{\mathinner{\vert#1\vert}} 
+\newcommand{\Modul}[1]{\left\vert#1\right\vert} 
+%\newcommand{\norm}[1]{\mathinner{\Vert#1\Vert}}
+%\newcommand{\Norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\conj}[1]{#1^{*}} 
+\newcommand{\adj}[1]{#1^{\dagger}}
+
+% Un ambiente per i sistemi.
+\newenvironment{sistema}%
+  {\left\lbrace\begin{array}{@{}l@{}}}%
+  {\end{array}\right.}
+
+% Cool package.
+\usepackage{cool}
+\makeatletter
+  \Style{ArcTrig=arc}
+  \Style{DSymb={{\operator@font d}}}
+  \Style{DDisplayFunc=inset,DShorten=true}
+  \Style{IntegrateDifferentialDSymb={{\operator@font d}}}
+\makeatother
+
+% 12many package. 
+\usepackage{12many}
+\newOTMstyle[var={k},dots={, \ldots, }]{mydots}{%
+   \getOTMparameter{var}=#1\getOTMparameter{dots}#2%
+}
+\setOTMstyle{mydots}
+
+% Intervals
+\makeatletter
+\DeclareRobustCommand{\genericinterval}[2]{%
+  \@ifstar{\genericinterval@star{#1}{#2}}{\genericinterval@nostar{#1}{#2}}}
+\newcommand{\genericinterval@star}[4]{\mathopen{}\mathclose{\left#1#3,#4\right#2}}
+\newcommand{\genericinterval@nostar}[4]{\mathopen{#1}#3,#4\mathclose{#2}}
+\newcommand{\intervalcc}{\genericinterval[]}
+\newcommand{\intervaloo}{\genericinterval][}
+\newcommand{\intervaloc}{\genericinterval]]}
+\newcommand{\intervalco}{\genericinterval[[}
+\newcommand{\cinterval}{\genericinterval[]}
+\newcommand{\ointerval}{\genericinterval][}
+\newcommand{\commutator}{\genericinterval[]}
+\makeatother
+
+% *****************************************************************************
+% 	Cleveref support for breqn
+% *****************************************************************************
+\usepackage{cleveref}
+
+% *****************************************************************************
+% 	Theorem and Definition Environments.
+% *****************************************************************************
+
+\usepackage{amsthm}                       % A.M.S. package for theorems.
+
+\makeatletter
+  \newtheoremstyle{classicdef}%           % Stile tipografico dei teoremi
+  {11pt}%                                 % Spazio che precede l'enunciato
+  {11pt}%                                 % Spazio che segue l'enunciato
+  {}%                                     % Stile del font dell'enunciato
+  {}%                                     % Rientro (se vuoto, nessun rientro;
+  %                                       % \parindent = rientro dei capoversi)
+  {\scshape}%                             % Font dell'intestazione
+  {:}%                                    % Punteggiatura dopo l'intestazione
+  {.5em}%                                 % Spazio che segue l'intestazione:
+  %                                       % " " = normale spazio inter-parola;
+  %                                       % \newline = a capo
+  {}%                                     % Specifica intestazione enunciato
+\makeatother
+
+\theoremstyle{classicdef}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem*{homework}{Homework}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\renewcommand{\qedsymbol}{\rule{.5em}{.5em}}
+
+% *****************************************************************************
+% 	Exercise environment 
+% *****************************************************************************
+
+\usepackage[framemethod=TikZ]{mdframed}
+
+\tikzstyle{titregris} =
+          [draw=gray, thick, fill=white, shading = exercisetitle, %
+           text=gray, rectangle, rounded corners,
+           right,minimum height=.7cm]
+
+\usetikzlibrary{shadows}
+
+\pgfdeclarehorizontalshading{exercisebackground}{100bp}
+{color(0bp)=(brown!40);
+color(100bp)=(black!5)}
+
+\pgfdeclarehorizontalshading{exercisetitle}{100bp}
+{color(0bp)=(red!40);
+color(100bp)=(black!5)}
+
+\makeatletter
+
+\def\mdf@@exercisepoints{}
+\define@key{mdf}{exercisepoints}{%
+    \def\mdf@@exercisepoints{#1}
+}
+
+\mdf@do@stringoption{problemtitle=={Problema}}
+
+\mdfdefinestyle{exercisestyle}{%
+  singleextra={
+      \node[titregris,xshift=1cm] at (P-|O) %
+           {~\mdf@frametitlefont{\mdf@problemtitle}~};
+      \ifdefempty{\mdf@@exercisepoints}%
+      {}%
+      {\node[titregris,left,xshift=-1cm] at (P)%
+        {~\mdf@frametitlefont{\mdf@@exercisepoints points}~};}%
+  },
+  firstextra={
+      \node[titregris,xshift=1cm] at (P-|O) %
+           {~\mdf@frametitlefont{\mdf@problemtitle}~};
+      \ifdefempty{\mdf@@exercisepoints}%
+      {}%
+      {\node[titregris,left,xshift=-1cm] at (P)%
+        {~\mdf@frametitlefont{\mdf@@exercisepoints points}~};}%
+	   \node[right,xshift=6cm, yshift=0.2cm] at (O)%
+      {{\footnotesize (continua nella prossima pagina\ldots)}~};
+  },
+  secondextra={
+      \node[titregris,xshift=1cm] at (P-|O) %
+           {~\mdf@frametitlefont{\mdf@problemtitle}~};
+      \node[titregris,left,xshift=-1cm] at (P)%
+      {~\mdf@frametitlefont{\small (continuation)}~};%
+  },
+  middleextra={
+      \node[titregris,xshift=1cm] at (P-|O) %
+           {~\mdf@frametitlefont{\mdf@problemtitle}~};
+      \node[titregris,left,xshift=-1cm] at (P)%
+      {~\mdf@frametitlefont{\small (continuation)}~};%
+  },
+  footnoteinside=true,
+  outerlinewidth=1pt,
+  innerlinewidth=1pt,
+  middlelinewidth=1pt,
+  shadow=true,
+  roundcorner=3pt,
+  linecolor=gray,
+  tikzsetting={shading = exercisebackground},
+  innertopmargin=1.2\baselineskip,
+  skipabove={\dimexpr0.5\baselineskip+\topskip\relax},
+  splittopskip=0.8cm,
+  splitbottomskip=0.8cm,
+  needspace=3\baselineskip,
+  frametitlefont=\scshape,%
+  %settings={\global\stepcounter{problem}},
+}
+
+\makeatother
+
+\providecommand{\problemname}{Problem}
+\newcounter{problem}[chapter]
+\setcounter{problem}{0}
+
+\definecolor{hilite}{rgb}{0.2,0.4,0.7}
+\colorlet{problemcolor}{hilite}
+
+\makeatletter
+\renewcommand{\theproblem}{%
+    \ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@problem
+}
+
+\def\Exercise{%
+  \@ifnextchar [%
+      {\@myprobt}%
+      {\@myprob}%
+}
+  
+
+\def\@myprobt[#1]{%
+\refstepcounter{problem}
+\begin{mdframed}[%
+     skipabove=12pt,%
+     skipbelow=12pt,%
+     style=exercisestyle,%
+     frametitlefont=\scshape,%
+     problemtitle=\problemname~\theproblem{}~(#1)
+%     frametitle=Problem~\theproblem{}
+]
+\begingroup
+}
+
+\def\@myprob{%
+\refstepcounter{problem}
+\begin{mdframed}[%
+     skipabove=10pt,%
+     skipbelow=10pt,%
+     style=exercisestyle,%
+     frametitlefont=\scshape,%
+     problemtitle=\problemname~\theproblem{}
+]
+\begingroup
+}
+
+\makeatother
+
+\def\endExercise{\endgroup\end{mdframed}}
+
+% *****************************************************************************
+% 	Solution environment 
+% *****************************************************************************
+\newcommand*{\myfancysym}{\color{hilite}\star}
+
+\newcommand*{\fancybreak}{%
+   \par
+   \nopagebreak\medskip\nopagebreak
+   \noindent\null\hfill$\myfancysym\quad\myfancysym\quad\myfancysym\quad$\hfill\null\par
+   \nopagebreak\medskip\pagebreak[0]%
+}
+
+\newenvironment{Solution}%{%
+{%
+%%\normalfont
+%%\par
+%%\noindent
+%%{\scshape Soluzione.}
+%%}
+   \trivlist\item[\hskip\labelsep{\scshape Soluzione.}]
+}%
+{%
+   \fancybreak%
+   \endtrivlist%
+}
+
+% *****************************************************************************
+% 	Digression environment
+% *****************************************************************************
+\usetikzlibrary{calc,arrows}
+\tikzset{
+    excursus arrow/.style={%
+       line width=2pt,
+       draw=gray!40,
+       rounded corners=2ex,
+    },
+    excursus head/.style={
+       fill=white,
+       font=\bfseries\sffamily,
+       text=gray!80,
+       anchor=base west,
+    },
+ }
+ 
+ \makeatletter
+ \mdf@do@stringoption{digressiontitle=={Digression}}
+ \mdfdefinestyle{digressionarrows}{%
+  singleextra={%
+       \path let \p1=(P), \p2=(O) in (\x2,\y1) coordinate (Q);
+       \path let \p1=(Q), \p2=(O) in (\x1,{(\y1-\y2)/2}) coordinate (M);
+       %\path [excursus arrow, round cap-to]
+       \path [excursus arrow]
+          ($(O)+(5em,0ex)$) -| (M) |- %
+          %($(Q)+(12em,0ex)$) .. controls +(0:16em) and +(185:6em) .. %
+          %++(23em,2ex);
+ 	 ($(Q)+(12em,0ex)$) --  (P);
+          %+(13em,0ex);
+       \node [excursus head] at ($(Q)+(2.5em,-0.75pt)$) {%
+ 	 \mdf@frametitlefont{\mdf@digressiontitle}};},
+  firstextra={%
+       \path let \p1=(P), \p2=(O) in (\x2,\y1) coordinate (Q);
+       \path let \p1=(Q), \p2=(O) in (\x1,{(\y1-\y2)/2}) coordinate (M);
+       \path [excursus arrow]
+          %(O) |- %
+          ($(O)+(5em,0ex)$) -| (M) |- %
+          %($(Q)+(12em,0ex)$) .. controls +(0:16em) and +(185:6em) .. %
+          %++(23em,2ex);
+ 	 ($(Q)+(12em,0ex)$) --  (P);
+       \node [excursus head] at ($(Q)+(2.5em,-2pt)$) {%
+ 	 \mdf@frametitlefont{\mdf@digressiontitle}};},
+       %\node [excursus head] at ($(Q)+(2.5em,-2pt)$) {Digression};},
+  secondextra={%
+       %\path let \p1=(P), \p2=(O) in (\x2,\y1) coordinate (Q);
+       %\path [excursus arrow,round cap-]
+       %   ($(O)+(5em,0ex)$) -| (Q);};
+      \path let \p1=(P), \p2=(O) in (\x2,\y1) coordinate (Q);
+      \path let \p1=(Q), \p2=(O) in (\x1,{(\y1-\y2)/2}) coordinate (M);
+      \path [excursus arrow]
+         %%(O) |- %
+         ($(O)+(5em,0ex)$) -| (M) |- %
+         %($(Q)+(12em,0ex)$) .. controls +(0:16em) and +(185:6em) .. %
+         %++(23em,2ex);
+  ($(Q)+(12em,0ex)$) --  (P);
+  \node [excursus head] at ($(Q)+(2.5em,-2pt)$) {\mdf@frametitlefont{\mdf@digressiontitle{}
+	(continuation)}};},
+ middleextra={%
+      \path let \p1=(P), \p2=(O) in (\x2,\y1) coordinate (Q);
+      \path [excursus arrow]
+          (O) -- (Q);},
+%middlelinewidth=2.5em,middlelinecolor=white,
+   hidealllines=true,
+   %topline=true,
+   innertopmargin=2.5ex,
+   innerbottommargin=2.5ex,
+   innerrightmargin=0ex,
+   innerleftmargin=2ex,
+   %skipabove=0.87\baselineskip,
+   % skipbelow=0.62\baselineskip,
+  %needspace=2\baselineskip,
+ % splittopskip=2.5ex,
+  % splitbottomskip=2.5ex,
+}
+ 
+\makeatother
+
+ 
+\newenvironment{digression}[1][Digressione]%
+{
+   \begin{mdframed}[%
+   style=digressionarrows, 
+   frametitlefont=\scshape,
+   digressiontitle=#1]
+   \begingroup
+}
+{
+\endgroup
+\end{mdframed}
+}
+
+
+% *****************************************************************************
+% 	Vectors 
+% *****************************************************************************
+\usepackage[veceuler]{utvec}
+\MakeRobust\vec
+
+
+% *****************************************************************************
+% 	Biblatex 
+% *****************************************************************************
+
+\renewcommand{\nameyeardelim}{, }
+
+\defbibheading{bibliography}{%
+\cleardoublepage
+\manualmark
+\phantomsection
+%\ifminitoc
+\mtcaddchapter[\numberline{}\tocEntry{\bibname}]
+%\else
+%\addtocontents{toc}{\protect\vspace{\beforebibskip}}
+%\addcontentsline{toc}{chapter}{\numberline{}\tocEntry{\bibname}}
+%\fi
+\myChapter*{\bibname\markboth{\spacedlowsmallcaps{\bibname}}
+{\spacedlowsmallcaps{\bibname}}}}     
+
+% *****************************************************************************
+% 	Caption
+% *****************************************************************************
+\usepackage{caption}                      % Fancy captions and more.
+\DeclareCaptionFont{captioncolor}{\color{hilite}}
+\captionsetup{format=plain,labelsep=period,font=small, labelfont={sc,
+      captioncolor}}
+\captionsetup[table]{skip=\medskipamount} 
+
+
+% *****************************************************************************
+% 	Makeidx, Multicol
+% *****************************************************************************
+\usepackage{varindex}
+\usepackage{toolbox}
+\let\orgtheindex\theindex
+\let\orgendtheindex\endtheindex
+\def\theindex{%
+	\def\twocolumn{\begin{multicols}{2}}%
+	\def\onecolumn{}%
+	\clearpage
+	\orgtheindex
+}
+\def\endtheindex{%
+	\end{multicols}%
+	\orgendtheindex
+}
+
+\makeindex
+
+% *****************************************************************************
+% 	Breqn
+% *****************************************************************************
+\usepackage{mathtools}                    % Add support for cramped,
+					  % mathlap,etc.
+%\usepackage{siunitx}                      % Add support to print SI units
+\usepackage[euler]{flexisym}              % Add support to Euler font
+\usepackage{breqn}                        % Breqn
+
+\makeatletter
+   \def\eqnumsize{\normalfont \Tf@font}   % Add support to Minion Pro
+\makeatother
+
+\setkeys{breqn}{labelprefix={eq:}}
+
+\catcode`\_=8 % for safety
+
+
+\newcommand{\breakingcomma}{%
+  \begingroup
+  \lccode`~=`,
+  \lowercase{\endgroup\expandafter\def\expandafter~\expandafter{~\penalty0 }}}
+
+% *****************************************************************************
+% 	Cleveref support for breqn
+% *****************************************************************************
+
+\makeatletter
+\renewcommand\set@label[2]{\protected@edef\@currentlabel{#2}
+\cref@constructprefix{equation}{\cref@result}%
+\protected@xdef\cref@currentlabel{%
+[equation][\arabic{equation}][\cref@result]\eq@number}
+  %%% Work in progress... Support for hyperref 
+  \hyper@makecurrent{equation}
+  \Hy@raisedlink{\hyper@anchorstart{\@currentHref}}
+  \Hy@raisedlink{\hyper@anchorend}
+}
+\makeatother
+
+      
+
+% *****************************************************************************
+% 	Migliorare il kerning dell'apostrofo coi font MinionPro
+% *****************************************************************************
+\makeatletter 
+\catcode`\'=12 
+\def\qu@te{'} 
+\catcode`'=\active 
+\begingroup 
+\obeylines\obeyspaces% 
+\gdef\@resetactivechars{% 
+\def^^M{\@activechar@info{EOL}\space}% 
+\def {\@activechar@info{space}\space}% 
+}% 
+\endgroup 
+\providecommand{\texorpdfstring}{\@firstoftwo} 
+\protected\def'{\texorpdfstring{\active@quote}{\qu@te}} 
+\def\active@quote{\relax 
+  \ifmmode 
+    \expandafter^\expandafter\bgroup\expandafter\prim@s 
+  \else 
+    \expandafter\futurelet\expandafter\@let@token\expandafter\qu@t@ 
+  \fi} 
+\def\qu@t@{% 
+  \ifx'\@let@token 
+    \qu@te\qu@te\expandafter\@gobble 
+  \else 
+    {}\qu@te{}\penalty\@M\hskip\expandafter\z@skip 
+  \fi} 
+\scantokens\expandafter{% 
+  \expandafter\def\expandafter\pr@m@s\expandafter{\pr@m@s}} 
+\makeatother
+
+% *****************************************************************************
+%	 Margins
+% *****************************************************************************
+% Suggestions from ClassicThesis
+% Palatino 	10pt: 288--312pt | 609--657pt
+% Palatino 	11pt: 312--336pt | 657--705pt
+% Palatino 	12pt: 360--384pt | 768pt
+
+\areaset[current]{336pt}{750pt}
+\setlength{\marginparwidth}{7em}
+\setlength{\marginparsep}{2em}%
+
+% *****************************************************************************
+% Change color of section titles 
+% *****************************************************************************
+
+ \colorlet{seccolor}{brown}
+ %\colorlet{seccolor}{OliveGreen}
+
+%\definecolor{hilite}{rgb}{0.2,0.4,0.7}
+% \colorlet{seccolor}{hilite}
+% sections \FloatBarrier
+    \titleformat{\section}
+    {\relax}{\color{seccolor}\textsc{\MakeTextLowercase{\thesection}}}{1em}{\color{seccolor}\spacedlowsmallcaps}
+    % subsections
+    \titleformat{\subsection}
+    {\relax}{\color{seccolor}\textsc{\MakeTextLowercase{\thesubsection}}}{1em}{\color{seccolor}\normalsize\itshape}
+    % subsubsections
+    \titleformat{\subsubsection}
+    {\relax}{\color{seccolor}\textsc{\MakeTextLowercase{\thesubsubsection}}}{1em}{\color{seccolor}\normalsize\itshape}        
+    % descriptionlabels
+    \renewcommand{\descriptionlabel}[1]{\color{seccolor}\hspace*{\labelsep}\spacedlowsmallcaps{#1}}   % spacedlowsmallcaps textit textsc                  
+
+
+% *****************************************************************************
+% 	Additional setup and packages
+% *****************************************************************************
+
+\hypersetup{citecolor=webbrown}
+\hypersetup{pdfstartpage=1}
+
+\usepackage{nicefrac}
+\usepackage{calligra}
+\usepackage{lettrine}
+\usepackage{paralist}
+\usepackage{cancel}
+
+\usepackage{asymptote}       % Asymptote Graphical Vector Language.
+\begin{asydef}
+defaultpen(fontsize(11pt));
+texpreamble("\usepackage[opticals,onlytext]{MinionPro}");
+texpreamble("\usepackage[small]{eulervm}");
+texpreamble("\usepackage{nicefrac}");
+texpreamble("\usepackage{cool}");
+\end{asydef}
+
+\newcommand*\openquote{\makebox(25,-12){\color{lightgray}\scalebox{5}{``}}}
+\newcommand*\closequote{\makebox(25,-22){\color{lightgray}\scalebox{5}{''}}}
+
+\Crefname{problem}{L'esercizio}{Gli esercizi}%
+\crefname{problem}{l'esercizio}{gli esercizi}%
+
+% *****************************************************************************
+% 	Footmisc
+% *****************************************************************************
+
+\usepackage[perpage, symbol*, stable, multiple]{footmisc}	
+\setlength{\footnotemargin}{.6em}%
+
+\makeatletter
+\newcounter{Hfootnote}%
+  \let\H@@footnotetext\@footnotetext
+  \let\H@@footnotemark\@footnotemark
+  \def\@xfootnotenext[#1]{%
+    \begingroup
+      \csname c@\@mpfn\endcsname #1\relax
+      \unrestored@protected@xdef\@thefnmark{\thempfn}%
+    \endgroup
+    \ifx\@footnotetext\@mpfootnotetext
+      \expandafter\H@@mpfootnotetext
+    \else
+      \expandafter\H@@footnotetext
+    \fi
+  }%
+  \def\@xfootnotemark[#1]{%
+    \begingroup
+      \c@footnote #1\relax
+      \unrestored@protected@xdef\@thefnmark{\thefootnote}%
+    \endgroup
+    \H@@footnotemark
+  }%
+  \let\H@@mpfootnotetext\@mpfootnotetext
+  \long\def\@mpfootnotetext#1{%
+    \H@@mpfootnotetext{%
+      \ifHy@nesting
+        \expandafter\hyper@@anchor\expandafter{%
+          \Hy@footnote@currentHref
+         }{#1}%
+      \else
+        \Hy@raisedlink{%
+          \expandafter\hyper@@anchor\expandafter{%
+            \Hy@footnote@currentHref
+          }{\relax}%
+        }#1%
+      \fi
+    }%
+  }%
+  \long\def\@footnotetext#1{%
+    \H@@footnotetext{%
+      \ifHy@nesting
+        \expandafter\hyper@@anchor\expandafter{%
+          \Hy@footnote@currentHref
+        }{#1}%
+      \else
+        \Hy@raisedlink{%
+          \expandafter\hyper@@anchor\expandafter{%
+            \Hy@footnote@currentHref
+          }{\relax}%
+        }%
+        \let\@currentHref\Hy@footnote@currentHref
+        \let\@currentlabelname\@empty
+        #1%
+      \fi
+    }%
+  }%
+  \def\@footnotemark{%
+    \leavevmode
+    \ifhmode\edef\@x@sf{\the\spacefactor}\nobreak\fi
+    \stepcounter{Hfootnote}%
+    \global\let\Hy@saved@currentHref\@currentHref
+    \hyper@makecurrent{Hfootnote}%
+    \global\let\Hy@footnote@currentHref\@currentHref
+    \global\let\@currentHref\Hy@saved@currentHref
+    \hyper@linkstart{link}{\Hy@footnote@currentHref}%
+    \@makefnmark
+    \hyper@linkend
+    \ifhmode\spacefactor\@x@sf\fi
+    \relax
+  }%
+
+
+\long\def\@footnotetext#1{%
+      \H@@footnotetext{%
+        \ifHy@nesting
+         \hyper@@anchor{\@currentHref}{#1}%
+       \else
+         \Hy@raisedlink{\hyper@@anchor{\@currentHref}{\relax}}#1%
+       \fi
+     }}
+
+
+  \def\@footnotemark{%
+     \leavevmode
+     \ifhmode\edef\@x@sf{\the\spacefactor}\nobreak\fi
+     \H@refstepcounter{Hfootnote}%
+     \hyper@makecurrent{Hfootnote}%
+     \hyper@linkstart{link}{\@currentHref}%
+     \@makefnmark
+     \hyper@linkend
+     \ifhmode\spacefactor\@x@sf\fi
+     \relax
+   }%
+
+ \ifFN@multiplefootnote%
+     \renewcommand*\@footnotemark{%
+      \leavevmode
+      \ifhmode
+        \edef\@x@sf{\the\spacefactor}%
+        \FN@mf@check
+        \nobreak
+      \fi
+      \H@refstepcounter{Hfootnote}%
+      \hyper@makecurrent{Hfootnote}%
+      \hyper@linkstart{link}{\@currentHref}%
+      \@makefnmark
+      \hyper@linkend
+      \FN@mf@prepare
+      \ifhmode\spacefactor\@x@sf\fi
+      \relax%
+    }%
+ \fi
+
+\makeatother
+
+% *****************************************************************************
+% 	Altro
+% *****************************************************************************	
+\def\eqspace{\,}
+\def\erf{\mathrm{erf}}
+\makeatletter
+\newcommand{\Res}[0]{\mathop{\operator@font Res}\nolimits}
+\newcommand{\torder}[0]{%\mathop{\operator@font T}\nolimits}
+\mathop{\kern\z@\operator@font T}%
+\csname nolimits@\endcsname}
+\makeatother
+\def\mat#1{\mathrm{#1}}
+\def\Ltwo{L}
+\usepackage{siunitx}
+\newcommand{\tend}[0]{t^{\prime\prime}}
+\newcommand{\tstart}[0]{t^{\prime}}
+\newcommand{\qstart}[0]{q^{\prime}}
+\newcommand{\qend}[0]{q^{\prime\prime}}
+\newcommand{\pos}[0]{x}
+\newcommand{\n}[0]{N}
+\newcommand{\openone}{\IdentityMatrix}
+\newcommand{\propagator}[4]{K\left( #1, #2; #3, #4 \right)}
+
