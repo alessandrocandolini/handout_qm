@@ -7,32 +7,117 @@
 
 \myChapter{Linear operators in Hilbert spaces}
 
-Operator formulation of non-relativistic quantum mechanics heavily relies on th
+Operator formulation of standard non-relativistic quantum mechanics heavily
+relies on the
 theory of linear operators in Hilber spaces.
-In particular, the spectral theory of self-adjoint operators is a key
+In particular, the spectral theory of self-adjoint operators (bounded and
+unbounded ones) is a key
 ingredient in formulating the basic rules of quantum mechanics.
 This chapter is aimed at providing the necessary mathematical background of functional
-analysis employed by quantum mechanics. 
+analysis employed by non-relativistic quantum mechanics. 
 It is a chapter on mathematics, not on quantum physics.
-The Reader interested in how functional analysis is used to formulate quantum
+The Reader interested in how functional analysis is applied to formulate quantum
 mechanics should jump to the next chapters. 
 
 \section{Banach and Hilber spaces}
 
 Unless stated otherwise, let $\K $ denote equivalently the field of real numbers
-$\R$ or the of complex numbers $\C$.
+$\R$ or the field of complex numbers $\C$.
+(It is possible to develop the theory also for the skew-field of quaternions,
+but this case will not be discussed here to avoid dealing with the
+non-commutativity of quaternionic product.)
 
 \begin{definition}[norm]
    Let $V$ be any linear space over $\K$.
-   A norm on $V$ is any application $\fullfunction{\norm{\cdot}}{V}{\R}$
-   satifying
+   A ``norm'' on $V$ is any application  $V \to \R$  denoted by $\norm{\cdot}$ 
+   %$\fullfunction{\norm{\cdot}}{V}{\R}$
+   satifying the following properties:
    \begin{enumerate}[(a)]
-      \item $\norm{\varphi} \geq 0 $ for any $\varphi \in V$, 
-      \item $\norm{\varphi} = 0$ if and only if $\varphi = 0$,
-      \item $\norm{\alpha \varphi} = \abs{\alpha} \norm{\varphi}$ for all
+      \item 
+	 \label{item:norm1}
+	 \begin{math}
+	    \norm{\varphi} \geq 0  \condition{$\forall \varphi \in V$}
+	 \end{math},
+      \item 
+	 \label{item:norm2}
+	 $\norm{\varphi} = 0$ if and only if $\varphi = 0$,
+      \item 
+	 \label{item:norm3}
+	 $\norm{\alpha \varphi} = \abs{\alpha} \norm{\varphi}$ for all
 	 $\alpha \in \K$ and $\varphi \in V$,
-      \item $\norm{\varphi + \psi} \leq \norm{
+      \item 
+	 \label{item:norm4}
+	 $\norm{\varphi + \psi} \leq \norm{
 	    \varphi} + \norm{\psi}$, for all $\varphi$ and $\psi$ in $V$ (this
 	 is called ``triangle inequality'')
    \end{enumerate}
 \end{definition}
+
+\begin{definition}[normed linear space]
+   A ``normed linear space'' is a pair $(V, \norm{\cdot})$ where $V$ is a
+   linear  space and $\norm{\cdot}$ is any norm on $V$.
+\end{definition}
+
+\begin{theorem}
+   Let $(V, \norm{\cdot})$ be any normed linear space. 
+   Let $\fullfunction{d}{V \times V}{\R}$ be the function defined by
+   \begin{dmath}[label={distance-norm}]
+      d( \varphi, \psi) = \norm{\varphi - \psi}
+   \end{dmath}.
+   Then,  $(V,d)$ is a metric space.
+   The metric in \cref{eq:distance-norm} is called the ``metric induced by the
+   norm'' on $V$.
+\end{theorem}
+
+\begin{proof}
+   We need to prove that \cref{eq:distance-norm} defines a metric over $V$,
+   \ie, we need to show that $d$  satisfies:
+   \begin{enumerate}[(a)]
+      \item 
+	 \label{item:distance1}
+	 \begin{math}
+	    d(\varphi,\psi) \geq 0 \condition{$\forall (\varphi,\psi)\in V
+	       \times V$}
+	 \end{math},
+      \item 
+	 \label{item:distance2}
+	 $d(\varphi,\psi) = 0$ if and only if $\varphi = \psi$,
+      \item 
+	 \label{item:distance3}
+%	    $d(\varphi,\psi) = d(\psi,\varphi)$ for all 
+	 \begin{math}
+	    d(\varphi,\psi) = d(\psi,\varphi) \condition{$\forall (\varphi,\psi)\in V
+	       \times V$}
+	 \end{math},
+      \item 
+	 \label{item:distance4}
+	 \begin{math}
+	    d(\varphi,\psi) \leq  d(\psi,\eta) + d(\eta,
+	    \psi)\condition{$\forall (\varphi,\psi,\eta)\in V
+	       \times V\times V $}
+	 \end{math} (the ``triangle inequality'').
+   \end{enumerate}
+   \Cref{item:distance1} follows from property~\ref{item:norm1} of the norm.
+   \Cref{item:distance2} follows from property~\ref{item:norm2} of the norm,
+   since
+      $\norm{\varphi - \psi} = 0 $ if and only if $\varphi - \psi = 0$, \ie, if
+      and only if $\varphi = \psi$.
+      \Cref{item:distance3} follows from property~\ref{item:norm3} of the norm,
+      since 
+      \begin{dmath*}[compact]
+	 d(\varphi, \psi) = 
+      \norm{\varphi - \psi} = \norm { - ( \psi - \varphi)} = \abs{-1}
+      \norm{\psi-\varphi} = \norm{\psi-\varphi} 
+      = d(\psi,\varphi) 
+   \end{dmath*}.
+      \Cref{item:distance4}  follows from property~\cref{item:norm4} of the
+      norm, since
+      \begin{dmath*}[compact]
+	 d(\varphi, \psi) = 
+	 \norm{\varphi - \psi } = \norm{\varphi - \eta + \eta - \psi}
+	 \leq \norm{\varphi - \eta} + \norm{\eta - \psi} 
+	 = 
+	 d(\varphi, \eta) + d(\eta, \psi) 
+      \end{dmath*}.
+      This completes the proof.
+\end{proof}
