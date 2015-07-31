@@ -36,8 +36,8 @@
 % *****************************************************************************
 
 \newcommand{\myName}{Alessandro Candolini}
-\newcommand{\myTitle}{Quantum Field Theory}
-\newcommand{\mySubTitle}{Path Integral Methods and Renormalization}
+\newcommand{\myTitle}{Non-Relativistic Quantum Mechanics}
+\newcommand{\mySubTitle}{}
 \newcommand{\myDegree}{}%Tesi di laurea}
 \newcommand{\myUni}{University of Trieste}
 \newcommand{\myFaculty}{Facolt\`a di Scienze Matematiche, Fisiche e Naturali}
@@ -130,7 +130,7 @@ ibidtracker=true]{biblatex}
 
 %\usepackage{arsclassica}                  % Modifica aspetti di ClassicThesis
 
-\input{my-impostazioni-qm}           % Un file personale:
+\input{my-new-impostazioni}           % Un file personale:
 					  % permette di mantenere ordinato il
 					  % sorgente
 
@@ -150,7 +150,6 @@ ibidtracker=true]{biblatex}
 \pagestyle{scrheadings} 
 \input{FrontBackmatter/TableOfContents}
 \input{FrontBackmatter/Preface}
-\input{FrontBackmatter/Aphorisms}
 \cleardoublepage
 % *****************************************************************************
 % Materiale principale
@@ -159,23 +158,26 @@ ibidtracker=true]{biblatex}
 \pagenumbering{arabic}
 \cleardoublepage
 \cleardoublepage
-\part{Complements of non-relativistic quantum mechanics}
+\part{The basis}
 \input{Chapters/Chapter1}
+\input{Chapters/Chapter2}
+\input{Chapters/Chapter3}
+\input{Chapters/Chapter4}
 \cleardoublepage
-\part{Renormalization}
-%\input{Chapters/Chapter2}
-%\input{Chapters/Chapter3}
-%\input{Chapters/Chapter4}
-%\input{Chapters/Chapter5}
-%\input{Chapters/Chapter6}
+\part{The core}
+\input{Chapters/Chapter5}
+\input{Chapters/Chapter6}
+\input{Chapters/Chapter7}
+\input{Chapters/Chapter8}
 \cleardoublepage
-\part{Non-abelian gauge theories}
+\part{Advanced topics}
+\input{Chapters/Chapter9}
+\input{Chapters/Chapter10}
+\input{Chapters/Chapter11}
+\input{Chapters/Chapter12}
 \cleardoublepage
 \part{Appendices}
 \appendix
-\input{Chapters/AppendixA}
-\input{Chapters/AppendixB}
-\input{Chapters/AppendixC}
 %\input{Chapters/AppendixD}
 %\input{Chapters/AppendixE}
 % *****************************************************************************

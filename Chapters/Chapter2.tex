@@ -5,8 +5,34 @@
 
 
 
-\myChapter{Spectral theory of linear operators in Hilbert spaces}
+\myChapter{Linear operators in Hilbert spaces}
 
-%\minitoc\mtcskip
+Operator formulation of non-relativistic quantum mechanics heavily relies on th
+theory of linear operators in Hilber spaces.
+In particular, the spectral theory of self-adjoint operators is a key
+ingredient in formulating the basic rules of quantum mechanics.
+This chapter is aimed at providing the necessary mathematical background of functional
+analysis employed by quantum mechanics. 
+It is a chapter on mathematics, not on quantum physics.
+The Reader interested in how functional analysis is used to formulate quantum
+mechanics should jump to the next chapters. 
 
+\section{Banach and Hilber spaces}
 
+Unless stated otherwise, let $\K $ denote equivalently the field of real numbers
+$\R$ or the of complex numbers $\C$.
+
+\begin{definition}[norm]
+   Let $V$ be any linear space over $\K$.
+   A norm on $V$ is any application $\fullfunction{\norm{\cdot}}{V}{\R}$
+   satifying
+   \begin{enumerate}[(a)]
+      \item $\norm{\varphi} \geq 0 $ for any $\varphi \in V$, 
+      \item $\norm{\varphi} = 0$ if and only if $\varphi = 0$,
+      \item $\norm{\alpha \varphi} = \abs{\alpha} \norm{\varphi}$ for all
+	 $\alpha \in \K$ and $\varphi \in V$,
+      \item $\norm{\varphi + \psi} \leq \norm{
+	    \varphi} + \norm{\psi}$, for all $\varphi$ and $\psi$ in $V$ (this
+	 is called ``triangle inequality'')
+   \end{enumerate}
+\end{definition}
