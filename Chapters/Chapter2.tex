@@ -477,16 +477,16 @@ product.
    Such norm  is the ``norm induced by the inner product''.
    Before proving this, we need a preliminary but extremely important result,
    which goes under the name of 
-Cauchy–Schwarz inequality.
+Cauchy-Schwarz inequality.
 
-Cauchy–Schwarz inequality is of major importance. 
+Cauchy-Schwarz inequality is of major importance. 
 It is a key ingredient in several proofs of functional analysis. 
 It has important implications also outside the realm of analysis. 
 For example, the general formulation of the Heisenberg uncertainty principle in
 quantum mechanics (or the analogous time-bandwidth uncertainty principle for
 temporal signal
 transmission) is derived
-using the Cauchy–Schwarz inequality.
+using the Cauchy-Schwarz inequality.
 \begin{theorem}[Cauchy-Schwarz inequality]
    Let 
    \graffito{Cauchy-Schwarz inequality}
@@ -524,3 +524,31 @@ using the Cauchy–Schwarz inequality.
    \cref{item:norm1,item:norm2,item:norm3,item:norm4} of the
    definition of the norm.
 \end{proof}
+
+\begin{theorem}
+   Let 
+   \graffito{Continuity of inner product}
+   $(X, \braket{\cdot|\cdot})$ be an inner product space over $\K$. 
+   $\braket{\cdot}{\cdot}$ is a continuous function of both arguments.
+\end{theorem}
+
+The following result is basic to establish the later theorem
+\begin{lemma}[polarization identity]
+\end{lemma}
+\begin{theorem}[parallelogram law]
+   Let 
+   \graffito{Parallelogram law}
+   $(X, \norm{\cdot})$ be a normed vector space over $\K$. 
+   The norm $\norm{\cdot}$ comes from an inner product \emph{if and only if}
+   the following identity (known as ``parallelogram law'') holds:
+   \begin{dmath}
+      \norm{\varphi + \psi}^{2} + \norm{\varphi - \psi}^{2} = 2
+      \norm{\varphi}^{2} + \norm{\psi}^{2}
+      \condition*{\forall (\varphi,\psi)\in X \times X}
+   \end{dmath}.
+\end{theorem}
+
+\section{Canonical prototypes of Banach and Hilbert spaces}
+
+\section{Orthogonality}
+\section{Orthonormal basis}
