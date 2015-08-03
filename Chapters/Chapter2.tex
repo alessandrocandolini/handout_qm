@@ -7,6 +7,7 @@
 
 \myChapter{Linear operators in Hilbert spaces}
 
+\begin{refsection}
 Operator formulation of standard non-relativistic quantum mechanics heavily
 relies on the
 theory of linear operators in Hilber spaces.
@@ -24,6 +25,11 @@ As we shall see, physicists are customary to employ Dirac's notation, a powerful
 mnemonic notation which naively speaking however lacks mathematical rigour; a
 dictionary is possible to translate Dirac notation to the rigorous theorems of
 functional analysis; more on this later on.
+
+This chapter is mostly based on \textcite{Reed.Simon:1980}. 
+
+
+
 
 \section{Banach and Hilber spaces}
 
@@ -335,6 +341,7 @@ $\conj{\left( z_{1} \pm z_{2}\right)} = \conj{z_{1}} \pm \conj{z_{2}}$, and
 $\abs{ z_{1}z_{2}} = \abs{z_{1}} \abs{z_{2}}$. 
 
 \begin{definition}[inner product]
+   \label{def:inner_product}
    Let
    \graffito{Inner product}
    $X$ be a vector space over $\K$. 
@@ -460,6 +467,41 @@ just a naming convention.
    inner product on $X$.
 \end{definition}
 
+The following lemma will be useful later on. 
+
+\begin{lemma}
+   \label{lemma:psi=0}
+   Let $(X, \braket{\cdot|\cdot})$ be a inner product space over $\K$.
+   If $\psi = 0$, then
+   \begin{dmath}[compact,label={psi=0}]
+      \braket{\varphi | \psi } = \braket{\psi|\varphi} = 0
+   \end{dmath},
+   for every $\varphi \in X$.
+\end{lemma}
+The statement of the lemma itself looks rather obvious. 
+However, a technical proof is given below. 
+The linearity of the inner product is a key ingredient.
+\begin{proof}
+By linearity of the inner product, 
+   \begin{dmath*}
+      \braket{\varphi | \psi + \psi } = \braket{\varphi|\psi } +
+      \braket{\varphi|\psi}
+      \condition{$\forall(\varphi, \psi) \in X \times X$}
+   \end{dmath*}.
+   In particular, if $\psi = 0$ we have $\psi + \psi = \psi$ and 
+   \begin{dmath*}
+      \braket{\varphi | \psi + \psi } = \braket{\varphi|\psi } 
+      \condition{$\forall\varphi \in X $ and $\psi = 0$}
+   \end{dmath*}.
+   Thus
+   \begin{dmath*}
+      \braket{\varphi|\psi} + \braket{\varphi|\psi} = \braket{\varphi|\psi}
+      \condition{$\forall\varphi \in X $ and $\psi = 0$}
+   \end{dmath*},
+   which is an equation in $\K$ for the unknown $\braket{\varphi|\psi}$, whose only
+   solution is $\braket {\varphi|\psi} = 0$. 
+\end{proof}
+
 Any 
 \graffito{Norm induced by inner product }
 inner product space is naturally endowed with a norm coming from the inner
@@ -467,11 +509,14 @@ product.
    Let $(X, \braket{\cdot|\cdot})$ be an inner product space over $\K$.
    Let $\fullfunction{\norm{\cdot}}{X}{\R}$ defined by
    \begin{dmath}[frame,label={norm-inner}]
-      \norm{\psi} = \left(\braket{\psi|\psi}\right)^{1/2}
+      \norm{\psi} = \sqrt{\braket{\psi|\psi}}
       \condition*{\forall\psi\in X}
    \end{dmath}.
-   Observe that such $\norm{\cdot}$  is well-defined, since $\braket{\psi|\psi}
+   Observe that such $\norm{\cdot}$ in \cref{eq:norm-inner} is well-defined, since $\braket{\psi|\psi}
    \geq 0$ for every $\psi\in X$.
+   The square root is not ambigous: it is not a square root of a complex
+   number; it is the square root of a positive real number, we don't need to
+   specify a branch for the square root function. 
    We shall prove in a moment that $\norm{\cdot}$ is actually a norm on $X$,
    this justify the notation $\norm{\cdot}$.
    Such norm  is the ``norm induced by the inner product''.
@@ -509,7 +554,67 @@ using the Cauchy-Schwarz inequality.
 
 \begin{proof}
    We distinguish two cases.
+   If $\psi = 0$, 
+   $\braket{\varphi|\psi} = 0$ 
+   (see \cref{eq:psi=0}) and $\braket{\psi|\psi} = \norm{\psi}^{2}= 0$ (by definition of the
+   inner product), thus
+   the inequality is satified.
 
+   Let us now consider $\psi \neq 0$.
+   For every $\lambda \in \K$, we have
+	\begin{dmath*}
+	   \braket{ \varphi + \lambda \psi | \varphi + \lambda \psi} 
+	   = 
+	   \braket{\varphi|\varphi} + \lambda \braket{\varphi|\psi} +
+	   \conj{\lambda}\braket{\psi|\varphi} + 
+	   \conj{\lambda} \lambda 
+	   \braket{\psi|\psi}
+	\end{dmath*}. 
+	By \cref{item:inner4} in \cref{def:inner}, the left-hand side of this
+	equation is 
+$
+	   \braket{ \varphi + \lambda \psi | \varphi + \lambda \psi} \geq 0$
+	   and it is zero if and only if $\varphi + \lambda \psi = 0$.
+	   Thus
+	   \begin{dmath*}
+	   \braket{\varphi|\varphi} + \lambda \braket{\varphi|\psi} +
+	   \conj{\lambda}\braket{\psi|\varphi} + 
+	   \conj{\lambda} \lambda 
+	   \braket{\psi|\psi} \geq 0 
+	\end{dmath*},
+	      for every $\varphi \in X$, $\psi \in X \backslash \{ 0\}$
+	      and $\lambda \in \K$.
+Choose
+\begin{dmath*}
+   \lambda = - \frac{\conj{\braket{\varphi|\psi}}}{\braket{\psi|\psi}}
+   \condition*{\psi \neq 0}
+\end{dmath*},
+which makes sense since we are discussing the case $\psi \neq 0$.
+Plugin into the previosu equation yields
+\begin{dmath*}
+   \braket{\varphi|\varphi} 
+   - \frac{\conj{\braket{\varphi|\psi}}}{\braket{\psi|\psi}} 
+   - \frac{\braket{\varphi|\psi}}{\braket{\psi|\psi}}
+   \conj{\braket{\varphi|\psi}} 
+   + \frac{\conj{\braket{\varphi|\psi}}}{\braket{\psi|\psi}}
+   \frac{\braket{\varphi|\psi}}{\cancel{\braket{\psi|\psi}}}
+    \cancel{\braket{\psi|\psi}} \geq 0 
+ \end{dmath*},
+ hence 
+ \begin{dmath*}
+   \braket{\varphi|\varphi}  - 
+   +
+   \frac{\conj{\braket{\varphi|\psi}}\braket{\varphi|\psi}}{\braket{\psi|\psi}}
+   \geq 0 
+\end{dmath*},
+from which it follows 
+\begin{dmath*}
+   \braket{\varphi|\varphi} \braket{\psi|\psi } \geq \abs{
+      \braket{\varphi|\psi}}
+\end{dmath*}
+(using the fact that $\braket{\psi|\psi} > 0$).
+Taking the square root of both sites (notice that both sides are surely
+positive) yields the expected result. 
 \end{proof}
 
 \begin{theorem}
@@ -532,23 +637,236 @@ using the Cauchy-Schwarz inequality.
    $\braket{\cdot}{\cdot}$ is a continuous function of both arguments.
 \end{theorem}
 
-The following result is basic to establish the later theorem
-\begin{lemma}[polarization identity]
-\end{lemma}
-\begin{theorem}[parallelogram law]
+\begin{definition}[Hilbert space]
    Let 
+   \graffito{Hilbert space}
+   $(X, \braket{\cdot|\cdot})$ 
+   be a inner product space over $\K$. 
+   If the metric space $(X,d)$ (with the distance arising from the inner
+   product) is complete, 
+   $(X, \braket{\cdot|\cdot})$  is called an ``Hilbert space''.
+\end{definition}
+
+In short: Banach spaces are complete normed vector spaces and Hilbert spaces
+are complete inner product spaces. 
+Hilbert spaces are a special case of Banach space, where the norm comes from an
+inner product. 
+The underlying iner product inducing the norm introduces extra features (in
+particular, the notion of orthogonality) which are not present in general
+Banach spaces. 
+
+Hereafter, if 
+   $(X, \braket{\cdot|\cdot})$ is an inner product space, if not explicitly
+   stated, we will also intend that $\norm{\cdot}$ denotes the norm induced by
+   the inner product, and that the convergence, etc refers to the distance
+   induced by that norm.
+   
+
+Is it possible to distinguish if in a normed vector space, the norm is coming
+from some underlying inner space?
+The answer is yes, and we are going to prove immediately an interesting
+criterion to perform this check.
+
+The following result is basic to establish the later theorem.
+It will also be useful  later, when discussing positive operators.
+\begin{lemma}[polarization identity]
+   Let $(X, \braket{\cdot|\cdot})$ be a inner product space.
+   In the case $\K = \R$, 
+   \begin{dmath}[label={polarization:R}]
+      \braket{\varphi|\psi} = \frac{1}{4} \left( \norm{\varphi + \psi}^{2}  -
+	 \norm{\varphi - \psi}^{2}\right)
+      \condition{$\forall (\varphi,\psi)\in X \times X$}
+      \end{dmath}.
+   In the case $\K = \C$, 
+   \begin{dmath}[label={polarization:R}]
+      \braket{\varphi|\psi} = \frac{1}{4} \left( \norm{\varphi + \psi}^{2}  -
+	 \norm{\varphi - \psi}^{2}\right) + 
+      \frac{\ii}{4} \left( \norm{ \varphi + \ii \psi}^{2} + \norm{ \varphi -
+	    \ii \psi }^{2} \right)
+      \condition{$\forall (\varphi,\psi)\in X \times X$}
+      \end{dmath}.
+\end{lemma}
+
+\begin{proof}
+
+
+\end{proof}
+
+The following result is called Jordan-von Neumann theorem%
+\footcite[See][]{Jordan.Neumann:1935}.
+\begin{theorem}[Jordan-von Neumann theorem]
+   \label{thm:parallelogram_law}
+   Let 
+   \graffito{Jordan-von Neumann theorem}
+   $(X, \norm{\cdot})$ be a Banach space over $\K$. %normed vector space over $\K$. 
+   The norm $\norm{\cdot}$ comes from an inner product (\ie, the Banach space
+   is also an Hilbert space) \emph{if and only if}
+   the following identity (known as ``parallelogram law'') holds
    \graffito{Parallelogram law}
-   $(X, \norm{\cdot})$ be a normed vector space over $\K$. 
-   The norm $\norm{\cdot}$ comes from an inner product \emph{if and only if}
-   the following identity (known as ``parallelogram law'') holds:
-   \begin{dmath}
+   \begin{dmath}[label={parallelogram}]
       \norm{\varphi + \psi}^{2} + \norm{\varphi - \psi}^{2} = 2
       \norm{\varphi}^{2} + \norm{\psi}^{2}
       \condition*{\forall (\varphi,\psi)\in X \times X}
    \end{dmath}.
 \end{theorem}
 
+\begin{proof}
+   Let's prove first that if $(X, \braket{\cdot|\cdot})$ is a
+   Hilbert space, then the norm induced by the inner product fullfills
+   \cref{eq:parallelogram}.
+   This is the straightforward part of the proof. 
+   By definition of the norm induced by the inner product, 
+   \begin{dgroup*}
+      \begin{dmath*}
+	 \norm{\varphi + \psi} = 
+	 \braket{\varphi + \psi|\varphi + \psi}
+	 =
+	 \braket{\varphi|\varphi} + \braket{\varphi|\psi} +
+	 \braket{\psi|\varphi} + \braket{\psi|\psi}
+	  = 
+	  \norm{\varphi^{2}} + 2 \Re { \braket{\varphi|\psi}} + \norm{\psi}^{2}
+       \end{dmath*}
+      \begin{dmath*}
+	 \norm{\varphi - \psi} = 
+	 \braket{\varphi - \psi|\varphi - \psi}
+	 =
+	 \braket{\varphi|\varphi} - \braket{\varphi|\psi} -
+	 \braket{\psi|\varphi} + \braket{\psi|\psi}
+	  = 
+	  \norm{\varphi^{2}} - 2 \Re { \braket{\varphi|\psi}} + \norm{\psi}^{2}
+       \end{dmath*}
+    \end{dgroup*}
+    for all $(\varphi,\psi)\in X \times X$; summing the two we have
+    \cref{eq:parallelogram}.
+
+    Now, let's prove that if $(X, \norm{\cdot})$ is a Banach space whose norm
+    satisfies \cref{eq:parallelogram} then the norm comes from an inner product.
+    It is possible to recover the underlying inner product by means of the
+    polarization identity. 
+    Since the polarization identity takes two differen forms, depending on
+    whether  $\K = \C$ or $\K = \R$, we should distinguish two cases. 
+    We will discuss the case $\K = \C$, the case $\C = \R$ is analogous and the
+    details are left to the Reader. 
+
+    In the Banach space $(X, \norm{\cdot})$ it is always possible to define an
+    application $\fullfunction{\braket{\cdot|\cdot}}{X \times X} {\K}$ by
+    letting
+    \begin{dmath*}
+       \braket{\varphi|\psi} = \frac{1}{4} \left( \norm{\varphi + \psi}^{2} -
+	  \norm{\varphi - \psi}^{2}\right) + \frac{\ii}{4} \left( \norm{\varphi
+	     + \ii \psi}^{2} - \norm{\varphi - \ii \psi}^{2} \right)
+       \condition{$\forall (\varphi, \psi) \in X\times X$}
+    \end{dmath*}.
+    We need to prove that this application indeed is a inner product on $X$,
+    \ie, we need to prove that it satisfies
+    \cref{item:inner1,item:inner2,item:inner3,item:inner4,item:inner5} in
+    \cref{def:inner}.
+
+    Ad \ref{item:inner1}.
+
+    Ad \ref{item:inner2}.
+
+    Ad \ref{item:inner2}.
+    
+    Ad \ref{item:inner3}.
+
+    Ad \ref{item:inner4}.
+    
+    Ad \ref{item:inner5}.
+\end{proof}
+
+
+\begin{exercise}
+   Does \cref{thm:parallelogram_law} apply to generic normed vector spaces over
+   $\K$ which are not completed (\ie, which are not Banach spaces)?
+\end{exercise}
+
 \section{Canonical prototypes of Banach and Hilbert spaces}
 
+Let $N\in\N\backslash\{0\}$ be any positive integer number.
+Consider the vector space 
+$\C^{N}$, whose elements are $N$-ple of complex numbers, endowed with the 
+usual operations of elementwise addition and elementwise multiplication of an
+$N$-ple 
+by a complex number. 
+For every 
+\begin{dseries*}
+   \begin{math}
+      \vec{\varphi} = 
+      \begin{pmatrix}
+	 \varphi_{1} \\
+	 \varphi_{2} \\
+	 \vdots \\
+	 \varphi_{N}
+      \end{pmatrix}
+   \end{math},
+   \begin{math}
+      \vec{\psi} = 
+      \begin{pmatrix}
+	 \psi_{1} \\
+	 \psi_{2} \\
+	 \vdots \\
+	 \psi_{N}
+      \end{pmatrix}
+   \end{math},
+\end{dseries*}
+in $\C^{N}$, define an application
+$\fullfunction{\braket{\cdot|\cdot}}{\C^{N}\times \C^{N}}{\C}$ as follows:
+\begin{dmath}
+   \braket{\vec{\varphi}|\vec{\psi}} = \sum_{k=1}^{N} \conj{\varphi_{k}} \psi_{k}
+\end{dmath}.
+It is possible to prove that this function indeed is a inner product on
+$\C^{N}$.
+We need to verify
+\cref{item:inner1,item:inner2,item:inner3,item:inner4,item:inner5} of
+\cref{def:inner_product}.
+Linearity is traightforward:
+\begin{dgroup*}
+   \begin{dmath*}[compact]
+      \braket{\vec{\varphi}|\vec{\psi} + \vec{\eta}} = 
+      \sum_{k=1}^{N} \conj{\varphi_{k}} \left( \psi_{k} + \eta_{k}\right) = 
+      \left( \sum_{k=1}^{N} \conj{\varphi_{k}} \psi_{k} \right) + 
+      \left( \sum_{k=1}^{N} \conj{\varphi_{k}} \eta_{k}\right)
+      = \braket{\vec{\varphi}|\vec{\psi}} + \braket{\vec{\varphi} | \vec{\eta}}
+      \condition{$\forall ( \vec{\varphi}, \vec{\psi}, \vec{\eta}) \in
+	 C^{N}\times C^{N} \times \C^{N}$  }
+   \end{dmath*},
+   \begin{dmath*}[compact]
+      \braket{\vec{\varphi}|\lambda \vec{\psi} + \vec{\eta}} = 
+      \sum_{k=1}^{N} \conj{\varphi_{k}} \lambda \psi_{k} = 
+      \lambda 
+      \sum_{k=1}^{N} \conj{\varphi_{k}} \psi_{k} = 
+      \lambda \braket{\vec{\varphi}|\vec{\psi}} 
+      \condition{$\forall ( \vec{\varphi}, \vec{\psi}) \in
+	 C^{N}\times C^{N} $ and $\lambda \in \C$  }
+   \end{dmath*}.
+\end{dgroup*}
+\Cref{item:inner3} follows from the fact that, for every $(z,w) \in \C \times
+\C$, 
+\begin{itemize}
+   \item $\conj{\left( z+w\right)}  = \conj{z} + \conj{w}$;
+   \item $\conj{
+   \left( zw\right)}= \conj{z} \conj{w}$; 
+	\item $\conj{ ( \conj{z})} = z$.
+\end{itemize}
+(It is easy to prove by
+induction on $N$ that the first property is true also with a sum of $N$ complex
+numbers.)
+Thus:
+\begin{dmath*}
+   \braket{\vec{\psi}|\vec{\varphi}} = 
+   \sum_{k=1}^{N} \conj{\psi_{k}} \varphi_{k} = 
+\sum_{k=1}^{N} \conj{\left( \psi_{k} \conj{\varphi_{k}}  \right)}
+	    = 
+	    \conj{ \left( 
+		  \sum_{k=1}^{N} \conj{\varphi_{k} } \psi_{k}
+	       \right)}
+    = \conj{\braket{
+		  \vec{\varphi} | \vec{\psi}
+	       }}
+	 \end{dmath*}
 \section{Orthogonality}
 \section{Orthonormal basis}
+
+\printbibliography[heading=subbibliography]
+\end{refsection}
