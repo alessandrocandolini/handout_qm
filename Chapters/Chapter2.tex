@@ -27,10 +27,8 @@ dictionary is possible to translate Dirac notation to the rigorous theorems of
 functional analysis; more on this later on.
 
 This chapter is mostly based on \textcite{Reed.Simon:1980}. 
-
-
-
-
+Some other books that have been helpful while writing this chapter includes:
+\textcite{Teschl:2009,Berberian:1976,Hutson.Pym:1980,Debnath.Mikusinski:2005}.
 \section{Banach and Hilber spaces}
 
 Unless stated otherwise, let $\K $ denote equivalently the field of real numbers
@@ -44,7 +42,7 @@ non-commutativity of quaternionic product.)
    Let 
    \graffito{Norm}
    $X$ be any vector space over $\K$.
-   A ``norm'' on $X$ is any application  $X \to \R$  denoted by $\norm{\cdot}$ 
+   A ``norm'' on $X$ is any application  $X \to \R$  here denoted by $\norm{\cdot}$ 
    satifying the following properties:
    \begin{enumerate} [label=(\alph*)]
 	 %[(a)]
@@ -320,6 +318,33 @@ sequencies are convergent.
    If $(X,d)$ (where $d$ is the metric induced by the norm) is complete,
    $(X,\norm{\cdot})$ is called a ``Banach space''.
 \end{definition}
+
+
+\begin{definition}[equivalence of the norms]
+   Let $X$ be a vector space over $\K$ and
+   $\fullfunction{\norm{\cdot}_{1}}{X}{\R}$ and
+   $\fullfunction{\norm{\cdot}_{2}}{X}{\R}$ two norms on $X$.
+   The two norms are said to be ``equivalent'' if there exists a pair of
+   strictly positive real
+   numbers $\lambda$ and $\mu$ such that 
+   \begin{dmath}
+      \alpha \norm{\varphi}_{1} \leq \norm{\varphi}_{2} \leq \beta
+      \norm{\varphi}_{1}
+   \end{dmath},
+   for all $\varphi \in X$.
+\end{definition}
+
+Equivalent norms define the same notions of continuity and convergence and for
+many purposes do not need to be distinguished. 
+As we shall prove later, 
+for finite-dimensional (real or complex) vector space, 
+all norms are
+equivalent.
+On the other hand, in the case of infinite-dimensional vector spaces, not all
+norms are equivalent and we need to specify which norm we are using. 
+
+
+
 
 We are almost ready to introduce the notion of Hilber space, which is the setting
 where we will develop the operator formulation of non-relativistic quantum mechanics. 
@@ -652,8 +677,13 @@ are complete inner product spaces.
 Hilbert spaces are a special case of Banach space, where the norm comes from an
 inner product. 
 The underlying iner product inducing the norm introduces extra features (in
-particular, the notion of orthogonality) which are not present in general
-Banach spaces. 
+particular, some related to the notion of orthogonality) which are not present in general
+Banach spaces (see next section for details on this).
+
+In the next sections, we will focus on Hilbert spaces only, and we will not
+consider incomplete
+inner product space. On  reason for this is that any incomplete metric space
+admit a completion (more on this later, when discussing BLT theorem).
 
 Hereafter, if 
    $(X, \braket{\cdot|\cdot})$ is an inner product space, if not explicitly
@@ -687,6 +717,14 @@ It will also be useful  later, when discussing positive operators.
       \end{dmath}.
 \end{lemma}
 
+\begin{remark}
+   The polarization identity can be stated in the following concise way:
+   \begin{dmath}
+      \braket{\varphi|\psi} = \frac{1}{4} \sum_{k=1}^{4} \ii^{k} \Norm{ \varphi +
+	 \ii^{k} \psi}^{2}
+   \end{dmath}.
+\end{remark}
+
 \begin{proof}
 
 
@@ -698,16 +736,17 @@ The following result is called Jordan-von Neumann theorem%
    \label{thm:parallelogram_law}
    Let 
    \graffito{Jordan-von Neumann theorem}
-   $(X, \norm{\cdot})$ be a Banach space over $\K$. %normed vector space over $\K$. 
-   The norm $\norm{\cdot}$ comes from an inner product (\ie, the Banach space
-   is also an Hilbert space) \emph{if and only if}
-   the following identity (known as ``parallelogram law'') holds
+   $(X, \norm{\cdot})$ be a normed vector space over $\K$. %normed vector space over $\K$. 
+   The norm $\norm{\cdot}$ comes from an inner product 
+   \emph{if and only if}
+   the following identity holds:
    \graffito{Parallelogram law}
    \begin{dmath}[label={parallelogram}]
       \norm{\varphi + \psi}^{2} + \norm{\varphi - \psi}^{2} = 2
       \norm{\varphi}^{2} + \norm{\psi}^{2}
       \condition*{\forall (\varphi,\psi)\in X \times X}
    \end{dmath}.
+   \Cref{eq:parallelogram} is known as ``parallelogram law''.
 \end{theorem}
 
 \begin{proof}
@@ -775,11 +814,13 @@ The following result is called Jordan-von Neumann theorem%
     Ad \ref{item:inner5}.
 \end{proof}
 
-
-\begin{exercise}
-   Does \cref{thm:parallelogram_law} apply to generic normed vector spaces over
-   $\K$ which are not completed (\ie, which are not Banach spaces)?
-\end{exercise}
+Subsequent authors 
+after Jordan and von Neumann
+have found norm conditions weaker
+than \cref{eq:parallelogram} which 
+characterize inner product spaces amongst normed vector
+spaces. See, \eg, \textcite{Reznick:1978} and references therein; a recent paper is \textcite{Onl-scho:2012}, which also contains
+references to the relevant literature on this subject. 
 
 \section{Canonical prototypes of Banach and Hilbert spaces}
 
@@ -865,8 +906,131 @@ Thus:
 		  \vec{\varphi} | \vec{\psi}
 	       }}
 	 \end{dmath*}
-\section{Orthogonality}
+
+	 
+	 \section{Orthogonality}
+
+	 The notion of inner product allows to naturally equip an inner product
+	space with a notion of orthogonality between vectors 
+	Some of the following results (\eg, Pitagorean theorem) can be used to
+	some extend to  export 
+	the notion of orthogonality to general Banach spaces, but here we will
+	restrict ourselves to Hilbert spaces. 
+
+	\begin{definition}
+	   Let $(X, \braket{\cdot, \cdot})$
+	   \graffito{Orthogonality of two vectors}
+	   be any inner product space.
+	   For every $(\varphi, \psi)\in X\times X$, $\varphi$ and $\psi$ are
+	   said to be mutually ``orthogonal'' if 
+	   \begin{dmath}
+	      \braket{\varphi | \psi } = 0 
+	   \end{dmath}.
+	\end{definition}
+
+	The extension to a (possibly not-countable) set of vectors is trivial and it is formalized by
+	the following definition.
+
+	\begin{definition}
+	   Let $(X, \braket{\cdot, \cdot})$
+	   \graffito{Orthogonality of a set of vectors}
+	   be any inner product space and $ W \subseteq X$ a non-empty subset of $X$.
+	   $W$ is a set of mutually orthogonal   vectors  if
+	   \begin{dmath}
+	      \braket{\varphi|\psi} = 0 
+	      \condition{$\forall (\varphi,\psi) \in W \times W$ with $\varphi
+	      \neq \psi$}
+	   \end{dmath}.
+	   If moreover 
+	   \begin{dmath}
+	      \braket{\varphi} = 1 
+	      \condition*{\forall \varphi \in W}
+	   \end{dmath}
+	   the set $W$ is said to be ``orthonormal''.
+	\end{definition}
+
+	In particular, given a sequence $\N \to X$ of vectors of $X$, we say 
+	that it is ``orthonormal'' if the image set is an orthonormal set. 
+
+
+	\begin{theorem}[Pythagorean theorem]
+	   Let $(X, \braket{\cdot, \cdot})$.
+	   \begin{enumerate}
+	      \item 
+		 for every orthogonal pair of vectors $\varphi$ and $\psi$ in
+		 $X$,
+		 \begin{dmath*}
+		    \norm{\varphi + \psi}^{2} = \norm{\varphi}^{2} +
+		    \norm{\psi}^{2} 
+		 \end{dmath*};
+	      \item 
+		 for every orthogonal finite set of $N\in \N$ vectors $\varphi_{1},
+		 \varphi_{2}, \ldots \varphi_{N}$ in $X$, 
+		 \begin{dmath*}
+		    \Norm{\sum_{k=1}^{N} \varphi_{k}}^{2} = \sum_{k=1}^{N}
+		    \Norm{\varphi_{k}}^{2}
+		 \end{dmath*}
+	      \item 
+		 if $(\varphi_{k})_{k\in\N}$ is a sequence $\N \to X$ of
+		 mutually orthogonal vectors of $X$, then 
+		 $\sum_{k=1}^{+\infty} \varphi_{k}$ is convergent in $X$ \emph{if and
+		    only if} $\sum_{k=1}^{+\infty} \norm{\varphi_{k}}^{2}$ is
+		 convergent in $\R$ and in that case we have the following
+		 identity:
+		 \begin{dmath*}
+		    \Norm{ \sum_{k=1}^{+\infty}\varphi_{k}} ^{2} =
+		    \sum_{k=1}^{+\infty} \Norm{\varphi_{k}}^{2}
+		 \end{dmath*}.
+	   \end{enumerate}
+	      \end{theorem}
+	      \begin{proof}
+	In the first case the proof is straightforward, we have already found
+	the same expression in the proof of the parallelogram identity, we have
+	by direct computation that
+	\begin{dmath*}
+	   \norm{\varphi+\psi}^{2} = \braket{\varphi + \psi | \varphi + \psi}
+	   = \braket{\varphi|\varphi} + \braket{\varphi | \psi} +
+	   \braket{\psi|\varphi} + \braket{\psi|\psi}
+	   = \norm{\varphi}^{2} + 2\underbrace{\Re{\braket{\varphi|\psi}}}_{=0}  + \norm{\psi}^{2}
+	   = \norm{\varphi}^{2} + \norm{\psi}^{2}
+	\end{dmath*}.
+
+	In the second case, the proof is by induction on $N$. 
+	The case $N=2$ has been shown explicitly in the first part of the proof.
+	Now, let's check  that 
+		 \begin{dmath*}
+		    \Norm{\sum_{k=1}^{N} \varphi_{k}}^{2} = \sum_{k=1}^{N}
+		    \Norm{\varphi_{k}}^{2}
+		 \end{dmath*}
+		 for a given $N$ implies 
+		 \begin{dmath*}
+		    \Norm{\sum_{k=1}^{N+1} \varphi_{k}}^{2} = \sum_{k=1}^{N+1}
+		    \Norm{\varphi_{k}}^{2}
+		 \end{dmath*}
+		 for $N+1$. 
+		 We have 
+	  
+
+		 The third case shows a classic trick of using the Cauchy
+		 criterion of convergence. 
+
+
+
+	      \end{proof}
+
+
+	   
+
+
+
 \section{Orthonormal basis}
+
+
+\section{Linear operators}
+
+\section{Isomorphism}
+
+
 
 \printbibliography[heading=subbibliography]
 \end{refsection}

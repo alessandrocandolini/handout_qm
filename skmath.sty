@@ -150,6 +150,8 @@
 }
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\newcommand{\Norm}[1]{\left\Vert#1\right\Vert}% not correct whitespace, cf egreg
+%\DeclarePairedDelimiterX{\Norm}[1]{\lVert}{\rVert}{#1}
 \AtBeginDocument{
   \DeclareDocumentCommand\E{m}{%
     \ensuremath{\operatorname{E}\left[#1\right]}%
