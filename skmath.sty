@@ -148,9 +148,9 @@
 }{
   \DeclareDocumentCommand\Im{m}{\ensuremath{{\operator@font Im}{#1}}}
 }
-\DeclarePairedDelimiter\abs{\lvert}{\rvert}
-\DeclarePairedDelimiter\norm{\lVert}{\rVert}
-\newcommand{\Norm}[1]{\left\Vert#1\right\Vert}% not correct whitespace, cf egreg
+%\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+%\DeclarePairedDelimiter\normDelimiter{\lVert}{\rVert}
+%\newcommand{\Norm}[1]{\left\Vert#1\right\Vert}% not correct whitespace, cf egreg
 %\DeclarePairedDelimiterX{\Norm}[1]{\lVert}{\rVert}{#1}
 \AtBeginDocument{
   \DeclareDocumentCommand\E{m}{%
@@ -178,7 +178,73 @@
   \ensuremath{\operatorname{Tr}#2}%
   }
 }
-% Cando's addition: Complex conjugate
+% Cando's addition: L spaces (add stared version without left /right
+  \NewDocumentCommand\LspaceSet{}{\ensuremath{\mathrm{L}}}
+  \NewDocumentCommand\lspaceSet{}{\ensuremath{l}}
+\DeclareDocumentCommand\lspace{m}{%
+	 \ensuremath{\lspaceSet^{#1}}
+}
+\DeclareDocumentCommand\Lspace{sd<>om}{%
+  \IfBooleanTF{#1}{
+      \IfNoValueTF{#2}
+      {
+	 \IfNoValueTF{#3}
+	 {\ensuremath{\LspaceSet^{#4}}}
+	 {\ensuremath{\LspaceSet^{#4}\left( #3\right)  }}
+      }{
+	 \IfNoValueTF{#3}
+	 {\ensuremath{#2}^{#4}}
+	 {\ensuremath{#2^{#4}\left( #3\right)  }}
+      }
+   }
+   {
+      \IfNoValueTF{#2}
+      {
+	 \IfNoValueTF{#3}
+	 {\ensuremath{\LspaceSet^{#4}}}
+	 {\ensuremath{\LspaceSet^{#4}( #3)  }}
+      }{
+	 \IfNoValueTF{#3}
+	 {\ensuremath{#2}^{#4}}
+	 {\ensuremath{#2^{#4}( #3)  }}
+      }
+   }
+}
+
+% Cando's addition: Norm with optional macro argument
+\DeclareDocumentCommand\norm{som}{%
+  \IfBooleanTF{#1}{
+     \IfNoValueTF{#2} {
+     	 \ensuremath{\Vert#3\Vert}
+     }{
+      	\ensuremath{\Vert#3\Vert\c_math_subscript_token{#2}}%
+     }
+  }{
+     \IfNoValueTF{#2} {
+     	 \ensuremath{\left\Vert#3\right\Vert}
+     }{
+      	\ensuremath{\left\Vert#3\right\Vert\c_math_subscript_token{#2}}%
+     }
+  }
+}
+% Cando's addition: Norm with optional macro argument
+\DeclareDocumentCommand\abs{som}{%
+  \IfBooleanTF{#1}{
+     \IfNoValueTF{#2} {
+     	 \ensuremath{\vert#3\vert}
+     }{
+      	\ensuremath{\vert#3\vert\c_math_subscript_token{#2}}%
+     }
+  }{
+     \IfNoValueTF{#2} {
+     	 \ensuremath{\left\vert#3\right\vert}
+     }{
+      	\ensuremath{\left\vert#3\right\vert\c_math_subscript_token{#2}}%
+     }
+  }
+}
+
+% Cando's addition: complex conjugation
 \DeclareDocumentCommand\conj{sm}{%
    \IfBooleanTF{#1}{
       \ensuremath{\left(#2\right)^{*}}%
@@ -186,6 +252,7 @@
       \ensuremath{#2^{*}}%
   }
 }
+
 % Cando's addition: Adjoint
 \DeclareDocumentCommand\adj{sm}{%
    \IfBooleanTF{#1}{
