@@ -28,7 +28,7 @@ functional analysis; more on this later on.
 
 This chapter is mostly based on \textcite{Reed.Simon:1980}. 
 Some other books that have been helpful while writing this chapter includes:
-\textcite{Teschl:2009,Berberian:1976,Hutson.Pym:1980,Debnath.Mikusinski:2005}.
+\textcite{Teschl:2009,Berberian:1976,Hutson.Pym:1980,Debnath.Mikusinski:2005,Helmberg:1969}.
 \section{Banach and Hilber spaces}
 
 Unless stated otherwise, let $\K $ denote equivalently the field of real numbers
@@ -51,11 +51,11 @@ non-commutativity of quaternionic product.)
 	 \begin{math}
 	    \norm{\varphi} \geq 0  \condition{$\forall \varphi \in X$}
 	 \end{math}
-	 (nonnegative);
+	 (nonnegativity);
       \item 
 	 \label{item:norm2}
 	 $\norm{\varphi} = 0$ if and only if $\varphi = 0$
-	 (strictly positive);
+	 (faithfulness)
       \item 
 	 \label{item:norm3}
 	 \begin{math}
@@ -70,19 +70,26 @@ non-commutativity of quaternionic product.)
 	    \varphi} + \norm{\psi}
 	 \condition*{\forall (\varphi,\psi) \in X \times X} 
       \end{math}
-	 (the 
-	 so-called ``triangle inequality'')
+      (subadditivity).
    \end{enumerate}
 \end{definition}
 
-\begin{approfondimento}
+\begin{remark}
    \Cref{item:norm1} is not strictly necessary: it follows from
    \cref{item:norm2,item:norm3,item:norm4}.
    In fact, from \cref{item:norm3} $\norm{-\varphi} = \norm{\varphi}$, 
    from \cref{item:norm4} we have thus $\norm{\varphi + (- \varphi)} \leq 
    \norm{\varphi} + \norm{\varphi} = 2 \norm{\varphi}$, and from
-   \cref{item:norm2} $\norm{\varphi-\varphi} = 0$.
-\end{approfondimento}
+   \cref{item:norm2} $\norm{\varphi-\varphi} = 0$, thus $\norm{\varphi} \leq 0$
+   for every $\varphi \in X$.
+\end{remark}
+
+\begin{remark}
+   $X$ does not need to be finite-dimensional. It can be infinite-dimensional.
+   The dimensionality of the vector space is not relevant for this and the
+   following 
+   definitions and properties. 
+\end{remark}
 
 A ``normed vector space'' is a vector space equipped with a norm, as formalized
 by the following definition.
@@ -115,9 +122,10 @@ This is proved by the following theorem.
 \end{theorem}
 
 \begin{proof}
-   We need to prove that \cref{eq:distance-norm} defines a metric over $X$,
-   \ie, we need to show that $d$  satisfies:
    %\begin{enumerate}[(a)]
+   Remember  that, given a set $X$ and an application $\fullfunction{d}{X\times
+      X}{\interval[open right]{0}{+\infty}}$, $d$ is called a ``metric'' (or
+   ``distance'') on $X$ if it satisfies the following properties:
    \begin{enumerate} [label=(\alph*)]
       \item 
 	 \label{item:distance1}
@@ -148,6 +156,9 @@ This is proved by the following theorem.
 	       \times X\times X $}
 	 \end{math} (the so-called ``triangle inequality'').
    \end{enumerate}
+   Thus, we need to show that \cref{eq:distance-norm} defines a metric over $X$,
+   \ie, we need to prova that such $d$  satisfies
+   \cref{item:distance1,item:distance2,item:distance3,item:distance4} above.
    \Cref{item:distance1} follows from property~\ref{item:norm1} of the norm.
    \Cref{item:distance2} follows from property~\ref{item:norm2} of the norm,
    since
@@ -162,7 +173,7 @@ This is proved by the following theorem.
       = d(\psi,\varphi) 
       \condition*{\forall (\varphi,\psi)\in X \times X}
    \end{dmath*}.
-      \Cref{item:distance4}  follows from property~\cref{item:norm4} of the
+      \Cref{item:distance4}  follows from property~\ref{item:norm4} of the
       norm, since
       \begin{dmath*}[compact]
 	 d(\varphi, \psi) = 
@@ -176,21 +187,27 @@ This is proved by the following theorem.
 \end{proof}
 
 The metric induced by a norm fulfilles the following extra properties,
-the proof of which is straightforward and is left to the Reader:
+the proof of which is straightforward and is left to the Reader as exercize:
 \begin{enumerate}
-   \item 
+   \item \label{item:norm:translation-invariance}
       \begin{math}
 	 d(\varphi +\eta , \psi + \eta) = d (\varphi, \psi)
-	 \condition{$\forall (\varphi,\psi,\eta) \in X\times X \times X$}
       \end{math}
-      (translation invariance);
-   \item 
+      (translation invariance), and 
+   \item \label{item:norm:homogeneity}
       \begin{math}
 	 d(\lambda \varphi ,\lambda \psi) = \abs{\lambda} d (\varphi, \psi)
-	 \condition{$\forall (\varphi, \psi)\in X\times X$ and $\lambda\in\K$}
       \end{math}
-      (homogeneity);
+      (homogeneity),
 \end{enumerate}
+for all 
+	    $(\varphi, \psi,\eta)\in X\times X$ and $\lambda\in\K$.
+
+	    \begin{exercise}
+	       Prove
+	       \cref{item:norm:translation-invariance,item:norm:homogeneity}
+	       above.
+	    \end{exercise}
 
 \Cref{thm:distance-norm}  shows that any normed vector space is naturally
 endowed with a notion of distance. Please notice however that a normed vector
@@ -198,9 +215,10 @@ space could be equipped also with distances  other than the one induced by the
 norm; such distances are not necessary related to the
 norm; furthermore, 
 \cref{eq:distance-norm}  is not the only one possible distance built from the
-norm.
+norm (see \cref{exercise:norm:different}).
 
 \begin{exercise}
+   \label{exercise:norm:different}
    Let $(X, \norm{\cdot})$ be a normed vector space.
    Let $\fullfunction{d}{X \times X}{\R}$ be the function defined by
    \begin{dmath*}
@@ -208,17 +226,18 @@ norm.
       \condition*{\forall (\varphi,\psi)\in X\times X}
    \end{dmath*}
    Show that $d$  
-   defines a nonhomogeneus, translation invariant metric on $X$.
+   defines a \emph{non}homogeneus, translation invariant metric on $X$.
 \end{exercise}
 
 Now that we have a ``natural'' notion of distance in normed vector spaces, 
 \ie, \cref{eq:distance-norm},
 all the concepts defined for metric spaces applies automatically, in
 particular, to normed linear spaces. 
-Among these concepts are: continuity, limits, completeness, open sets etc.
+Among these concepts are: continuity, limits, convergence, compactness, completeness, open sets etc.
 
 \begin{lemma}
 Let
+\graffito{Inverse triangle inequality}
 $(X, \norm{\cdot})$ be a normed vector space over $\K$.
 The following holds:
 \begin{dmath}[label={norm-continuity}]
@@ -293,6 +312,54 @@ $\tilde{d}( \norm{\psi},
 Using \cref{eq:norm-continuity}, it is enough to choose any $0<\delta < \epsilon$.
 \end{proof}
 
+As a consequence of the continuity of the norm,
+if $(X, \norm{\cdot})$ is a normed vector space and 
+  $\fullfunction{(\varphi_{k})_{k\in\N}}{\N}{X}$ is a sequence in $X$
+  convergent to some $\varphi\in X$, \ie, 
+  \begin{dmath*}
+     \lim_{k\rightarrow +\infty} \varphi_{k} = \varphi
+  \end{dmath*},
+  then 
+  \begin{dmath}[compact,label={norm:continuity}]
+     \norm{\varphi}
+     = 
+     \norm{ \lim_{k\rightarrow + \infty} \varphi_{k}} 
+     = 
+     \lim_{k\rightarrow + \infty} \norm{\varphi_{k}} 
+  \end{dmath}.
+  \begin{exercise}
+     Justify all steps in \cref{eq:norm:continuity}.
+     (Hint: it is just a way to say that a function $f(x)$, in this case the
+     norm, is continuous if and only if $\lim_{x\rightarrow x_{0}}f(x)
+     f(x_{0})$.)
+  \end{exercise}
+
+\begin{definition}[equivalence of the norms]
+   Let $X$ be a vector space over $\K$ and
+   $\fullfunction{\norm{\cdot}_{1}}{X}{\R}$ and
+   $\fullfunction{\norm{\cdot}_{2}}{X}{\R}$ two norms on $X$.
+   The two norms are said to be ``equivalent'' if there exists a pair of
+   strictly positive real
+   numbers $\lambda$ and $\mu$ such that 
+   \begin{dmath}
+      \alpha \norm{\varphi}_{1} \leq \norm{\varphi}_{2} \leq \beta
+      \norm{\varphi}_{1}
+   \end{dmath},
+   for all $\varphi \in X$.
+\end{definition}
+
+Equivalent norms define the same notions of continuity and convergence and for
+many purposes do not need to be distinguished. 
+As we shall prove later, 
+for finite-dimensional (real or complex) vector space, 
+all norms are
+equivalent.
+On the other hand, in the case of infinite-dimensional vector spaces, not all
+norms are equivalent and we need to specify which norm we are using. 
+
+
+
+
 Let us recall an important fact about Cauchy sequencies.
 \graffito{Completeness of a metric space}
 Give any metric space $(X,d)$, a convergent sequence in $X$ is also a Cauchy
@@ -318,31 +385,6 @@ sequencies are convergent.
    If $(X,d)$ (where $d$ is the metric induced by the norm) is complete,
    $(X,\norm{\cdot})$ is called a ``Banach space''.
 \end{definition}
-
-
-\begin{definition}[equivalence of the norms]
-   Let $X$ be a vector space over $\K$ and
-   $\fullfunction{\norm{\cdot}_{1}}{X}{\R}$ and
-   $\fullfunction{\norm{\cdot}_{2}}{X}{\R}$ two norms on $X$.
-   The two norms are said to be ``equivalent'' if there exists a pair of
-   strictly positive real
-   numbers $\lambda$ and $\mu$ such that 
-   \begin{dmath}
-      \alpha \norm{\varphi}_{1} \leq \norm{\varphi}_{2} \leq \beta
-      \norm{\varphi}_{1}
-   \end{dmath},
-   for all $\varphi \in X$.
-\end{definition}
-
-Equivalent norms define the same notions of continuity and convergence and for
-many purposes do not need to be distinguished. 
-As we shall prove later, 
-for finite-dimensional (real or complex) vector space, 
-all norms are
-equivalent.
-On the other hand, in the case of infinite-dimensional vector spaces, not all
-norms are equivalent and we need to specify which norm we are using. 
-
 
 
 
@@ -659,8 +701,76 @@ positive) yields the expected result.
    Let 
    \graffito{Continuity of inner product}
    $(X, \braket{\cdot|\cdot})$ be an inner product space over $\K$. 
-   $\braket{\cdot}{\cdot}$ is a continuous function of both arguments.
+   $\braket{\cdot}{\cdot}$ is a continuous function 
+   of both arguments
+(with respect to the metric
+induced by the inner product).
 \end{theorem}
+
+\begin{proof}
+   Let us discuss the continuity on the second argument (the continuity on the
+   first argument can be handled in a similar way).
+
+   We need to show that  $\forall (\varphi, \psi) \in X\times X$ the following holds:
+for all real numbers $\varepsilon > 0$, 
+there exists a real number $\delta > 0$ such that, for all $\eta \in X$, if
+$d(\psi,\eta)<\delta$ then 
+$\tilde{d}( \braket{\varphi|\psi}, \braket{\varphi|\eta}) < \varepsilon$, 
+where $\tilde{d}$ is the euclidean distance in
+$\R$.
+
+   Notice  that 
+   $d( \psi, \eta) < \delta $ means 
+\begin{dmath*}[compact]
+   \norm{\psi-\eta} < \delta
+\end{dmath*},
+and 
+$\tilde{d}( \braket{\varphi|\psi}, \braket{\varphi|\eta}) < \varepsilon$
+means 
+\begin{dmath*}[compact]
+   \Abs{ \braket{\varphi|\psi} - \braket{\varphi|\eta}} < \varepsilon
+\end{dmath*}.
+Using linearity of the inner product and Cauchy-Schwarz inequality yields
+\begin{dmath*}[compact]
+   \Abs{ \braket{\varphi|\psi} - \braket{\varphi|\eta}}  = 
+   \Abs{ \braket{\varphi|\psi - \eta}}   \leq \norm{\varphi} \norm{\psi - \eta}
+   \leq \delta \norm{\varphi}
+\end{dmath*}.
+If $\varphi = 0$, the result is $0$ and we are done.
+Otherwise, if $\varphi \neq 0$, it is enough to choose 
+$0 < \delta < \epsilon / \norm{\varphi}$.
+\end{proof}
+
+As a consequence of the continuity of the inner product,
+if $(X, \braket{\cdot|\cdot})$ is a inner product space and 
+  $\fullfunction{(\psi_{k})_{k\in\N}}{\N}{X}$ is a sequence in $X$ such that 
+  $\sum_{k\in\N} \psi_{k}$ is convergent to some $\psi \in X$, \ie,
+  \begin{dmath*}
+     \lim_{n\rightarrow + \infty} \sum_{k=1}^{n} \psi_{k} = \psi
+  \end{dmath*},
+  then 
+  \begin{dmath}[compact,label={inner:continuity}]
+     \braket{ \varphi | \psi } 
+     = \braket{ \varphi | \lim_{n\rightarrow + \infty} \sum_{k=1}^{n} \psi_{k}}
+     = \lim_{n\rightarrow +\infty} \braket{ \varphi | \sum_{k=1}^{n} \psi_{k}}
+     = \lim_{n\rightarrow +\infty} \sum_{k=1}^{n} \braket{ \varphi | \psi_{k}}
+  \end{dmath}.
+  \begin{exercise}
+     Justify all steps in \cref{eq:inner:continuity}.
+  \end{exercise}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \begin{definition}[Hilbert space]
    Let 
@@ -720,7 +830,7 @@ It will also be useful  later, when discussing positive operators.
 \begin{remark}
    The polarization identity can be stated in the following concise way:
    \begin{dmath}
-      \braket{\varphi|\psi} = \frac{1}{4} \sum_{k=1}^{4} \ii^{k} \Norm{ \varphi +
+      \braket{\varphi|\psi} = \frac{1}{4} \sum_{k=1}^{4} \ii^{k} \norm{ \varphi +
 	 \ii^{k} \psi}^{2}
    \end{dmath}.
 \end{remark}
@@ -824,6 +934,9 @@ references to the relevant literature on this subject.
 
 \section{Canonical prototypes of Banach and Hilbert spaces}
 
+
+\subsection{The Hilbert spaces $R^{N}$ and $\C^{N}$}
+
 Let $N\in\N\backslash\{0\}$ be any positive integer number.
 Consider the vector space 
 $\C^{N}$, whose elements are $N$-ple of complex numbers, endowed with the 
@@ -853,59 +966,391 @@ For every
 \end{dseries*}
 in $\C^{N}$, define an application
 $\fullfunction{\braket{\cdot|\cdot}}{\C^{N}\times \C^{N}}{\C}$ as follows:
-\begin{dmath}
+\begin{dmath}[frame,label={inner:CN}]
    \braket{\vec{\varphi}|\vec{\psi}} = \sum_{k=1}^{N} \conj{\varphi_{k}} \psi_{k}
 \end{dmath}.
-It is possible to prove that this function indeed is a inner product on
-$\C^{N}$.
-We need to verify
-\cref{item:inner1,item:inner2,item:inner3,item:inner4,item:inner5} of
-\cref{def:inner_product}.
-Linearity is traightforward:
-\begin{dgroup*}
-   \begin{dmath*}[compact]
-      \braket{\vec{\varphi}|\vec{\psi} + \vec{\eta}} = 
-      \sum_{k=1}^{N} \conj{\varphi_{k}} \left( \psi_{k} + \eta_{k}\right) = 
-      \left( \sum_{k=1}^{N} \conj{\varphi_{k}} \psi_{k} \right) + 
-      \left( \sum_{k=1}^{N} \conj{\varphi_{k}} \eta_{k}\right)
-      = \braket{\vec{\varphi}|\vec{\psi}} + \braket{\vec{\varphi} | \vec{\eta}}
-      \condition{$\forall ( \vec{\varphi}, \vec{\psi}, \vec{\eta}) \in
-	 C^{N}\times C^{N} \times \C^{N}$  }
-   \end{dmath*},
-   \begin{dmath*}[compact]
-      \braket{\vec{\varphi}|\lambda \vec{\psi} + \vec{\eta}} = 
-      \sum_{k=1}^{N} \conj{\varphi_{k}} \lambda \psi_{k} = 
-      \lambda 
-      \sum_{k=1}^{N} \conj{\varphi_{k}} \psi_{k} = 
-      \lambda \braket{\vec{\varphi}|\vec{\psi}} 
-      \condition{$\forall ( \vec{\varphi}, \vec{\psi}) \in
-	 C^{N}\times C^{N} $ and $\lambda \in \C$  }
-   \end{dmath*}.
-\end{dgroup*}
-\Cref{item:inner3} follows from the fact that, for every $(z,w) \in \C \times
-\C$, 
-\begin{itemize}
-   \item $\conj{\left( z+w\right)}  = \conj{z} + \conj{w}$;
-   \item $\conj{
-   \left( zw\right)}= \conj{z} \conj{w}$; 
-	\item $\conj{ ( \conj{z})} = z$.
-\end{itemize}
-(It is easy to prove by
-induction on $N$ that the first property is true also with a sum of $N$ complex
-numbers.)
-Thus:
-\begin{dmath*}
-   \braket{\vec{\psi}|\vec{\varphi}} = 
-   \sum_{k=1}^{N} \conj{\psi_{k}} \varphi_{k} = 
-\sum_{k=1}^{N} \conj{\left( \psi_{k} \conj{\varphi_{k}}  \right)}
-	    = 
-	    \conj{ \left( 
-		  \sum_{k=1}^{N} \conj{\varphi_{k} } \psi_{k}
-	       \right)}
-    = \conj{\braket{
-		  \vec{\varphi} | \vec{\psi}
-	       }}
+In a similar manner one can define the usual (Euclidean) inner product on
+$\R^{N}$, which takes the same form of \cref{eq:inner:CN} without complex
+conjugation (because in that case all numbers involved are real numbers).
+
+
+\begin{theorem}
+   $(\C^{N}, \braket{\cdot|\cdot})$, where $\braket{\cdot|\cdot}$ is defined by
+   \cref{eq:inner:CN}, is an inner product space.
+\end{theorem}
+\begin{proof}
+   It is straightforward to show that $\braket{\cdot|\cdot}$ defined in
+   \cref{eq:inner:CN} satifies 
+\Cref{item:inner1,item:inner2,item:inner3,item:inner4,item:inner5} of
+\cref{def:inner_product}. 
+\end{proof}
+\begin{theorem}
+   $(\C^{N}, \braket{\cdot|\cdot})$, where $\braket{\cdot|\cdot}$ is defined by
+   \cref{eq:inner:CN}, is an Hilbert space.
+\end{theorem}
+\begin{proof}
+   We need to check completeness. 
+\end{proof}
+
+	 \subsection{The Hilbert space $\lspace{2}$}
+
+	 Let $\lspace{2}$ be the space of all and only the sequences
+	 $(\varphi_{k})_{k\geq 1}$ in $\K$ such that the series 
+	 \begin{math}
+	    \sum_{k=1}^{+\infty} \abs{\varphi_{k}}^{2}
+	 \end{math}
+	 is convergent in $\R$. 
+
+	 It is easy to show that, with the usual addition and multiplication
+	 for an element of $\K$, $\lspace{2}$ is a vector space over $\K$. 
+	 Define
+	 \begin{dmath}[frame,label={inner:l2}]
+	    \braket{\varphi | \psi } = \sum_{k=1}^{+\infty} \conj{\varphi_{k}}
+	    \psi_{k}
+	 \end{dmath},
+	 for every $\varphi = ( \varphi_{k})_{k\geq 1 }$ and $\psi =
+	 (\psi_{k})_{k\geq 1 }$ in $\lspace{2}$.
+
+	 \begin{theorem}
+	    $(\lspace{2}, \braket{\cdot|\cdot})$, where $\braket{\cdot|\cdot}$
+	    is defined by \cref{eq:inner:l2}, is an inner product space. 
+	 \end{theorem}
+
+	 \begin{proof}
+	    Similar to the proof that $\C^{N}$ is an inner product space, with
+	    some care to handle the limits of the various sums.
+	 \end{proof}
+
+	 \begin{theorem}
+	    $(\lspace{2}, \braket{\cdot|\cdot})$, where $\braket{\cdot|\cdot}$
+	    is defined by \cref{eq:inner:l2}, is an Hilbert space.
+	 \end{theorem}
+	 
+
+	 \subsection{The Hilbert $\Lspace[\Omega]{2}$}
+
+	 Let $\Omega \subseteq \R^{N}$ be an arbitrary non-empty subset of $\R^{N}$ for some
+	 $N\in\N$ and  let
+	 $\Lspace<\tilde{L}>[\Omega]{2}$ 
+	 be the set consisting of all and only the
+	 functions defined on $\Omega$ and taking values on $\K$, \ie,
+	 $\fullfunction{\psi}{\Omega}{\K}$, such that their square modulus is 
+	 Lebesgue-integrable over $\Omega$, \ie, the following integral exists
+	 and it is finite (in the sense of Lebesgue):
+	 \begin{dmath*}
+	    \int_{\Omega} \abs{\psi}^{2}
+	 \end{dmath*}.
+
+	 \begin{remark}
+	    Even if $\K = \C$, the modulus is real-valued so the integral above
+	    is always an integral of a real function. 
+	 \end{remark}
+
+	 It is not difficult to make
+	 $\Lspace<\tilde{L}>[\Omega]{2}$ a vector space. 
+	 Our goal would be to endow $\Lspace<\tilde{L}>[\Omega] {2}$ also with
+	 an inner product.
+	 A problem would arise however, due to the fact that there
+	 are non-zero functions in 
+	 $\Lspace<\tilde{L}>[\Omega]{2}$ whose square modulus integral is zero,
+	 and this would ultimately make not possible to satisfy property~\ref{item:inner5}
+	 of the inner product.
+
+	 To overcome this difficulty, a slightly more techical construction is
+	 needed. 
+	 The formal construction involves working with equivalence classes and proceeds as follows. 
+	 First, we will equip 
+	 $\Lspace<\tilde{L}>[\Omega]{2}$ 
+	 with an equivalence relation, which allows to identify two functions
+	 whenever they are equal almost everywhere (\ie, when they  differ only on a set of Lebesgue zero
+	 measure).
+	 Then, the quotient space with respect to this equivalence relation can
+	 be made a vector space over $\K$ (with suitable definitions of
+	 addition and multiplication by a element of $\K$) and  can
+	 be equipped with an inner product. 
+	 We will see that, with this inner product, the quotient space becomes
+	 an Hilbert space. 
+
+	 As a preliminary step, consider the subset $M\subseteq \Lspace<\tilde{L}>[\Omega]{2}$ defined as follows:
+	 \begin{dmath*}
+	    M = \Set{ \psi \in \Lspace<\tilde{L}>[\Omega]{2} | \int_{\Omega}
+	       \abs{\psi}^{2}  = 0  }
 	 \end{dmath*}
+
+	 The following lemma is not strictly necessary to be mentioned, but
+	 it makes the next proofs clearer. 
+	 \begin{lemma}
+	    \label{lemma:linearityofM}
+	    For every $(\varphi, \psi) \in M \times M$ and for every $\lambda
+	    \in \C$, $\varphi + \psi$ and $\lambda \psi$ belong to $M$.
+	 \end{lemma}
+
+	 In words: any linear combination of vectors of $M$ is an element of
+	 $M$ itself. 
+
+	 \begin{proof}
+	    By linearity of the integral,
+	    \begin{dmath*}[compact]
+	       \int_{\Omega} \abs{\lambda \psi}^{2} = \int_{\Omega}
+	       \abs{\lambda}^{2} \abs{\psi}^{2} = \abs{\lambda}^{2}
+	       \int_{\Omega} \abs{\psi}^{2}
+	    \end{dmath*},
+	    thus $\lambda \psi \in M$.
+	    Using the monotonicity of the integral,
+	    \begin{dmath*}[compact]
+	       0 \leq \int_{\Omega} \abs{ \varphi + \psi}^{2} \leq \int_{\Omega}
+	       \abs{\psi}^{2} + \int_{\Omega} \abs{\varphi}^{2}  = 0 
+	    \end{dmath*},
+	    thus $\psi + \varphi \in M$.
+	 \end{proof}
+
+	 Let $\sim$ be the relation on 
+	 $\Lspace<\tilde{L}>[\Omega]{2}$  defined in this way:
+	 for every $(\varphi, \psi) \in 
+\Lspace<\tilde{L}>[\Omega]{2}\times \Lspace<\tilde{L}>[\Omega]{2}$, $\varphi
+\sim \psi$ if $\varphi - \psi \in M$.
+In words: $\varphi \sim \psi$ if the two functions agree outside a set of (Lebesgue)
+zero measure. 
+
+\begin{lemma}
+   $\sim$ is an equivalence relation over 
+	 $\Lspace<\tilde{L}>[\Omega]{2}$.
+      \end{lemma}
+
+      \begin{proof}
+	 Let's check the equivalence relation properties:
+	 \begin{description}
+	    \item[Reflexivity]:
+	       for every $\psi\in \Lspace<\tilde{L}>[\Omega]{2}$,
+	       $\psi - \psi = 0$ (where $0$ denotes the identically zero
+	       function, 
+	       \ie, the function which takes value zero
+	       everywhere on $\Omega$) and thus $\psi - \psi \in M$;
+	    \item[Symmetry]:
+	       for every $\psi$ and $\varphi$ in $\Lspace<\tilde{L}>[\Omega]{2}$,
+	       if $\psi \sim \varphi$ also $\varphi \sim \psi$; in fact, $\psi
+	       \sim \varphi$ means $\psi - \varphi\in M$ and, for 
+	       \cref{lemma:linearityofM}, also $\varphi - \psi =
+	       (-1)(\psi-\varphi) \in M$;
+	    \item[Transitivity]:
+	       for every $\psi$, $\varphi$ and $\eta$ in $\Lspace<\tilde{L}>[\Omega]{2}$,
+	       if $\psi \sim \eta$ and $\eta \sim \varphi$, then $\psi\sim
+	       \varphi$; in fact, if $\psi - \eta \in M$ and $\eta - \psi \in
+	       M$, then also $(\psi - \eta) + (\eta-\varphi)  \in M$ by
+	       \cref{lemma:linearityofM}.
+	 \end{description}
+      \end{proof}
+
+      We introduce the following notation:
+	       for every $\psi$ in $\Lspace<\tilde{L}>[\Omega]{2}$, 
+	       let $[\psi]$ denote the equivalence class of $\psi$ under
+	       $\sim$; 
+	       furthermore, let 
+	       $\Lspace[\Omega]{2}$ denote the quotient space (\ie, 
+	       the space of all possibile equivalence
+	       classes) of $\Lspace<\tilde{L}>[\Omega]{2}$ by $\sim$.
+
+	       Define addition and multiplication by a scalar constant
+	       in $\Lspace[\Omega]{2}$ in the following way. 
+	       For every $[\psi]$ and $[\varphi]$ in $\Lspace[\Omega]{2}$ and
+	       $\lambda \in \K$, put
+	       \begin{dgroup*}
+		  \begin{dmath*}
+		     [\psi] + [\varphi] = [\psi + \varphi] 
+		  \end{dmath*},
+		  \begin{dmath*}
+		     \lambda [\psi] = [\lambda \psi ] 
+		  \end{dmath*}.
+	       \end{dgroup*}
+		First of all, let us check that these operations are
+		well-defined. 
+		\begin{lemma}
+		   For every $\psi$ and $\tilde{\psi}$ in $[\psi]$
+		   and for every $\varphi$, $\tilde{\varphi}$ in $[\varphi]$, 
+		   \begin{dgroup*}
+		   \begin{dmath*}
+		      [\psi] + [\varphi] = [\tilde{\psi}] + [\tilde{\psi}]
+		   \end{dmath*},
+		   \begin{dmath*}
+		      \lambda [\psi] = \lambda [\tilde{\psi}] 
+		   \end{dmath*}.
+		\end{dgroup*}
+%		$[\psi] + [\varphi] = [\tilde{\psi}] + [\tilde{\}]$?
+\end{lemma}	       
+\begin{proof}
+   There exists $\eta$ and $\xi$ in $M$ such that 
+   $\tilde{\psi} = \psi + \eta $ and $\tilde{\varphi} = \varphi + \xi$;
+   then, $\tilde{\psi}  + \tilde{\varphi} = (\psi + \eta) + (\varphi + \xi) = (\psi +
+   \varphi) + (\eta + \xi)$, where $\eta + \xi \in M$. Thus
+   $( \tilde{\psi} + \tilde{\varphi}) - (\psi + \varphi) = \eta + \xi \in M$,
+   $( \tilde{\psi} + \tilde{\varphi}) \sim (\psi + \varphi)$.
+   In the same way one proves that $\lambda \tilde{\psi} \sim \lambda \psi$.
+\end{proof}
+
+\begin{theorem}
+   \label{thm:L2vectorspace}
+   $(\Lspace[\Omega]{2}, +, \cdot)$ is a vector space over $\K$, where the addition and
+   multiplication are those defined above.
+\end{theorem}
+
+It is a standard result of linear algebra that the quotient space with the
+above definitions of addition and multiplication is a vector space. More
+generally, this  result 
+applies to every quotient space, no matter what is the underlying set and what
+is the specific equivalence relation. We leave the proof of \cref{thm:L2vectorspace}
+as exercise. 
+
+\begin{exercise}
+   Prove 
+   \cref{thm:L2vectorspace}.
+   Generalize the proof to arbitrary quotient spaces under a generic
+   equivalence relation. 
+\end{exercise}
+
+In $\Lspace[\Omega]{2}$, define an application $\braket{\cdot|\cdot}$ by letting
+\begin{dmath}[frame,label={inner:L2}]
+   \Braket{ [\varphi] | [\psi]} 
+   = \int_{\Omega} \conj{\varphi} \psi 
+\end{dmath},
+where on the right hand side $\varphi$ is any function belonging to $[\varphi]$ and $\psi$ is any
+function belonging to $[\psi]$.
+
+\begin{remark}
+In order to simplify the notation, 
+   we will denote the equivalence class $[\psi]$ containing $\psi$ by
+   $\psi$ itself.
+\end{remark}
+
+\begin{remark}
+   Given $\fullfunction{\varphi}{\Omega}{\K}$, the function 
+   $\fullfunction{\conj{\varphi}}{\Omega}{\K}$ is defined by
+   $\conj{\varphi}(x) = \conj*{\varphi(x)}$ for all $x\in\Omega$.
+\end{remark}
+
+We need to show that such $\braket{\cdot|\cdot}$ is well-defined, \ie:
+\begin{inparaenum}[(a)]
+\item show that the integral exists and is convergent, and
+\item show that the integral is independent from the choice of $\psi\in[\psi]$ and
+   $\varphi\in[\varphi]$.
+\end{inparaenum}
+
+Let us recall the following theorem from the theory of Lebesgue integration.
+\begin{theorem}
+   Let $\fullfunction{\varphi}{\Omega}{\K}$ be Lebesgue integrable on $\Omega$
+   and let $\fullfunction{\psi}{\Omega}{\K}$ be any function satisfying
+   \begin{dmath*}
+      \abs{\psi(x)} \leq \abs{\varphi(x)} 
+   \end{dmath*},
+   for all $x\in\Omega$.
+   Then, $\psi$ is Lebesgue integrable on $\Omega$.
+\end{theorem}
+
+To show that the integral exists, notice that for every $(z,w)\in \C\times \C$,
+we have
+\begin{dmath}
+   \abs{ zw } \leq \frac{1}{2} \abs{z}^{2} + \frac{1}{2} \abs{w}^{2}
+\end{dmath};
+in fact,
+\begin{dmath*}[compact]
+   0 \leq \left( \abs{z} - \abs{w}\right)^{2} = \abs{z}^{2} + \abs{w}^{2} -
+   2\abs{ zw} 
+\end{dmath*}.
+Thus,
+\begin{dmath*}
+   \abs{ \conj{\varphi}(x) \psi(x) } 
+   \leq \frac{1}{2} \abs{ \varphi(x)}^{2} +
+   \frac{1}{2} \abs{ \psi(x)}^{2} 
+   \condition*{\forall x \in \Omega}
+\end{dmath*},
+thus the integral of 
+   $\abs{ \conj{\varphi}(x) \psi(x) } $ exists and is absolutely convergent,
+   and this ensures the convergence of the integral of 
+   $\conj{\varphi}(x) \psi(x)$.
+
+
+   \begin{exercise}
+      Show that the integral in \cref{eq:inner:L2} is independent from the choice of $\psi\in[\psi]$
+   and $\varphi\in [\varphi]$.
+\end{exercise}
+
+\begin{theorem}
+   $(\Lspace[\Omega]{2}, \braket{\cdot|\cdot})$, where $\braket{\cdot|\cdot}$
+   is defined by \cref{eq:inner:L2}, is a inner product space.
+\end{theorem}
+	       
+
+\begin{proof}
+   We need to show that $\braket{\cdot|\cdot}$ defined by \cref{eq:inner:L2}
+   satisfies \cref{item:inner1,item:inner2,item:inner3,item:inner4,item:inner5}
+   in \cref{def:inner}.
+
+   Linearity of $\braket{\cdot|\cdot}$ follows immediately from the linearity
+   of the integral:
+   \begin{dgroup*}
+      \begin{dmath*}
+	 \braket{\varphi|\psi + \eta} = \int_{\Omega} \conj{\varphi} \left(
+	    \psi + \eta \right) = 
+	 \int_{\Omega} \conj{\varphi} \psi + \int_{\Omega} \conj{\varphi} \eta 
+	 = \braket{\varphi|\psi } + \braket{\varphi|\eta}
+      \end{dmath*}
+      \begin{dmath*}
+      \braket{\varphi|\lambda \psi} = \int_{\Omega} \conj{\varphi} \left(
+	 \lambda \psi \right) = \lambda \int_{\Omega} \conj{\varphi}\psi =
+      \lambda \braket{\varphi|\psi}
+   \end{dmath*}
+\end{dgroup*}
+   Furthrmore,
+   \begin{dmath*}
+      \braket{\psi|\varphi} = 
+      \int_{\Omega} \conj{\psi} \varphi
+      = \int_{\Omega} \conj*{\psi \conj{\varphi}} 
+      = \conj*{ \int_{\Omega} \conj{\varphi} \psi}
+      = \conj{\braket{\varphi|\psi}}
+   \end{dmath*}
+   \begin{approfondimento}
+      The fact that complex conjugation can be moved outside the integration
+      symbol is rigorously justified as follows. 
+      Let $\fullfunction{\psi}{\Omega}{\C}$ be  a complex-valued function defined
+      on $\Omega$, and set $\fullfunction{\psi_{1},\psi_{2}}{\Omega}{\R}$ by
+      letting $\psi_{1} = \Re \psi$ and $\psi_{2} = \Im \psi$.
+      By definition, $\psi$ is Lebesgue integrable on $\Omega$ if and only if
+      $\psi_{1}$ and $\psi_{2}$ are Lebesgue integrable on $\Omega$ and in that
+      case we put
+      \begin{dmath*}
+	 \int_{\Omega} \psi = \int_{\Omega} \psi_{1} + \ii \int_{\Omega}
+	 \psi_{2}
+      \end{dmath*}
+      Clearly, if $\psi$ is Lebesgue integrable, $\conj{\psi}$ is Lebesgue
+      integrable  and 
+      \begin{dmath*}
+	 \int_{\Omega} \conj{\psi} = \int_{\Omega} \psi_{1} - \ii \int_{\Omega}
+	 \psi_{2}
+	 = \conj*{\int_{\Omega}\psi}
+      \end{dmath*}.
+   \end{approfondimento}
+   Finally, the monotonicity of the integral ensures that 
+   \begin{dmath*}
+      \braket{\psi|\psi} = \int_{\Omega} \conj{\psi} \psi
+      =\int_{\Omega}\abs{\psi}^{2} \geq 0
+   \end{dmath*},
+   and $\int_{\omega}\abs{\psi}^{2} = 0 $ if and only if $\psi$ belongs to the
+   class of equivalence of the function which is identically zero on $\Omega$,
+   \ie, $\psi = 0$.
+\end{proof}
+
+\begin{theorem}[Riesz-Fischer]
+   $(\Lspace[\Omega]{2}, \braket{\cdot|\cdot})$ is an Hilbert space.
+\end{theorem}
+
+\begin{proof}
+We need to check completeness.
+\end{proof}
+
+
+
+\subsection{The Banach spaces $\lspace{p}$ and $\Lspace[\Omega]{p}$}
+
+
 
 	 
 	 \section{Orthogonality}
@@ -967,8 +1412,8 @@ Thus:
 		 for every orthogonal finite set of $N\in \N$ vectors $\varphi_{1},
 		 \varphi_{2}, \ldots \varphi_{N}$ in $X$, 
 		 \begin{dmath*}
-		    \Norm{\sum_{k=1}^{N} \varphi_{k}}^{2} = \sum_{k=1}^{N}
-		    \Norm{\varphi_{k}}^{2}
+		    \norm{\sum_{k=1}^{N} \varphi_{k}}^{2} = \sum_{k=1}^{N}
+		    \norm{\varphi_{k}}^{2}
 		 \end{dmath*}
 	      \item 
 		 if $(\varphi_{k})_{k\in\N}$ is a sequence $\N \to X$ of
@@ -978,8 +1423,8 @@ Thus:
 		 convergent in $\R$ and in that case we have the following
 		 identity:
 		 \begin{dmath*}
-		    \Norm{ \sum_{k=1}^{+\infty}\varphi_{k}} ^{2} =
-		    \sum_{k=1}^{+\infty} \Norm{\varphi_{k}}^{2}
+		    \norm{ \sum_{k=1}^{+\infty}\varphi_{k}} ^{2} =
+		    \sum_{k=1}^{+\infty} \norm{\varphi_{k}}^{2}
 		 \end{dmath*}.
 	   \end{enumerate}
 	      \end{theorem}
@@ -999,13 +1444,13 @@ Thus:
 	The case $N=2$ has been shown explicitly in the first part of the proof.
 	Now, let's check  that 
 		 \begin{dmath*}
-		    \Norm{\sum_{k=1}^{N} \varphi_{k}}^{2} = \sum_{k=1}^{N}
-		    \Norm{\varphi_{k}}^{2}
+		    \norm{\sum_{k=1}^{N} \varphi_{k}}^{2} = \sum_{k=1}^{N}
+		    \norm{\varphi_{k}}^{2}
 		 \end{dmath*}
 		 for a given $N$ implies 
 		 \begin{dmath*}
-		    \Norm{\sum_{k=1}^{N+1} \varphi_{k}}^{2} = \sum_{k=1}^{N+1}
-		    \Norm{\varphi_{k}}^{2}
+		    \norm{\sum_{k=1}^{N+1} \varphi_{k}}^{2} = \sum_{k=1}^{N+1}
+		    \norm{\varphi_{k}}^{2}
 		 \end{dmath*}
 		 for $N+1$. 
 		 We have 
@@ -1023,14 +1468,37 @@ Thus:
 
 
 
-\section{Orthonormal basis}
+	      \section{Complete orthonormal sets}
+
+	      \begin{definition}
+		 Let $(X, \braket{\cdot|\cdot})$ a Hilbert space and
+		 $(\varphi_{k})_{k}$ a family of vectors in $X$.
+		 $(\varphi_{k})_{k}$  is called a ``complete orthonormal set''
+		 if 
+		 \begin{enumerate}
+		    \item 
+		 $(\varphi_{k})_{k}$  is an orthonormal set in $X$;
+	      \item 
+		 for every $\psi \in X$, 
+		 \begin{dmath*}
+		    \braket{\varphi_{k}|\psi} = 0 \condition{$\forall k$}
+		 \end{dmath*}
+		if and only if $\psi = 0$. 
+	  \end{enumerate}
+	     \end{definition}
 
 
-\section{Linear operators}
+
+
+\section{The Fouries series in $\Lspace[\Omega]{2}$}
+
+
+\section{Linear operators: first properties}
 
 \section{Isomorphism}
 
 
+\section{Riesz theorem}
 
 \printbibliography[heading=subbibliography]
 \end{refsection}
