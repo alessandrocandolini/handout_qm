@@ -288,29 +288,29 @@ induced by the norm).
 \end{theorem}
 
 \begin{proof}
-   Long proof. 
-We need to show that  $\forall \psi \in X$ the following holds:
-for all real numbers $\varepsilon > 0$, 
-there exists a real number $\delta > 0$ such that, for all $\varphi \in X$, if
-$d(\psi,\varphi)<\delta$ then 
-$\tilde{d}( \norm{\psi},
-\norm{\varphi}) < \varepsilon$, where $\tilde{d}$ is the euclidean distance in
-$\R$.
-   Notice  that 
-   $d( \psi, \varphi) < \delta $ means 
-\begin{dmath*}[compact]
-   \norm{\psi-\varphi} < \delta
-\end{dmath*},
-and 
-$\tilde{d}( \norm{\psi},
-   \norm{\varphi}) < \varepsilon$ means 
-\begin{dmath*}[compact]
-   \abs{\norm{\psi}-\norm{\varphi} }< \epsilon
-\end{dmath*}.
-Using \cref{eq:norm-continuity}, it is enough to choose any $0<\delta < \epsilon$.
-
-Short proof:
-\cref{eq:norm-continuity} implies that $\norm{\cdot}$ is Lipschitz and every
+   %Long proof. 
+%We need to show that  $\forall \psi \in X$ the following holds:
+%for all real numbers $\varepsilon > 0$, 
+%there exists a real number $\delta > 0$ such that, for all $\varphi \in X$, if
+%$d(\psi,\varphi)<\delta$ then 
+%$\tilde{d}( \norm{\psi},
+%\norm{\varphi}) < \varepsilon$, where $\tilde{d}$ is the euclidean distance in
+%$\R$.
+%   Notice  that 
+%   $d( \psi, \varphi) < \delta $ means 
+%\begin{dmath*}[compact]
+%   \norm{\psi-\varphi} < \delta
+%\end{dmath*},
+%and 
+%$\tilde{d}( \norm{\psi},
+%   \norm{\varphi}) < \varepsilon$ means 
+%\begin{dmath*}[compact]
+%   \abs{\norm{\psi}-\norm{\varphi} }< \epsilon
+%\end{dmath*}.
+%Using \cref{eq:norm-continuity}, it is enough to choose any $0<\delta < \epsilon$.
+%
+%Short proof:
+\Cref{eq:norm-continuity} implies that $\norm{\cdot}$ is Lipschitz and every
 Lipschitz function is continuous. 
 \cref{}
 \end{proof}
@@ -665,12 +665,12 @@ using the Cauchy-Schwarz inequality.
 	      for every $\varphi \in X$, $\psi \in X \backslash \{ 0\}$
 	      and $\lambda \in \K$.
 Choose
-\begin{dmath*}
+   \begin{dmath}[label={cs:lambda}]
    \lambda =  \frac{\conj{\braket{\varphi|\psi}}}{\braket{\psi|\psi}}
    \condition*{\psi \neq 0}
-\end{dmath*},
+\end{dmath},
 which makes sense since we are discussing the case $\psi \neq 0$.
-Plugin into the previosu equation yields
+Plugin into the previous equation yields
 \begin{dmath*}
    \braket{\varphi|\varphi} 
    - 2 \Re{ \left( \frac{\conj{\braket{\varphi|\psi}}}{\braket{\psi|\psi}}
@@ -693,9 +693,28 @@ from which it follows
 (using the fact that $\braket{\psi|\psi} > 0$).
 Taking the square root of both sites (notice that both sides are surely
 positive) yields the expected result. 
-The equality holds if $\varphi - \lambda \psi = $, \ie, if the two vectors are
+The equality holds if and only if $\varphi - \lambda \psi = 0$, \ie, if the two vectors are
 linearly dependent. 
 \end{proof}
+
+\begin{exercise}
+For every fixed $(\varphi, \psi) \in X \times X $, consider
+   $\fullfunction{f}{\C}{\R}$ defined by 
+   \begin{dmath}[label={cs:f}]
+      f(\lambda) = \norm{ \varphi - \lambda \psi}^{2} 
+      = \abs{\lambda}^{2} \norm{\psi}^{2} - \lambda \braket{ \varphi
+	 | \psi} - \conj{\lambda} \conj{\braket{\varphi|\psi}} +
+      \norm{\varphi}^{2} 
+      \condition*{\forall \lambda \in \C}
+   \end{dmath}.
+   By positivity of the norm, $f(\lambda) \geq 0$ and
+   $f(\lambda) =0 $ if and only if $\varphi = \lambda \psi$, as already
+   discussed in the proof of Cauchy-Schwarz inequality.  
+   Show that $\lambda$ given by \cref{eq:cs:lambda} is a minimum for the
+   function $f$ define  in \cref{eq:cs:f}.
+   This can explain the choice \cref{eq:cs:lambda}.
+\end{exercise}
+   
 
 \begin{theorem}
    Let 
@@ -733,7 +752,7 @@ linearly dependent.
    $(X, \braket{\cdot|\cdot})$ be an inner product space over $\K$. 
    $\braket{\cdot}{\cdot}$ is a continuous function 
    of both arguments
-(with respect to the metric
+(with respect to the topology
 induced by the inner product).
 \end{theorem}
 
@@ -773,7 +792,7 @@ $0 < \delta < \epsilon / \norm{\varphi}$.
 
 As a consequence of the continuity of the inner product,
 if $(X, \braket{\cdot|\cdot})$ is a inner product space and 
-  $\fullfunction{(\psi_{k})_{k\in\N}}{\N}{X}$ is a sequence in $X$ such that 
+  $(\psi_{k})_{k\geq 1}$ is a sequence in $X$ such that 
   $\sum_{k\in\N} \psi_{k}$ is convergent to some $\psi \in X$, \ie,
   \begin{dmath*}
      \lim_{n\rightarrow + \infty} \sum_{k=1}^{n} \psi_{k} = \psi
@@ -781,8 +800,8 @@ if $(X, \braket{\cdot|\cdot})$ is a inner product space and
   then 
   \begin{dmath}[compact,label={inner:continuity}]
      \braket{ \varphi | \psi } 
-     = \braket{ \varphi | \lim_{n\rightarrow + \infty} \sum_{k=1}^{n} \psi_{k}}
-     = \lim_{n\rightarrow +\infty} \braket{ \varphi | \sum_{k=1}^{n} \psi_{k}}
+     = \Braket{ \varphi | \lim_{n\rightarrow + \infty} \sum_{k=1}^{n} \psi_{k}}
+     = \lim_{n\rightarrow +\infty} \Braket{ \varphi | \sum_{k=1}^{n} \psi_{k}}
      = \lim_{n\rightarrow +\infty} \sum_{k=1}^{n} \braket{ \varphi | \psi_{k}}
   \end{dmath}.
   \begin{exercise}
@@ -848,9 +867,9 @@ It will also be useful  later, when discussing positive operators.
       \condition{$\forall (\varphi,\psi)\in X \times X$}
       \end{dmath}.
    In the case $\K = \C$, 
-   \begin{dmath}[label={polarization:R}]
+   \begin{dmath}[label={polarization:C}]
       \braket{\varphi|\psi} = \frac{1}{4} \left( \norm{\varphi + \psi}^{2}  -
-	 \norm{\varphi - \psi}^{2}\right) + 
+	 \norm{\varphi - \psi}^{2}\right) - 
       \frac{\ii}{4} \left( \norm{ \varphi + \ii \psi}^{2} + \norm{ \varphi -
 	    \ii \psi }^{2} \right)
       \condition{$\forall (\varphi,\psi)\in X \times X$}
@@ -858,19 +877,89 @@ It will also be useful  later, when discussing positive operators.
 \end{lemma}
 
 \begin{remark}
-   The polarization identity can be stated in the following concise way:
-   \begin{dmath}
-      \braket{\varphi|\psi} = \frac{1}{4} \sum_{k=1}^{4} \ii^{k} \norm{ \varphi +
+   \Cref{eq:polarization:C} can be recasted in a shorter form:
+   \begin{dmath}[frame, label={}]
+      \braket{\varphi|\psi} = \frac{1}{4} \sum_{k=0}^{3} (-\ii)^{k} \norm{ \varphi +
 	 \ii^{k} \psi}^{2}
    \end{dmath}.
 \end{remark}
 
+\begin{remark}
+   Different signs are possibile in literature if a different convention is
+   chosen for property~\ref{item:inner2} of \cref{def:inner}, namely, if the inner
+   product is chosen to be linear on the first component instead of the second
+   one. 
+\end{remark}
+
 \begin{proof}
+   We discuss the case $\K = \C$. The 
+   proof can be easily modified for the case $\K = \R$.
 
-
+   By straightforward computation,
+   \begin{dgroup}
+      \begin{dmath}[label={polarization:sum1}]
+	 \norm{\varphi + \psi}^{2} = \norm{\varphi}^{2} + 2 \Re
+	 {\braket{\varphi|\psi}} + \norm{\psi}^{2}
+      \end{dmath},
+      \begin{dmath}[label={polarization:sum2}]
+	 \norm{\varphi - \psi}^{2} = \norm{\varphi}^{2} - 2 \Re
+	 {\braket{\varphi|\psi}} + \norm{\psi}^{2}
+      \end{dmath},
+      \begin{dmath}[label={polarization:sum3}]
+	 \norm{\varphi + \ii \psi} = \norm{\varphi}^{2} - 2  \Im \braket{
+	    \varphi | \psi} + \norm{\psi}^{2}
+      \end{dmath},
+      \begin{dmath}[label={polarization:sum4}]
+	 \norm{\varphi - \ii \psi} = \norm{\varphi}^{2} + 2 \Im
+	 \braket{\varphi|\psi} + \norm{\psi}^{2}
+      \end{dmath}.
+   \end{dgroup}
+   Subtracting \cref{eq:polarization:sum1,eq:polarization:sum2} we get
+   \begin{dmath*}[compact]
+	 \norm{\varphi + \psi}^{2} 
+	 -
+	 \norm{\varphi - \psi}^{2} 
+%	 = 
+%	 \norm{\varphi}^{2} + 2 \Re
+%	 {\braket{\varphi|\psi}} + \norm{\psi}^{2}
+%	 - \norm{\varphi}^{2} + 2 \Re
+%	 {\braket{\varphi|\psi}} - \norm{\psi}^{2}
+	 = 4 \Re {\braket{\varphi|\psi}}
+      \end{dmath*};
+   subtracting \cref{eq:polarization:sum3,eq:polarization:sum4} we get
+   \begin{dmath*}[compact]
+	 \norm{\varphi + \ii \psi} 
+	- 
+	 \norm{\varphi - \ii \psi} 
+%	 = \norm{\varphi}^{2} - 2  \Im \braket{
+%	    \varphi | \psi} + \norm{\psi}^{2}
+%	 - \norm{\varphi}^{2} - 2 \Im
+%	 \braket{\varphi|\psi} - \norm{\psi}^{2}
+	 = -4 \Im {\braket{\varphi|\psi}}
+      \end{dmath*}.
+      Thus 
+      \begin{dmath*}
+	 \frac{1}{4}
+	 \left( 
+	 \norm{\varphi + \psi}^{2} 
+	 -
+	 \norm{\varphi - \psi}^{2} 
+      \right) 
+      - \frac{\ii}{4}
+      \left(
+	 \norm{\varphi + \ii \psi} 
+	- 
+	 \norm{\varphi - \ii \psi} 
+      \right)
+      = \Re {\braket{\varphi|\psi}} 
+      + \ii \Im {\braket{\varphi|\psi}}
+      = \braket{\varphi|\psi}
+   \end{dmath*}.
+   This completes the proof.
 \end{proof}
 
-The following result is called Jordan-von Neumann theorem%
+The following result allows a complete characterization of inner-product spaces
+among norm vector spaces. It is called Jordan-von Neumann theorem%
 \footcite[See][]{Jordan.Neumann:1935}.
 \begin{theorem}[Jordan-von Neumann theorem]
    \label{thm:parallelogram_law}
@@ -942,6 +1031,79 @@ The following result is called Jordan-von Neumann theorem%
     \cref{def:inner}.
 
     Ad \ref{item:inner1}.
+    For  every $(\varphi,\psi,\eta) \in X \times X \times X$, by applying the
+    parallelogram law we get
+    \begin{dgroup}
+       \begin{dmath}[label={jvn:sum1}]
+	  2 \norm{\varphi + \psi}^{2} + 
+	  2 \norm{\eta}^{2} 
+	  = 
+	  \norm{\varphi + \psi + \eta }^{2} + 
+	  \norm{\varphi + \psi - \eta }^{2}
+       \end{dmath},
+       \begin{dmath}[label={jvn:sum2}]
+	  2 \norm{\varphi - \psi}^{2} + 
+	  2 \norm{\eta}^{2} 
+	  = 
+	  \norm{\varphi - \psi + \eta }^{2} + 
+	  \norm{\varphi - \psi - \eta }^{2}
+       \end{dmath},
+       \begin{dmath}[label={jvn:sum3}]
+	  2 \norm{\varphi + \eta}^{2} + 
+	  2 \norm{\psi}^{2} 
+	  =
+	  \norm{\varphi + \psi + \eta }^{2} + 
+	  \norm{\varphi - \psi + \eta }^{2}
+       \end{dmath},
+       \begin{dmath}[label={jvn:sum4}]
+	  2 \norm{\varphi - \eta}^{2} + 
+	  2 \norm{\psi}^{2} 
+	  =
+	  \norm{\varphi + \psi - \eta }^{2} + 
+	  \norm{\varphi - \psi - \eta }^{2}
+       \end{dmath}.
+    \end{dgroup}
+    Subtracting \cref{eq:jvn:sum1,eq:jvn:sum2} we get
+    \begin{dmath}[label={jvn:sum5}]
+	  2 \norm{\varphi + \psi}^{2} - 
+	  2 \norm{\varphi - \psi}^{2} 
+	  = 
+	  \norm{\varphi + \psi + \eta }^{2} + 
+	  \norm{\varphi + \psi - \eta }^{2} - 
+	  \norm{\varphi - \psi + \eta }^{2} - 
+	  \norm{\varphi - \psi - \eta }^{2}
+       \end{dmath};
+    subtracting \cref{eq:jvn:sum3,eq:jvn:sum4} we get
+    \begin{dmath}[label={jvn:sum6}]
+	  2 \norm{\varphi + \eta}^{2} - 
+	  2 \norm{\varphi - \eta}^{2} 
+	  =
+	  \norm{\varphi + \psi + \eta }^{2} + 
+	  \norm{\varphi - \psi + \eta }^{2} -
+	  \norm{\varphi + \psi - \eta }^{2} - 
+	  \norm{\varphi - \psi - \eta }^{2}
+       \end{dmath};
+    summing \cref{eq:jvn:sum5,eq:jvn:sum6} we get
+    \begin{dmath}[label={jvn:sum7}]
+	    2 \norm{\varphi + \psi}^{2} - 
+	    2 \norm{\varphi - \psi}^{2} + 
+	    2 \norm{\varphi + \eta}^{2} - 
+	    2 \norm{\varphi - \eta}^{2} 
+	  = 
+	  \norm{\varphi + \psi + \eta }^{2} + 
+	  \norm{\varphi + \psi - \eta }^{2} - 
+	  \norm{\varphi - \psi + \eta }^{2} - 
+	  \norm{\varphi - \psi - \eta }^{2} +
+	  \norm{\varphi + \psi + \eta }^{2} + 
+	  \norm{\varphi - \psi + \eta }^{2} -
+	  \norm{\varphi + \psi - \eta }^{2} - 
+	  \norm{\varphi - \psi - \eta }^{2}
+	  = 
+	  2 \norm{\varphi + \psi + \eta }^{2} -
+	  2 \norm{\varphi - \psi - \eta }^{2}
+       \end{dmath}.
+
+
 
     Ad \ref{item:inner2}.
 
