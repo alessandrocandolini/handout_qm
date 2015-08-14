@@ -438,15 +438,21 @@
 % 	Cleveref support for breqn
 % *****************************************************************************
 
+%\makeatletter
+%\renewcommand\set@label[2]{\protected@edef\@currentlabel{#2}
+%\cref@constructprefix{equation}{\cref@result}%
+%\protected@xdef\cref@currentlabel{%
+%[equation][\arabic{equation}][\cref@result]\eq@number}
+%  %%% Work in progress... Support for hyperref 
+%  \hyper@makecurrent{equation}
+%  \Hy@raisedlink{\hyper@anchorstart{\@currentHref}}
+%  \Hy@raisedlink{\hyper@anchorend}
+%}
+%\makeatother
+
 \makeatletter
-\renewcommand\set@label[2]{\protected@edef\@currentlabel{#2}
-\cref@constructprefix{equation}{\cref@result}%
-\protected@xdef\cref@currentlabel{%
-[equation][\arabic{equation}][\cref@result]\eq@number}
-  %%% Work in progress... Support for hyperref 
-  \hyper@makecurrent{equation}
-  \Hy@raisedlink{\hyper@anchorstart{\@currentHref}}
-  \Hy@raisedlink{\hyper@anchorend}
+\patchcmd\eq@setnumber{\stepcounter}{\refstepcounter}{}{%
+   \errmessage{Patching \noexpand\eq@setnumber failed}%
 }
 \makeatother
 
