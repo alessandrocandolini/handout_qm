@@ -1650,6 +1650,80 @@ All these examples are generalization of those discussed in previous sections.
 
 The Banach spaces $\lspace{p}$ and $\Lspace[\Omega]{p}$
 
+
+\begin{theorem}[Young inequality]
+   For
+   \graffito{Young inequality}
+   every $A,B\geq 0$ and $0\leq \vartheta  \leq 1$, 
+   \begin{dmath}[frame,label={young:AB}]
+      A^{\vartheta} B^{1-\vartheta} \leq \vartheta A + ( 1 - \vartheta) B
+   \end{dmath},
+\end{theorem}
+
+\begin{remark}
+   As a special case, 
+  we recover the arithmetic-geometric mean inequality 
+   for $\vartheta = 1/2$:
+   \begin{dmath*}
+      \sqrt{ AB} \leq \frac{A+B}{2}
+   \end{dmath*}.
+
+\end{remark}
+
+\begin{remark}
+
+   Young inequality is often stated in a slightly different form.
+   Let 
+   \begin{dmath*}
+      \frac{1}{p} + \frac{1}{q} = 1
+   \end{dmath*},
+   put $\vartheta = 1/p$ so $1 - \vartheta = 1/q$ and set $A= a^{p}$ and $B=
+   b^{q}$. This way \cref{eq:young:AB} reads
+   \begin{dmath}[label={young:pq}]
+      ab \leq \frac{a^{p}}{p} + \frac{b^{q}}{q}
+   \end{dmath}.
+\end{remark}
+
+\begin{proof}
+
+   There are various proof, mainly based on convexity.
+   One proof goes as follows. 
+   Consider $\fullfunction{f_{\vartheta}}{\interval[open]{0}{+\infty}}{\R}$
+   defined by 
+   \begin{dmath*}
+      f_{\vartheta} (x)  = x^{\vartheta} - \vartheta x + ( \vartheta - 1)
+      \condition*{\forall x > 0}
+   \end{dmath*},
+   where by definition 
+   \begin{dmath*}
+      x^{\vartheta} = \exp{\vartheta \log{x}}
+      \condition*{\forall x > 0}
+   \end{dmath*}.
+   Notice that when $\vartheta = 0$ or $\vartheta = 1$ the function is
+   constant, in particular $f_{0} (x) = f_{1} (x) = 0$. 
+   Let us discuss what happens when $\vartheta \neq 0,1$.
+   The first-order derivative is 
+   \begin{dmath*}
+      \D{f(x)}{x} 
+      = 
+      \vartheta \left(  x^{\vartheta - 1} - 1\right )
+   \end{dmath*};
+   since %
+  $0< \vartheta < 1$, 
+   we have 
+   \begin{math}
+      \D{f(x)}{x}  \geq 0 
+   \end{math} 
+  if and only if  $0 < x \leq 1 $, and 
+   \begin{math}
+      \D{f(x)}{x}  <  0 
+   \end{math} 
+   for $x> 0 $.
+   This means that $x = 1$ is a maximum  of $f_{\vartheta}$.
+   Since $f_{\vartheta}(1) = 0$, we get $f_{\vartheta}(x) \leq 0$.
+\end{proof}
+
+
 We know that for $p=2$, $\lspace{2}$ is a Hilbert space. 
 This is also the only value of $p$ for which $\lspace{p}$ is an Hilbert space. 
 \begin{theorem}
