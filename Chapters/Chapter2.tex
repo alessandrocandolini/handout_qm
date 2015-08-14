@@ -228,8 +228,8 @@ norm (see \cref{exercise:norm:different}).
       d(\varphi,\psi) = \frac{\norm{\varphi - \psi}}{1+ \norm{\varphi - \psi}} 
       \condition*{\forall (\varphi,\psi)\in X\times X}
    \end{dmath*}
-   Show that $d$  
-   defines a \emph{non}homogeneus, translation invariant metric on $X$.
+   Check whether $d$  
+   defines a metric on $X$.
 \end{exercise}
 
 Now that we have a ``natural'' notion of distance in normed vector spaces, 
@@ -244,7 +244,7 @@ Let
 $(X, \norm{\cdot})$ be a normed vector space over $\K$.
 The following holds:
 \begin{dmath}[label={norm-continuity}]
-   \Abs { \norm{\psi} - \norm{\varphi}} \leq \norm{\psi-\varphi}
+   \abs { \norm{\psi} - \norm{\varphi}} \leq \norm{\psi-\varphi}
    \condition*{\forall (\psi,\varphi)\in X \times X}
 \end{dmath}.
 \end{lemma}
@@ -275,15 +275,10 @@ Thus,
       \leq \norm{\varphi - \psi} 
    \end{dmath*}.
 \end{dgroup*}
-which is exactly the meaning of \cref{eq:norm-continuity}.
-(To see this even more explicitly, it is enough to discuss the three cases
-$\norm{\psi} < \norm{\varphi}$,
-$\norm{\psi} = \norm{\varphi}$,
-$\norm{\psi} > \norm{\varphi}$,
-and remember that $\norm{\varphi-\psi}\geq 0$.
-)
+which can be recasted in the single expression \cref{eq:norm-continuity}.
 \end{proof}
 
+\Cref{eq:norm-continuity} implies the continuity of the norm.
 \begin{theorem}
 Let
 \graffito{Continuity of the norm}
@@ -293,6 +288,7 @@ induced by the norm).
 \end{theorem}
 
 \begin{proof}
+   Long proof. 
 We need to show that  $\forall \psi \in X$ the following holds:
 for all real numbers $\varepsilon > 0$, 
 there exists a real number $\delta > 0$ such that, for all $\varphi \in X$, if
@@ -300,7 +296,6 @@ $d(\psi,\varphi)<\delta$ then
 $\tilde{d}( \norm{\psi},
 \norm{\varphi}) < \varepsilon$, where $\tilde{d}$ is the euclidean distance in
 $\R$.
-
    Notice  that 
    $d( \psi, \varphi) < \delta $ means 
 \begin{dmath*}[compact]
@@ -313,6 +308,11 @@ $\tilde{d}( \norm{\psi},
    \abs{\norm{\psi}-\norm{\varphi} }< \epsilon
 \end{dmath*}.
 Using \cref{eq:norm-continuity}, it is enough to choose any $0<\delta < \epsilon$.
+
+Short proof:
+\cref{eq:norm-continuity} implies that $\norm{\cdot}$ is Lipschitz and every
+Lipschitz function is continuous. 
+\cref{}
 \end{proof}
 
 As a consequence of the continuity of the norm,
@@ -405,7 +405,7 @@ $\conj{\left( z_{1} \pm z_{2}\right)} = \conj{z_{1}} \pm \conj{z_{2}}$, and
 $\abs{ z_{1}z_{2}} = \abs{z_{1}} \abs{z_{2}}$. 
 
 \begin{definition}[inner product]
-   \label{def:inner_product}
+   \label{def:inner}
    Let
    \graffito{Inner product}
    $X$ be a vector space over $\K$. 
@@ -450,8 +450,11 @@ $\abs{ z_{1}z_{2}} = \abs{z_{1}} \abs{z_{2}}$.
 
 Several remarks are in order.
 \begin{remark}
-\Cref{item:inner1,item:inner2} implies that the inner product is
-\emph{linear} on the \emph{second} component, namely:
+   \Cref{item:inner1,item:inner2} are \emph{equivalent} to say that
+   $\braket{\cdot|\cdot}$  is
+   \emph{linear} on the \emph{second} component, \ie, $\braket{\cdot|\cdot}$
+   satisfies 
+   \cref{item:inner1,item:inner2} \emph{if and only if}
 \begin{dmath*}[frame]
 	 \braket{ \varphi | \lambda \psi + \mu \eta } 
 	 = \lambda \braket{\varphi | \psi}
@@ -481,13 +484,13 @@ Several remarks are in order.
       complex conjugation appears. 
    \end{remark}
 \begin{remark}
-   \Cref{item:inner2} is a matter of choice.
-   Some authors prefer a different convention:
+   Convention~\ref{item:inner2} is a matter of choice.
+   Some authors prefer the different convention:
    \begin{dmath*}
       \braket{\lambda \varphi|\psi} = \lambda \braket{\varphi|\psi}
       \condition{$\forall(\varphi,\psi)\in X \times X$ and $\lambda \in \K$}
    \end{dmath*};
-   with this convention, the inner product would become linear on the first
+   with this latter convention, the inner product would become linear on the first
    component and conjugate-linear on the second one.
    The convetion of having the inner product linear on the second component is
    the one most often employed by physicists, and the one used in this notes.
@@ -518,7 +521,7 @@ analogous ``ket'' $\ket{\varphi}$ to a so-called ``bra'' $\bra{\varphi}$ and
 the inner product is considered as a product between a ``bra'' and a ``ket''
 (resulting in a ``braket''!).
 Of course, this is 
-just a naming convention.
+just a suggestive naming convention.
 \end{remark}
 
 
@@ -542,7 +545,7 @@ The following lemma will be useful later on.
    \end{dmath},
    for every $\varphi \in X$.
 \end{lemma}
-The statement of the lemma itself looks rather obvious. 
+The statement of this lemma looks rather trivial.
 However, a technical proof is given below. 
 The linearity of the inner product is a key ingredient.
 \begin{proof}
@@ -562,8 +565,10 @@ By linearity of the inner product,
       \braket{\varphi|\psi} + \braket{\varphi|\psi} = \braket{\varphi|\psi}
       \condition{$\forall\varphi \in X $ and $\psi = 0$}
    \end{dmath*},
-   which is an equation in $\K$ for the unknown $\braket{\varphi|\psi}$, whose only
-   solution is $\braket {\varphi|\psi} = 0$. 
+   which is an equation in $\K$ for the unknown $\braket{\varphi|\psi}$.
+   $\braket {\varphi|\psi}$ 
+   is a solution of this equation \emph{if and only if}
+   $\braket {\varphi|\psi} = 0$. 
 \end{proof}
 
 Any 
@@ -581,9 +586,9 @@ product.
    The square root is not ambigous: it is not a square root of a complex
    number; it is the square root of a positive real number, we don't need to
    specify a branch for the square root function. 
-   We shall prove in a moment that $\norm{\cdot}$ is actually a norm on $X$,
+   We shall prove in a moment that $\norm{\cdot}$ is indeed a norm on $X$,
    this justify the notation $\norm{\cdot}$.
-   Such norm  is the ``norm induced by the inner product''.
+   Such norm  is called the ``norm induced by the inner product''.
    Before proving this, we need a preliminary but extremely important result,
    which goes under the name of 
 Cauchy-Schwarz inequality.
@@ -605,6 +610,7 @@ using the Cauchy-Schwarz inequality.
       \abs{ \braket{\varphi|\psi}} \leq \norm{\varphi} \norm{\psi}
       \condition*{\forall (\varphi,\psi) \in X \times X}
    \end{dmath}.
+   Equality holds if and only if the vectors are linearly dependent. 
 \end{theorem}
 
 \begin{remark}
@@ -617,49 +623,58 @@ using the Cauchy-Schwarz inequality.
 \end{remark}
 
 \begin{proof}
-   We distinguish two cases.
-   If $\psi = 0$, 
+   We distinguish two cases: $\psi =0 $ and $\psi \neq 0$.
+
+   If $\psi = 0$,  then 
    $\braket{\varphi|\psi} = 0$ 
-   (see \cref{eq:psi=0}) and $\braket{\psi|\psi} = \norm{\psi}^{2}= 0$ (by definition of the
-   inner product), thus
-   the inequality is satified.
+   (see \cref{eq:psi=0}) and $\braket{\psi|\psi} = \norm{\psi}^{2}= 0$,
+   thus
+   the inequality becomes $0 \leq 0$, which is satified.
 
    Let us now consider $\psi \neq 0$.
-   For every $\lambda \in \K$, we have
+   As a preliminary step, consider 
+   for every $\lambda \in \K$ 
 	\begin{dmath*}
-	   \braket{ \varphi + \lambda \psi | \varphi + \lambda \psi} 
+	   \braket{ \varphi - \lambda \psi | \varphi - \lambda \psi} 
 	   = 
-	   \braket{\varphi|\varphi} + \lambda \braket{\varphi|\psi} +
+	   \braket{\varphi|\varphi} - \lambda \braket{\varphi|\psi} -
 	   \conj{\lambda}\braket{\psi|\varphi} + 
 	   \conj{\lambda} \lambda 
 	   \braket{\psi|\psi}
+	   = 
+	   \braket{ \varphi | \varphi } - 2 \Re{ \left( \lambda
+		 \braket{\varphi|\psi}\right)}
+	   + \conj{\lambda} \lambda 
+	   \braket{\psi|\psi}
 	\end{dmath*}. 
-	By \cref{item:inner4} in \cref{def:inner}, the left-hand side of this
-	equation is 
-$
-	   \braket{ \varphi + \lambda \psi | \varphi + \lambda \psi} \geq 0$
-	   and it is zero if and only if $\varphi + \lambda \psi = 0$.
+	From \cref{item:inner4} in \cref{def:inner}, the left-hand side of this
+	equation is positive:
+	\begin{dmath*}
+	   \braket{ \varphi - \lambda \psi | \varphi - \lambda \psi} \geq 0
+	\end{dmath*}
+	   and it is zero if and only if $\varphi - \lambda \psi = 0 $ (\ie, if
+	   $\varphi$ and $\psi$ are linearly dependent).
 	   Thus
 	   \begin{dmath*}
-	   \braket{\varphi|\varphi} + \lambda \braket{\varphi|\psi} +
-	   \conj{\lambda}\braket{\psi|\varphi} + 
-	   \conj{\lambda} \lambda 
-	   \braket{\psi|\psi} \geq 0 
+	   \braket{ \varphi | \varphi } - 2 \Re{ \left( \lambda
+		 \braket{\varphi|\psi}\right)}
+	   + \conj{\lambda} \lambda 
+	   \braket{\psi|\psi} 
+	   \geq 0
 	\end{dmath*},
 	      for every $\varphi \in X$, $\psi \in X \backslash \{ 0\}$
 	      and $\lambda \in \K$.
 Choose
 \begin{dmath*}
-   \lambda = - \frac{\conj{\braket{\varphi|\psi}}}{\braket{\psi|\psi}}
+   \lambda =  \frac{\conj{\braket{\varphi|\psi}}}{\braket{\psi|\psi}}
    \condition*{\psi \neq 0}
 \end{dmath*},
 which makes sense since we are discussing the case $\psi \neq 0$.
 Plugin into the previosu equation yields
 \begin{dmath*}
    \braket{\varphi|\varphi} 
-   - \frac{\conj{\braket{\varphi|\psi}}}{\braket{\psi|\psi}} 
-   - \frac{\braket{\varphi|\psi}}{\braket{\psi|\psi}}
-   \conj{\braket{\varphi|\psi}} 
+   - 2 \Re{ \left( \frac{\conj{\braket{\varphi|\psi}}}{\braket{\psi|\psi}}
+	 \braket{\varphi|\psi} \right) }
    + \frac{\conj{\braket{\varphi|\psi}}}{\braket{\psi|\psi}}
    \frac{\braket{\varphi|\psi}}{\cancel{\braket{\psi|\psi}}}
     \cancel{\braket{\psi|\psi}} \geq 0 
@@ -667,7 +682,6 @@ Plugin into the previosu equation yields
  hence 
  \begin{dmath*}
    \braket{\varphi|\varphi}  - 
-   +
    \frac{\conj{\braket{\varphi|\psi}}\braket{\varphi|\psi}}{\braket{\psi|\psi}}
    \geq 0 
 \end{dmath*},
@@ -679,6 +693,8 @@ from which it follows
 (using the fact that $\braket{\psi|\psi} > 0$).
 Taking the square root of both sites (notice that both sides are surely
 positive) yields the expected result. 
+The equality holds if $\varphi - \lambda \psi = $, \ie, if the two vectors are
+linearly dependent. 
 \end{proof}
 
 \begin{theorem}
@@ -692,6 +708,23 @@ positive) yields the expected result.
    We need to check that \cref{eq:norm-inner} makes sense and that it satisfies
    \cref{item:norm1,item:norm2,item:norm3,item:norm4} of the
    definition of the norm.
+   The only non-trivial property is the subadditivity. It can be proved using
+   the Cauchy-Schwarz inequality. In fact, for every $\varphi$, $\psi$ in $X$, 
+   \begin{dmath*}
+      \norm{\varphi + \psi}^{2} = \braket{ \varphi + \psi | \varphi + \psi}
+      = \braket{\varphi | \varphi} + \braket{\varphi|\psi} +
+      \braket{\psi|\varphi} + \braket{\psi | \psi}
+      = 
+      \norm{\varphi}^{2} + 2 \Re{ \braket{\varphi|\psi}} + \norm{\psi}^{2}
+      \leq 
+      \norm{\varphi}^{2} + 2 \abs{ \braket{\varphi|\psi}} + \norm{\psi}^{2}
+      \leq 
+      \norm{\varphi}^{2} + 2 \norm{\varphi}\norm{\psi} + \norm{\psi}^{2}
+      =
+      \left( \norm{\varphi} + \norm{\psi}\right)^{2}
+      \end{dmath*};
+      taking the square root (all quantities involved are positive real
+      numbers) yields the expected result. 
 \end{proof}
 
 \begin{theorem}
@@ -725,12 +758,12 @@ and
 $\tilde{d}( \braket{\varphi|\psi}, \braket{\varphi|\eta}) < \varepsilon$
 means 
 \begin{dmath*}[compact]
-   \Abs{ \braket{\varphi|\psi} - \braket{\varphi|\eta}} < \varepsilon
+   \abs{ \braket{\varphi|\psi} - \braket{\varphi|\eta}} < \varepsilon
 \end{dmath*}.
 Using linearity of the inner product and Cauchy-Schwarz inequality yields
 \begin{dmath*}[compact]
-   \Abs{ \braket{\varphi|\psi} - \braket{\varphi|\eta}}  = 
-   \Abs{ \braket{\varphi|\psi - \eta}}   \leq \norm{\varphi} \norm{\psi - \eta}
+   \abs{ \braket{\varphi|\psi} - \braket{\varphi|\eta}}  = 
+   \abs{ \braket{\varphi|\psi - \eta}}   \leq \norm{\varphi} \norm{\psi - \eta}
    \leq \delta \norm{\varphi}
 \end{dmath*}.
 If $\varphi = 0$, the result is $0$ and we are done.
@@ -979,7 +1012,7 @@ conjugation (because in that case all numbers involved are real numbers).
    It is straightforward to show that $\braket{\cdot|\cdot}$ defined in
    \cref{eq:inner:CN} satifies 
 \Cref{item:inner1,item:inner2,item:inner3,item:inner4,item:inner5} of
-\cref{def:inner_product}. 
+\cref{def:inner}. 
 \end{proof}
 \begin{theorem}
    $(\C^{N}, \braket{\cdot|\cdot})$, where $\braket{\cdot|\cdot}$ is defined by
@@ -1029,7 +1062,7 @@ conjugation (because in that case all numbers involved are real numbers).
 	 Let $\Omega \subseteq \R^{N}$ be an arbitrary non-empty subset of $\R^{N}$ for some
 	 $N\in\N$ and  let
 	 $\Lspace<\tilde{L}>[\Omega]{2}$ 
-	 be the set consisting of all and only the
+	 be the set consisting of all and only the 
 	 functions defined on $\Omega$ and taking values on $\K$, \ie,
 	 $\fullfunction{\psi}{\Omega}{\K}$, such that their square modulus is 
 	 Lebesgue-integrable over $\Omega$, \ie, the following integral exists
@@ -1055,6 +1088,8 @@ conjugation (because in that case all numbers involved are real numbers).
 
 	 To overcome this difficulty, a slightly more techical construction is
 	 needed. 
+	 The idea is to ``identify'' two functions when they are equal almost
+	 everywhere (\ie, everywhere but on a set of zero Lebesgue measure).
 	 The formal construction involves working with equivalence classes and proceeds as follows. 
 	 First, we will equip 
 	 $\Lspace<\tilde{L}>[\Omega]{2}$ 
@@ -1268,6 +1303,7 @@ thus the integral of
    \begin{exercise}
       Show that the integral in \cref{eq:inner:L2} is independent from the choice of $\psi\in[\psi]$
    and $\varphi\in [\varphi]$.
+   Hint: write $\psi = \psi - \tilde{\psi} + \tilde{\psi}$ and remember that 
 \end{exercise}
 
 \begin{theorem}
@@ -1343,12 +1379,95 @@ thus the integral of
 We need to check completeness.
 \end{proof}
 
+\subsection{Young, H\"older and Minkovsky inequalities and $p$-norms}
 
+We will discuss the $p$-norms for $\R^{N}$, $\C^{N}$, $\lspace{p}$ and
+$\Lspace[\Omega]{p}$.
+All these examples are generalization of those discussed in previous sections. 
 
-\subsection{The Banach spaces $\lspace{p}$ and $\Lspace[\Omega]{p}$}
+The Banach spaces $\lspace{p}$ and $\Lspace[\Omega]{p}$
 
-
-
+We know that for $p=2$, $\lspace{2}$ is a Hilbert space. 
+This is also the only value of $p$ for which $\lspace{p}$ is an Hilbert space. 
+\begin{theorem}
+   If $p \neq 2$, $\lspace{p}$ is not a Hilbert space. 
+\end{theorem}
+\begin{proof}
+   By absurdum, let's suppose $\lspace{p}$ is an Hilbert space for $p\neq 2$.
+   Then the parallelogram law applies for all $\varphi = ( \varphi_{n})_{n\geq
+      0}$ and $\psi = ( \psi_{n} ) _{n\geq 0}$ in
+   $\lspace{p}$.
+   Select 
+   \begin{dseries*}
+   \begin{math}
+      \varphi_{n} = \begin{dcases}
+	 1 & \text{if  $ n = 1$}\\
+	 1 & \text{if  $ n = 2$}\\
+	 0 & \text{if  $ n > 2$}
+      \end{dcases}
+   \end{math},
+   \begin{math}
+      \psi_{n} = \begin{dcases}
+	 1 & \text{if  $ n = 1$}\\
+	 -1 & \text{if  $ n = 2$}\\
+	 0 & \text{if  $ n > 2$}
+      \end{dcases}
+   \end{math}.
+\end{dseries*}
+and so 
+\begin{dseries*}
+   \begin{math}
+      \varphi_{n} +\psi_{n}= \begin{dcases}
+	 2 & \text{if  $ n = 1$}\\
+	 0 & \text{if  $ n = 2$}\\
+	 0 & \text{if  $ n > 2$}
+      \end{dcases}
+   \end{math},
+   \begin{math}
+      \varphi_{n} - \psi_{n} = \begin{dcases}
+	 0 & \text{if  $ n = 1$}\\
+	 2 & \text{if  $ n = 2$}\\
+	 0 & \text{if  $ n > 2$}
+      \end{dcases}
+   \end{math}.
+\end{dseries*}
+We have
+\begin{dgroup*}
+   \begin{dmath*}[compact]
+   \norm{\varphi + \psi} = \left( \sum_{n=1}^{+\infty} \abs{ \varphi_{n} +
+	 \psi_{n}}^{p} \right)^{\frac{1}{p}} = \left(
+      2^{p}\right)^{\frac{1}{p}} = 2
+\end{dmath*},
+   \begin{dmath*}[compact]
+   \norm{\varphi - \psi} = \left( \sum_{n=1}^{+\infty} \abs{ \varphi_{n} -
+	 \psi_{n}}^{p} \right)^{\frac{1}{p}} = \left(
+      2^{p}\right)^{\frac{1}{p}} = 2
+\end{dmath*},
+   \begin{dmath*}[compact]
+      \norm{\varphi} = \left( \sum_{n=1}^{+\infty} \abs{ \varphi_{n} }^{p} \right)^{\frac{1}{p}} = \left(
+	 1^{p} + 1^{p}\right)^{\frac{1}{p}} = 2^{\frac{1}{p}}
+\end{dmath*},
+   \begin{dmath*}[compact]
+      \norm{\psi} = \left( \sum_{n=1}^{+\infty} \abs{ \psi_{n} }^{p} \right)^{\frac{1}{p}} = \left(
+	 1^{p} + 1^{p}\right)^{\frac{1}{p}} = 2^{\frac{1}{p}}
+\end{dmath*},
+\end{dgroup*}
+and the parallelogram law 
+\begin{dmath*}
+   \norm{\varphi - \psi}^{2} + \norm{\varphi + \psi}^{2} = 2 \norm{\varphi}^{2}
+   + 2 \norm{\psi}^{2}
+\end{dmath*}
+reads in this case
+\begin{dmath*}
+   2^{2} + 2^{2} = 2 \cdot 2^{\frac{2}{p}} + 2 \cdot 2 ^{ \frac{2}{p}}
+\end{dmath*},
+that is 
+\begin{dmath*}
+   2  =  2^{\frac{2}{p}}
+\end{dmath*}.
+Thsi equation is true if and only if $\frac{2}{p} = 1$, \ie, if $p = 2$, which
+is not the case. 
+\end{proof}
 	 
 	 \section{Orthogonality}
 
