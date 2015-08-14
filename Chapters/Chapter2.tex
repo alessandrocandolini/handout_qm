@@ -22,7 +22,7 @@ will be customary in later chapters.
 The Reader interested in how functional analysis applies to the formulation of quantum
 mechanics should jump to the next chapters. 
 As we shall see, physicists are customary to employ Dirac's notation, a powerful
-mnemonic notation which naively speaking however lacks mathematical rigour; a
+mnemonic tool which naively speaking however lacks mathematical rigour; a
 dictionary is possible to translate Dirac notation to the rigorous theorems of
 functional analysis; more on this later on.
 
@@ -31,19 +31,19 @@ Some other books that have been helpful while writing this chapter includes:
 \textcite{Teschl:2009,Berberian:1976,Hutson.Pym:1980,Debnath.Mikusinski:2005,Helmberg:1969}.
 \section{Banach and Hilber spaces}
 
-Unless stated otherwise, let $\K $ denote equivalently the field of real numbers
+Unless stated otherwise, let $\K $ denote either the field of real numbers
 $\R$ or the field of complex numbers $\C$.
 (It is possible to develop the theory also for the skew-field of quaternions,
-but this case will not be discussed here to avoid dealing with the
-non-commutativity of quaternionic product.)
+but this case will not be taken  into account  here in order to avoid dealing with the
+non-commutativity of the quaternionic product.)
 
 
 \begin{definition}[norm]
    Let 
    \graffito{Norm}
    $X$ be any vector space over $\K$.
-   A ``norm'' on $X$ is any application  $X \to \R$  here denoted by $\norm{\cdot}$ 
-   satifying the following properties:
+   A ``norm'' on $X$ is any application  $X \to \R$  hereafter denoted by $\norm{\cdot}$ 
+   satisfying the following properties:
    \begin{enumerate} [label=(\alph*)]
 	 %[(a)]
       \item 
@@ -74,21 +74,24 @@ non-commutativity of quaternionic product.)
    \end{enumerate}
 \end{definition}
 
+A norm on $X$ can be viewed as a way to define a ``length'' of the vectors belonging
+to $X$.
+
 \begin{remark}
-   \Cref{item:norm1} is not strictly necessary: it follows from
+   \Cref{item:norm1} is redundant: 
+   it follows from
    \cref{item:norm2,item:norm3,item:norm4}.
-   In fact, from \cref{item:norm3} $\norm{-\varphi} = \norm{\varphi}$, 
-   from \cref{item:norm4} we have thus $\norm{\varphi + (- \varphi)} \leq 
-   \norm{\varphi} + \norm{\varphi} = 2 \norm{\varphi}$, and from
-   \cref{item:norm2} $\norm{\varphi-\varphi} = 0$, thus $\norm{\varphi} \leq 0$
-   for every $\varphi \in X$.
+   For every $\varphi\in X$, \cref{item:norm3} implies $\norm{-\varphi} = \norm{\varphi}$, 
+   from \cref{item:norm4} it follows that $\norm{\varphi + (- \varphi)} \leq 
+   \norm{\varphi} + \norm{\varphi}$, and 
+   \cref{item:norm2} implies $\norm{\varphi-\varphi} = 0$, so $\norm{\varphi}
+   \geq 0$.
 \end{remark}
 
 \begin{remark}
-   $X$ does not need to be finite-dimensional. It can be infinite-dimensional.
-   The dimensionality of the vector space is not relevant for this and the
-   following 
-   definitions and properties. 
+   $X$ is not required to be finite-dimensional. It can be infinite-dimensional.
+   (Actually, the infinite-dimensional case is the case we are most interested
+   on.)
 \end{remark}
 
 A ``normed vector space'' is a vector space equipped with a norm, as formalized
@@ -125,7 +128,7 @@ This is proved by the following theorem.
    %\begin{enumerate}[(a)]
    Remember  that, given a set $X$ and an application $\fullfunction{d}{X\times
       X}{\interval[open right]{0}{+\infty}}$, $d$ is called a ``metric'' (or
-   ``distance'') on $X$ if it satisfies the following properties:
+   ``distance'') on $X$ by definition if it satisfies the following properties:
    \begin{enumerate} [label=(\alph*)]
       \item 
 	 \label{item:distance1}
@@ -156,12 +159,12 @@ This is proved by the following theorem.
 	       \times X\times X $}
 	 \end{math} (the so-called ``triangle inequality'').
    \end{enumerate}
-   Thus, we need to show that \cref{eq:distance-norm} defines a metric over $X$,
-   \ie, we need to prova that such $d$  satisfies
+   Let's show that $d$ in \cref{eq:distance-norm} 
+   satisfies
    \cref{item:distance1,item:distance2,item:distance3,item:distance4} above.
    \Cref{item:distance1} follows from property~\ref{item:norm1} of the norm.
    \Cref{item:distance2} follows from property~\ref{item:norm2} of the norm,
-   since
+   in fact
       $\norm{\varphi - \psi} = 0 $ if and only if $\varphi - \psi = 0$, \ie, if
       and only if $\varphi = \psi$.
       \Cref{item:distance3} follows from property~\ref{item:norm3} of the norm,
@@ -187,7 +190,7 @@ This is proved by the following theorem.
 \end{proof}
 
 The metric induced by a norm fulfilles the following extra properties,
-the proof of which is straightforward and is left to the Reader as exercize:
+the proof of which is straightforward and is left to the Reader as exercise:
 \begin{enumerate}
    \item \label{item:norm:translation-invariance}
       \begin{math}
@@ -327,12 +330,6 @@ if $(X, \norm{\cdot})$ is a normed vector space and
      = 
      \lim_{k\rightarrow + \infty} \norm{\varphi_{k}} 
   \end{dmath}.
-  \begin{exercise}
-     Justify all steps in \cref{eq:norm:continuity}.
-     (Hint: it is just a way to say that a function $f(x)$, in this case the
-     norm, is continuous if and only if $\lim_{x\rightarrow x_{0}}f(x)
-     f(x_{0})$.)
-  \end{exercise}
 
 \begin{definition}[equivalence of the norms]
    Let $X$ be a vector space over $\K$ and
@@ -1468,7 +1465,7 @@ We need to check completeness.
 
 
 
-	      \section{Complete orthonormal sets}
+	      \section{Complete orthonormal sets and their characterization}
 
 	      \begin{definition}
 		 Let $(X, \braket{\cdot|\cdot})$ a Hilbert space and
@@ -1495,10 +1492,9 @@ We need to check completeness.
 
 \section{Linear operators: first properties}
 
-\section{Isomorphism}
+\section{Riesz representation theorem}
 
 
-\section{Riesz theorem}
 
 \printbibliography[heading=subbibliography]
 \end{refsection}
