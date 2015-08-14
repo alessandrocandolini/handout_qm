@@ -259,6 +259,7 @@
 % *****************************************************************************
 % 	Cleveref support for breqn
 % *****************************************************************************
+\usepackage{aliascnt}
 \usepackage{cleveref}
 %\crefname{chapter}{\S}{\S}
 %\Crefname{chapter}{\S}{\S}
@@ -295,6 +296,16 @@
 \newtheorem*{remark}{Remark}
 \newtheorem*{hint}{Hint}
 \renewcommand{\qedsymbol}{\rule{.5em}{.5em}}
+
+%\newaliascnt{lemma}{theorem}
+%\newtheorem{lemma}[lemma]{Lemma}
+%\aliascntresetthe{lemma}
+%\crefname{lemma}{lemma}{lemmas}
+%\crefname{exercise}{ex.}{exs.}
+%\Crefname{exercise}{Ex.}{Exs.}
+\crefname{exercise}{exercise}{exercises}
+\Crefname{exercise}{Exercise}{Exercises}
+
 
 % *****************************************************************************
 % 	Exercise environment 
