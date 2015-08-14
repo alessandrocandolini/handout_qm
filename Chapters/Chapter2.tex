@@ -859,6 +859,7 @@ criterion to perform this check.
 The following result is basic to establish the later theorem.
 It will also be useful  later, when discussing positive operators.
 \begin{lemma}[polarization identity]
+   \label{thm:polarization}
    Let $(X, \braket{\cdot|\cdot})$ be a inner product space.
    In the case $\K = \R$, 
    \begin{dmath}[label={polarization:R}]
@@ -896,7 +897,7 @@ It will also be useful  later, when discussing positive operators.
    proof can be easily modified for the case $\K = \R$.
 
    By straightforward computation,
-   \begin{dgroup}
+   \begin{dgroup*}
       \begin{dmath}[label={polarization:sum1}]
 	 \norm{\varphi + \psi}^{2} = \norm{\varphi}^{2} + 2 \Re
 	 {\braket{\varphi|\psi}} + \norm{\psi}^{2}
@@ -913,7 +914,7 @@ It will also be useful  later, when discussing positive operators.
 	 \norm{\varphi - \ii \psi} = \norm{\varphi}^{2} + 2 \Im
 	 \braket{\varphi|\psi} + \norm{\psi}^{2}
       \end{dmath}.
-   \end{dgroup}
+   \end{dgroup*}
    Subtracting \cref{eq:polarization:sum1,eq:polarization:sum2} we get
    \begin{dmath*}[compact]
 	 \norm{\varphi + \psi}^{2} 
@@ -1007,28 +1008,23 @@ among norm vector spaces. It is called Jordan-von Neumann theorem%
     for all $(\varphi,\psi)\in X \times X$; summing the two we have
     \cref{eq:parallelogram}.
 
-    Now, let's prove that if $(X, \norm{\cdot})$ is a Banach space whose norm
-    satisfies \cref{eq:parallelogram} then the norm comes from an inner product.
-    It is possible to recover the underlying inner product by means of the
-    polarization identity. 
-    Since the polarization identity takes two differen forms, depending on
-    whether  $\K = \C$ or $\K = \R$, we should distinguish two cases. 
-    We will discuss the case $\K = \C$, the case $\C = \R$ is analogous and the
-    details are left to the Reader. 
-
-    In the Banach space $(X, \norm{\cdot})$ it is always possible to define an
-    application $\fullfunction{\braket{\cdot|\cdot}}{X \times X} {\K}$ by
-    letting
+    Now, let's prove the converse: if $(X, \norm{\cdot})$ is a Banach space whose norm
+    satisfies \cref{eq:parallelogram}, then the norm comes from an inner product.
+    We discuss the case $\K = \C$, the case $\C = \R$ is analogous. 
+    Let  
+    $\fullfunction{\braket{\cdot|\cdot}}{X \times X} {\K}$ be the application
+    defined by 
     \begin{dmath*}
        \braket{\varphi|\psi} = \frac{1}{4} \left( \norm{\varphi + \psi}^{2} -
-	  \norm{\varphi - \psi}^{2}\right) + \frac{\ii}{4} \left( \norm{\varphi
+	  \norm{\varphi - \psi}^{2}\right) - \frac{\ii}{4} \left( \norm{\varphi
 	     + \ii \psi}^{2} - \norm{\varphi - \ii \psi}^{2} \right)
-       \condition{$\forall (\varphi, \psi) \in X\times X$}
-    \end{dmath*}.
-    We need to prove that this application indeed is a inner product on $X$,
+    \end{dmath*},
+    for all $(\varphi,\psi) \in X \times X$. 
+    We will prove now that this application indeed is a inner product on $X$,
     \ie, we need to prove that it satisfies
     \cref{item:inner1,item:inner2,item:inner3,item:inner4,item:inner5} in
     \cref{def:inner}.
+    That this formula induced the norm is known from \cref{thm:polarization}.
 
     Ad \ref{item:inner1}.
     For  every $(\varphi,\psi,\eta) \in X \times X \times X$, by applying the
@@ -1104,16 +1100,121 @@ among norm vector spaces. It is called Jordan-von Neumann theorem%
        \end{dmath}.
 
 
-
     Ad \ref{item:inner2}.
+    This is the tricky part.
+    Let 
+    \begin{dmath*}
+       S = \Set{ z \in \C | \braket{\varphi | z \psi} = z \braket{\varphi|\psi}}
+    \end{dmath*}.
+    Notice that $0 \in S$ and $1\in S$.
+    Furthermore, for every $z$ and $w$ in $S$, also $z\pm w\in S$, so $\Z
+    \subseteq S$. 
+    Now, observe that for every 
+    $z\in \Z$, $w\in \Z\backslash\{0\}$, 
+    \begin{dmath*}
+       z \braket{ \varphi | \psi } = \braket {\varphi | z \psi} 
+       = \Braket { \varphi | w \frac{z}{w} \psi } 
+       =  w \Braket { \varphi | \frac{z}{w} \psi } 
+       \condition*{\forall (\varphi,\psi)\in X\times X}
+    \end{dmath*},
+    yielding
+    \begin{dmath*}
+       \frac{z}{w} \braket{\varphi | \psi } = \Braket{ \varphi | \frac{z}{w}
+	  \psi}
+    \end{dmath*},
+    so also $\Q \subseteq S$. 
+    Since $\Q$ is dense in $\R$ we \emph{would like} to conclude that $\R
+    \subseteq \S$.
+    This however requires the continuity of $\braket{\cdot|\cdot}$ and we can't
+    rely on th  fact that the inner product is continuous on both components
+    because we do not know whether $\braket{\cdot|\cdot}$ is a inner product
+    yet. 
+    Upgrading from $\Q$ to $\R$  requires that we prove that the Cauchy-Schwarz
+    inequality holds using only the tools at our disposal so far.
+    Fortunately, the usual trick 
+    works just fine.
+    So, we can conclude that $\R \in S$.
+    Finally, since a direct computation shows that 
+    \begin{dmath*}
+       \braket{ \varphi | \ii \psi } = \ii \braket{ \varphi | \psi}
+    \end{dmath*},
+    we conclude that $S = \C$. 
 
-    Ad \ref{item:inner2}.
-    
+
+
     Ad \ref{item:inner3}.
+    This is straightforward:
+    \begin{dmath*}
+       \braket{\psi | \varphi} 
+       = 
+       \frac{1}{4} 
+       \left\{ 
+	  \norm{\psi + \varphi}^{2} - 
+	  \norm{\psi - \varphi}^{2} - 
+	  \ii \left( 
+	     \norm{\psi + \ii \varphi }^{2} - 
+	     \norm{\psi - \ii \varphi }^{2}
+	  \right)
+       \right\}
+       %= 
+%	\frac{1}{4} 
+%       \left\{ 
+%	  \norm{\varphi + \psi}^{2} - 
+%	  \norm{\varphi - \psi}^{2} - 
+%	  \ii \left( 
+%	     \norm{\ii \left( \frac{1}{\ii} \psi +  \varphi \right) }^{2} - 
+%	     \norm{\ii \left( \frac{1}{\ii} \psi - \varphi \right)  }^{2}
+%	  \right)
+%       \right\}
+%= \frac{1}{4} 
+%       \left\{ 
+%	  \norm{\varphi + \psi}^{2} - 
+%	  \norm{\varphi - \psi}^{2} - 
+%	  \ii \left( 
+%	     \norm{\varphi - \ii \psi  }^{2} - 
+%	     \norm{\varphi + \ii \psi  }^{2}
+%	  \right)
+%       \right\}
+= \frac{1}{4} 
+\left(
+	  \norm{\varphi + \psi}^{2} - 
+	  \norm{\varphi - \psi}^{2} 
+       \right) + \frac{\ii}{4}
+	  \left( 
+	     \norm{\varphi + \ii \psi  }^{2}
+	     \norm{\varphi - \ii \psi  }^{2} 
+	  \right)
+	  = \conj{\braket{\varphi|\psi}}
+       \end{dmath*}.
 
     Ad \ref{item:inner4}.
-    
+    Also this is straightforward:
+    \begin{dmath*}
+       \braket{\psi|\psi}
+       = \frac{1}{4}
+       \left\{
+	  \norm{\psi + \psi}^{2}
+	  - \norm{\psi - \psi}^{2}
+	  - \ii \left( 
+	     \norm{\psi + \ii \psi}^{2}
+	     - \norm{\psi - \ii \psi}^{2}
+	  \right)
+	  \right\}
+    = \frac{1}{4}
+       \left\{
+	  4 \norm{\psi }^{2}
+	  - \ii \left( 
+	     \abs{1+\ii}^{2} \norm{\psi }^{2}
+	     - \abs{1-\ii}^{2}\norm{\psi }^{2}
+	  \right)
+	  \right\}
+	  = \norm{\psi}^{2} \geq 0
+       \end{dmath*}.
+
     Ad \ref{item:inner5}.
+    Since we have already shown that $\braket{\psi|\psi} = \norm{\psi}^{2}$,
+    $\braket{\psi|\psi} = 0 $ if and only if $\norm{\psi} = 0$, that is if and
+    only if $\psi = 0$.
 \end{proof}
 
 Subsequent authors 
