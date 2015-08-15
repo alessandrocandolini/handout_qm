@@ -1225,6 +1225,227 @@ characterize inner product spaces amongst normed vector
 spaces. See, \eg, \textcite{Reznick:1978} and references therein; a recent paper is \textcite{Onl-scho:2012}, which also contains
 references to the relevant literature on this subject. 
 
+\section{A  glimpse at convex analysis}
+
+\begin{quoting}
+   \openquote 
+   Many inequalities in physics and mathematics have their origin in 
+   the notion of convexity.~\closequote
+   \begin{flushright}
+      Folklore
+    \end{flushright}
+\end{quoting}
+
+Convex analysis is an important branch of analysis, with implications in
+optimization, etc%
+\footcite[See, \eg,][]{Rockafellar:1970}.
+Here, 
+we give general definitions for arbitrary convex sets and convex functions defined on
+convex sets. We apply these definitions to real-valued functions of one real
+variable as a special case and we use this to derive Young and Jensen
+inequalities, which will prove useful in later proofs. Jensen inequality plays
+a major role in information theory, entropy etc. 
+
+\begin{definition}[Convex set]
+   \label{def:convex:set}
+   Let
+   \graffito{Convex set}
+   $X$ be a vector space over $\K$ and $\Omega\subseteq X$ a non-empty subset of $X$.
+   $\Omega$ is ``convex'' if for every $(\varphi, \psi) \in \Omega \times \Omega$, 
+   \begin{dmath}[label={convex:def:set}]
+      \vartheta \varphi + ( 1 - \vartheta) \psi \in \Omega
+   \end{dmath},
+   for every $\vartheta \in \interval{0}{1}$%
+   \footnote{Of course, if $\vartheta = 0$ we get $\psi$ and if $\vartheta = 1$
+      we get $\varphi$, so we could have considered equivalently $\interval[open]{0}{1}$
+      instead of $\interval{0}{1}$ in \cref{def:convex:set}.}
+   As a convention, the empty set  is considered to be convex by definition.
+\end{definition}
+
+\begin{remark}
+   \Cref{eq:convex:def:set} is a ``weighted average'' of $\varphi$ and $\psi$.
+\end{remark}
+
+\begin{remark}
+   In order \cref{eq:convex:def:set} to be meaningful, we need the notion of
+   addition and scalar multiplication for a real number. 
+   The natural setting where these two operations are defined are the vector
+   spaces. This is the reason why in \cref{def:convex:set} $X$ is a vector space over
+   $\R$ or $\C$.
+   The notion of convexity may be generalized to more general settings if
+   certain propeties of convexity are taken as axioms, but we will not discuss
+   this approach here. 
+\end{remark}
+
+\begin{remark}
+   $X$ itself is convex. 
+   Furthermore, let $\psi \in X$; then, $\set{\psi}$ is a convex subset of $X$.
+\end{remark}
+
+The relation with the usual ``geometric'' definition of convex set can be
+understood by introducing the notion of ``line segment'' for arbitrary real or
+complex vector spaces. 
+\begin{definition}[line segment]
+   Let 
+   \label{def:convex:line}
+   \graffito{Line segment}
+   $X$ be a vector space over $\K$ and consider $(\varphi,\psi) \in X \times X$.
+   The set 
+   \begin{dmath}
+      \interval{\varphi}{\psi} = \Set{ \vartheta \varphi + ( 1 - \vartheta )
+	 \psi | \forall \vartheta \in \interval{0}{1}} 
+   \end{dmath}
+   is called the ``(straight) line segment'' joining $\varphi$ and $\psi$ (or
+   with endpoints $\varphi$ and $\psi$).
+\end{definition}
+
+\begin{remark}
+   Of course, $\interval{\varphi}{\psi} = \interval{\psi}{\varphi}$.
+   Check as exercise. 
+   (Hint: It is enough to replace $\lambda = 1 - \vartheta$.)
+\end{remark}
+
+Using \cref{def:convex:line} we can restate \cref{def:convex:set} in the
+following equivalent way:
+\begin{lemma}
+   Let 
+   \label{lemma:convex:definition2}
+   \graffito{Alternative definition of convex set}
+   $X$ be a vector space over $\K$ and $\Omega \subseteq X$ any non-empty subset of $X$.
+   $\Omega$ is convex if and only if for every pair of points $(\varphi, \psi) \in \Omega
+   \times \Omega$, $\interval{\varphi}{\psi} \subseteq \Omega$.
+\end{lemma}
+
+\begin{exercise}
+   Prove \cref{eq:lemma:convex:definition2}.
+\end{exercise}
+
+Before proving more details on convex sets, let us see some examples in $\R$
+and $\R^{N}$. First of all, recall the definition of ``real interval''.
+\begin{definition}[real interval]
+   Let $I \subseteq \R$ a non-empty subset of $\R$.
+   $I$ is a ``real interval'' if $(\varphi,\psi) \in I \times I$ and
+   $\eta \in \R$ such that $\varphi \leq \eta \leq \psi$ implies $\eta \in I$.
+   The empty set is regarded as a interval.
+\end{definition}
+This definition covers different typologies of real intervals:
+$\interval{\varphi}{\psi}$, $\interval[open]{\varphi}{\psi}$, $\interval[open
+left]{\varphi}{\psi}$, $\interval[open right]{\varphi}{\psi}$, etc.
+It covers also the case of a single real number $I = \Set{\psi}$ and the case
+where one of the two endpoints or both of them are $\pm\infty$.
+
+\begin{lemma}
+   Let $ \Omega \subseteq \R$ a subset of $\R$.
+   $\Omega$ is convex \emph{if and only if} $\Omega$ is a real interval.
+\end{lemma}
+
+\begin{theorem}[Young inequality]
+   For
+   \graffito{Young inequality}
+   every $A,B\geq 0$ and $0\leq \vartheta  \leq 1$, 
+   \begin{dmath}[frame,label={young:AB}]
+      A^{\vartheta} B^{1-\vartheta} \leq \vartheta A + ( 1 - \vartheta) B
+   \end{dmath},
+\end{theorem}
+
+\begin{remark}
+   As a special case, 
+   for $\vartheta = 1/2$
+   we recover the arithmetic-geometric mean (AGM) inequality for two positive real
+  numbers, namely
+  \begin{dmath}[label={convex:AGM-2}]
+      \sqrt{ AB} \leq \frac{A+B}{2}
+      \condition*{A,B\geq 0}
+   \end{dmath}. 
+   The general aithmetic-geometric mean inequality with $n\in\N$ terms will be
+   proven later, as a special case of the Jensen inequality. 
+   There are other interesting ways to prove the AGM inequality for two terms,
+   for example rearraning the square terms:
+   \begin{dmath*}[compact]
+      0 \leq (A-B)^{2} =  (A+B)^{2} - 4AB
+      \condition*{\forall A,B\in \R}
+   \end{dmath*},
+   yielding 
+   \begin{dmath*}
+      AB \leq \left( \frac{A+B}{2} \right)^{2}
+      \condition*{\forall A,B\in \R}
+      \end{dmath*}.
+      If $A,B\geq 0$ we can take the square root and find
+      \cref{eq:convex:AGM-2}.
+   There are also several other proofs for AGM inequality with $n\in\N$ terms
+   (\eg, proof by induction).
+\end{remark}
+
+\begin{remark}
+   Geometric meaning of \cref{eq:convex:AGM-2}:
+   $AB$ is the area of a rectangle with sides of length $A$ and $B$ and
+   $\frac{A+B}{2}$ is the semi-perimeter of such rectangle. 
+   $\sqrt{AB}$ can be viewed as the length of the side of a square having the same
+   area of the rectangle. 
+   Re-arranging the terms we have  $4\sqrt{AB} \leq 2A+2B$ which means that 
+    the square has the smallest perimeter amongst all rectangles of equal area.
+ \end{remark}
+
+
+\begin{remark}
+
+   Young inequality is often stated in a slightly different form.
+   Let 
+   \begin{dmath*}
+      \frac{1}{p} + \frac{1}{q} = 1
+   \end{dmath*},
+   put $\vartheta = 1/p$ so $1 - \vartheta = 1/q$ and set $A= a^{p}$ and $B=
+   b^{q}$. This way \cref{eq:young:AB} reads
+   \begin{dmath}[label={young:pq}]
+      ab \leq \frac{a^{p}}{p} + \frac{b^{q}}{q}
+   \end{dmath}.
+\end{remark}
+
+\begin{proof}
+
+   There are various proof, mainly based on convexity.
+   Our proof uses the fact that the exponential function is convex on $\R$, thus
+   \begin{dmath}
+      \exp{ \vartheta \varphi + (1-\vartheta) \psi } \leq \vartheta \exp{\varphi
+      } + ( 1- \vartheta) \exp{\psi}
+   \end{dmath}
+   for all $\vartheta \in \interval{0}{1}$ and $(\varphi,\psi)\in \R \times
+   \R$. 
+   Using $A = \exp{\varphi}$ and $B= \exp{\psi}$ (this makes sense because $A$
+   and $B$ are positive) yields \cref{eq:young:AB}.
+\end{proof}
+
+\begin{approfondimento}
+   Another possible proof 
+   goes as follows. 
+   Consider $\fullfunction{f_{\vartheta}}{\interval[open]{0}{+\infty}}{\R}$
+   defined by 
+   \begin{dmath*}
+      f_{\vartheta} (x)  = x^{\vartheta} - \vartheta x + ( \vartheta - 1)
+      \condition*{\forall x > 0}
+   \end{dmath*},
+   where by definition 
+   \begin{dmath*}
+      x^{\vartheta} = \exp{\vartheta \log{x}}
+      \condition*{\forall x > 0}
+   \end{dmath*}.
+   Notice that when $\vartheta = 0$ or $\vartheta = 1$ the function is
+   constant, in particular $f_{0} (x) = f_{1} (x) = 0$. 
+   Study the function and show that it has a maximum for $x=1$.
+   Since $f_{\vartheta}(1) = 0$, we get $f_{\vartheta}(x) \leq 0$.
+\end{approfondimento}
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Canonical prototypes of Banach and Hilbert spaces}
 
 
@@ -1642,86 +1863,13 @@ thus the integral of
 We need to check completeness.
 \end{proof}
 
-\subsection{Young, H\"older and Minkovsky inequalities and $p$-norms}
+\subsection{H\"older and Minkovsky inequalities and $p$-norms}
 
 We will discuss the $p$-norms for $\R^{N}$, $\C^{N}$, $\lspace{p}$ and
 $\Lspace[\Omega]{p}$.
 All these examples are generalization of those discussed in previous sections. 
 
 The Banach spaces $\lspace{p}$ and $\Lspace[\Omega]{p}$
-
-
-\begin{theorem}[Young inequality]
-   For
-   \graffito{Young inequality}
-   every $A,B\geq 0$ and $0\leq \vartheta  \leq 1$, 
-   \begin{dmath}[frame,label={young:AB}]
-      A^{\vartheta} B^{1-\vartheta} \leq \vartheta A + ( 1 - \vartheta) B
-   \end{dmath},
-\end{theorem}
-
-\begin{remark}
-   As a special case, 
-  we recover the arithmetic-geometric mean inequality 
-   for $\vartheta = 1/2$:
-   \begin{dmath*}
-      \sqrt{ AB} \leq \frac{A+B}{2}
-   \end{dmath*}.
-
-\end{remark}
-
-\begin{remark}
-
-   Young inequality is often stated in a slightly different form.
-   Let 
-   \begin{dmath*}
-      \frac{1}{p} + \frac{1}{q} = 1
-   \end{dmath*},
-   put $\vartheta = 1/p$ so $1 - \vartheta = 1/q$ and set $A= a^{p}$ and $B=
-   b^{q}$. This way \cref{eq:young:AB} reads
-   \begin{dmath}[label={young:pq}]
-      ab \leq \frac{a^{p}}{p} + \frac{b^{q}}{q}
-   \end{dmath}.
-\end{remark}
-
-\begin{proof}
-
-   There are various proof, mainly based on convexity.
-   One proof goes as follows. 
-   Consider $\fullfunction{f_{\vartheta}}{\interval[open]{0}{+\infty}}{\R}$
-   defined by 
-   \begin{dmath*}
-      f_{\vartheta} (x)  = x^{\vartheta} - \vartheta x + ( \vartheta - 1)
-      \condition*{\forall x > 0}
-   \end{dmath*},
-   where by definition 
-   \begin{dmath*}
-      x^{\vartheta} = \exp{\vartheta \log{x}}
-      \condition*{\forall x > 0}
-   \end{dmath*}.
-   Notice that when $\vartheta = 0$ or $\vartheta = 1$ the function is
-   constant, in particular $f_{0} (x) = f_{1} (x) = 0$. 
-   Let us discuss what happens when $\vartheta \neq 0,1$.
-   The first-order derivative is 
-   \begin{dmath*}
-      \D{f(x)}{x} 
-      = 
-      \vartheta \left(  x^{\vartheta - 1} - 1\right )
-   \end{dmath*};
-   since %
-  $0< \vartheta < 1$, 
-   we have 
-   \begin{math}
-      \D{f(x)}{x}  \geq 0 
-   \end{math} 
-  if and only if  $0 < x \leq 1 $, and 
-   \begin{math}
-      \D{f(x)}{x}  <  0 
-   \end{math} 
-   for $x> 0 $.
-   This means that $x = 1$ is a maximum  of $f_{\vartheta}$.
-   Since $f_{\vartheta}(1) = 0$, we get $f_{\vartheta}(x) \leq 0$.
-\end{proof}
 
 
 We know that for $p=2$, $\lspace{2}$ is a Hilbert space. 
