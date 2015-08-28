@@ -94,19 +94,25 @@
     breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,%
     plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
     hypertexnames=true, pdfhighlight=/O,%
-    urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=RoyalBlue, pagecolor=RoyalBlue,%
+    urlcolor=webbrown, linkcolor=webbrown, citecolor=webbrown,
+    pagecolor=webbrown,%
    hyperfootnotes=true,%
-% uncomment the following line if you want to have black links (e.g., for printing)
-% urlcolor=Black, linkcolor=Black, citecolor=Black, pagecolor=Black,%
-    pdftitle={\myTitle},%
-    pdfauthor={\textcopyright\ \myName},%
-    pdfsubject={},%
-    pdfkeywords={},%
-    pdfcreator={pdfLaTeX},%
+%% uncomment the following line if you want to have black links (e.g., for printing)
+%% urlcolor=Black, linkcolor=Black, citecolor=Black, pagecolor=Black,%
+%    pdftitle={\myTitle},%
+%    pdfauthor={\textcopyright\ \myName},%
+%    pdfsubject={},%
+%    pdfkeywords={},%
+%    pdfcreator={pdfLaTeX},%
 }
 
 
-\hypersetup{citecolor=webblue}
+%\definecolor{Black}{cmyk}{0, 0, 0, 0}
+\definecolor{webbrown}{rgb}{.6,0,0}
+\definecolor{Maroon}{cmyk}{0, 0.87, 0.68, 0.32}
+\definecolor{RoyalBlue}{cmyk}{1, 0.50, 0, 0}
+
+\hypersetup{citecolor=webbrown}
 
 \newcommand{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
 
@@ -323,18 +329,20 @@
 % *****************************************************************************
 
 \renewcommand{\nameyeardelim}{, }
+    \newlength{\beforebibskip}  
+    \setlength{\beforebibskip}{0em}
 
 \defbibheading{bibliography}{%
-\cleardoublepage
-\manualmark
-\phantomsection
+%\cleardoublepage
+%\manualmark
+%\phantomsection
 %\ifminitoc
 %\mtcaddchapter[\numberline{}\tocEntry{\bibname}]
 %\else
 \addtocontents{toc}{\protect\vspace{\beforebibskip}}
 \addcontentsline{toc}{chapter}{\numberline{}\tocEntry{\bibname}}
 %\fi
-\myChapter*{\bibname\markboth{\spacedlowsmallcaps{\bibname}}
+\chapter*{\bibname\markboth{\spacedlowsmallcaps{\bibname}}
 {\spacedlowsmallcaps{\bibname}}}}     
 
 
@@ -346,9 +354,10 @@
 % 	Caption
 % *****************************************************************************
 \usepackage{caption}                      % Fancy captions and more.
-\DeclareCaptionFont{captioncolor}{\color{hilite}}
-\captionsetup{format=plain,labelsep=period,font=small, labelfont={sc,
-      captioncolor}}
+%\DeclareCaptionFont{captioncolor}{\color{hilite}}
+%\captionsetup{format=plain,labelsep=period,font=small, labelfont={sc,
+%      captioncolor}}
+\usepackage[font={small},labelfont={bf},margin=15pt]{caption} % load after babel. also replaces hypcap.
 \captionsetup[table]{skip=\medskipamount} 
 
 
@@ -381,12 +390,12 @@
 % *****************************************************************************
 % 	Lettrine 
 % *****************************************************************************
-\usepackage{lettrine}
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd{\@lettrine}{$}{\relax}{}{}
-\patchcmd{\@lettrine}{$}{}{}{}
-\makeatother
+%\usepackage{lettrine}
+%\usepackage{etoolbox}
+%\makeatletter
+%\patchcmd{\@lettrine}{$}{\relax}{}{}
+%\patchcmd{\@lettrine}{$}{}{}{}
+%\makeatother
 
 
 % *****************************************************************************
@@ -394,6 +403,7 @@
 % *****************************************************************************
 \usepackage{mathtools}                    % Add support for cramped,
 					  % mathlap,etc.
+
 \usepackage[euler]{flexisym}              % Add support to Euler font
 \usepackage{breqn}                        % Breqn
 \catcode`\_=8 % for safety
@@ -406,7 +416,6 @@
 \setkeys{breqn}{labelprefix={eq:}}
 
 \newcommand\coloneqq{\mathrel{:\mkern-1.2mu=}}
-
 % *****************************************************************************
 % 	Feyn support for breqn
 % *****************************************************************************
@@ -438,17 +447,17 @@
 % 	Cleveref support for breqn
 % *****************************************************************************
 
-%\makeatletter
-%\renewcommand\set@label[2]{\protected@edef\@currentlabel{#2}
-%\cref@constructprefix{equation}{\cref@result}%
-%\protected@xdef\cref@currentlabel{%
-%[equation][\arabic{equation}][\cref@result]\eq@number}
-%  %%% Work in progress... Support for hyperref 
-%  \hyper@makecurrent{equation}
-%  \Hy@raisedlink{\hyper@anchorstart{\@currentHref}}
-%  \Hy@raisedlink{\hyper@anchorend}
-%}
-%\makeatother
+\makeatletter
+\renewcommand\set@label[2]{\protected@edef\@currentlabel{#2}
+\cref@constructprefix{equation}{\cref@result}%
+\protected@xdef\cref@currentlabel{%
+[equation][\arabic{equation}][\cref@result]\eq@number}
+  %%% Work in progress... Support for hyperref 
+  \hyper@makecurrent{equation}
+  \Hy@raisedlink{\hyper@anchorstart{\@currentHref}}
+  \Hy@raisedlink{\hyper@anchorend}
+}
+\makeatother
 
 \makeatletter
 \patchcmd\eq@setnumber{\stepcounter}{\refstepcounter}{}{%
@@ -466,45 +475,10 @@
 % Palatino 	11pt: 312--336pt | 657--705pt
 % Palatino 	12pt: 360--384pt | 768pt
 
-\areaset[current]{336pt}{750pt}
-\setlength{\marginparwidth}{7em}
-\setlength{\marginparsep}{2em}%
+%\areaset[current]{336pt}{750pt}
+%\setlength{\marginparwidth}{7em}
+%\setlength{\marginparsep}{2em}%
 
-% *****************************************************************************
-% 	 Sections and optional sections
-% *****************************************************************************
-
-\colorlet{seccolor}{black}
-
-\definecolor{hilite}{rgb}{0.2,0.4,0.7}
-
-
-\newcommand{\secmark}{}
-\newcommand{\marktotoc}[1]{\renewcommand{\secmark}{#1}}
-\newenvironment{advanced}{
-   \renewcommand{\secmark}{*}%
-   \addtocontents{toc}{\protect\marktotoc{*}}
-}
-{\addtocontents{toc}{\protect\marktotoc{}}}
-
-% \colorlet{seccolor}{hilite}
-% sections \FloatBarrier
-    \titleformat{\section}
-    {\relax}{\color{seccolor}\textsc{% moved below
-	  \makebox[1.5em][l]{\llap{\secmark}%added for * sections
-	     \MakeTextLowercase{\thesection}}}}{1em}{\color{seccolor}\spacedlowsmallcaps}
-    % subsections
-    \titleformat{\subsection}
-    {\relax}{\color{seccolor}\textsc{\MakeTextLowercase{\thesubsection}}}{1em}{\color{seccolor}\normalsize\itshape}
-    % subsubsections
-    \titleformat{\subsubsection}
-    {\relax}{\color{seccolor}\textsc{\MakeTextLowercase{\thesubsubsection}}}{1em}{\color{seccolor}\normalsize\itshape}        
-    % descriptionlabels
-    \renewcommand{\descriptionlabel}[1]{\color{seccolor}\hspace*{\labelsep}\spacedlowsmallcaps{#1}}   % spacedlowsmallcaps textit textsc                  
-
-
-    \usepackage{titletoc}
-    \titlecontents{section}[3.7em]{}{\contentslabel[\llap{\secmark}\thecontentslabel]{2.3em}}{\hspace*{-2.3em}}{\contentspage}
 
 
 
@@ -553,8 +527,8 @@
 % 	Additional setup and packages
 % *****************************************************************************
 
-\hypersetup{citecolor=webbrown}
-\hypersetup{pdfstartpage=1}
+%\hypersetup{citecolor=webbrown}
+%\hypersetup{pdfstartpage=1}
 
 \usepackage{nicefrac}
 \usepackage{calligra}
@@ -569,13 +543,13 @@
 % 	Footnotes
 % *****************************************************************************
 
-\usepackage[perpage, symbol*, stable, multiple]{footmisc}	
-\setlength{\footnotemargin}{.6em}%
-%\usepackage{footnpag}
-%\makeatletter
-%      \renewcommand*\thefootnote{\@fnsymbol\c@footnote}%
-%      \makeatother
-\input{my-footnote-stuff}
+%\usepackage[perpage, symbol*, stable, multiple]{footmisc}	
+%\setlength{\footnotemargin}{.6em}%
+%%\usepackage{footnpag}
+%%\makeatletter
+%%      \renewcommand*\thefootnote{\@fnsymbol\c@footnote}%
+%%      \makeatother
+%\input{my-footnote-stuff}
 \usepackage{footnotebackref}
 
 
@@ -618,5 +592,6 @@
 \newenvironment{Exercise}{\begin{exercise}}{\end{exercise}}
 
 
+\usepackage{enumitem}                          % Url.
 
 %\input{kerning4}
