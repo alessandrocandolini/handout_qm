@@ -245,8 +245,9 @@ $(X, \norm{\cdot})$ be a normed vector space over $\K$.
 The following holds:
 \begin{dmath}[label={norm-continuity}]
    \abs { \norm{\psi} - \norm{\varphi}} \leq \norm{\psi-\varphi}
-   \condition*{\forall (\psi,\varphi)\in X \times X}
-\end{dmath}.
+%   \condition*{\forall (\psi,\varphi)\in X \times X}
+\end{dmath},
+for every $(\psi, \varphi) \in X \times X$.
 \end{lemma}
 \begin{proof}
    The key ingredient is the triangle inequality of the norm.
@@ -312,7 +313,6 @@ induced by the norm).
 %Short proof:
 \Cref{eq:norm-continuity} implies that $\norm{\cdot}$ is Lipschitz and every
 Lipschitz function is continuous. 
-\cref{}
 \end{proof}
 
 As a consequence of the continuity of the norm,
@@ -365,12 +365,17 @@ The converse of this statement is not generally true  however, \ie, there
 exists metric spaces where some Cauchy sequences do not need to converge.
 \begin{approfondimento}
    A typical counter-example works as follow.
-   Consider a sequence $(x_{n})_{n}$ of rational numbers in $\R$ which is
-   convergent to some irrational
-   number. 
-   Thus, $(x_{n})_{n}$ is a Cauchy sequence.
-   Now, consider the same sequence as a sequence in $\Q$: of course, it is
-   still a Cauchy sequence, but this time it is not convergent.
+   Let $(x_{n})_{n\geq 1}$ be a sequence in $\R$ such that for every $n\geq 1 $
+   we have: $x_{n} \in \Q$ and 
+   \begin{math}
+      \sqrt{2} - \frac{1}{n} < x_{n} < \sqrt{2} + \frac{1}{n} 
+   \end{math}.
+   (It is always possible to construct such sequence since $\Q$ is dense in
+   $\R$.)
+   It is possible to prove that $\lim_{n\rightarrow+\infty} x_{n} = \sqrt{2}$.
+   Being convergent in $\R$, $x_{n}$ is of Cauchy type in $\R$.
+   The same sequence can be defined in $\Q$ and it is of Cauchy type in $\Q$,
+   but it is not convergent in $\Q$ since $\sqrt{2} \in \R \backslash \Q$.
 \end{approfondimento}
 A metric space is ``complete'' if \emph{all} Cauchy
 sequencies are convergent. 
@@ -705,14 +710,13 @@ For every fixed $(\varphi, \psi) \in X \times X $, consider
       = \abs{\lambda}^{2} \norm{\psi}^{2} - \lambda \braket{ \varphi
 	 | \psi} - \conj{\lambda} \conj{\braket{\varphi|\psi}} +
       \norm{\varphi}^{2} 
-      \condition*{\forall \lambda \in \C}
-   \end{dmath}.
-   By positivity of the norm, $f(\lambda) \geq 0$ and
+   \end{dmath},
+   as a function of $\lambda \in \C$.
+   The positivity of the norm ensures that $f(\lambda) \geq 0$ and
    $f(\lambda) =0 $ if and only if $\varphi = \lambda \psi$, as already
    discussed in the proof of Cauchy-Schwarz inequality.  
-   Show that $\lambda$ given by \cref{eq:cs:lambda} is a minimum for the
-   function $f$ define  in \cref{eq:cs:f}.
-   This can explain the choice \cref{eq:cs:lambda}.
+   Show that $\lambda$ given by \cref{eq:cs:lambda} is a minimum of $f$.
+   This fact can be use to explain the choice in \cref{eq:cs:lambda}.
 \end{exercise}
    
 
