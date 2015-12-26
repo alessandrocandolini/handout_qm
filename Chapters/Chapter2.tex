@@ -40,7 +40,6 @@ non-commutativity of the quaternionic product.)
 
 \begin{definition}[norm]
    Let 
-   \graffito{Norm}
    $X$ be any vector space over $\K$.
    A ``norm'' on $X$ is any application  $X \to \R$  hereafter denoted by $\norm{\cdot}$ 
    satisfying the following properties:
@@ -93,13 +92,17 @@ to $X$.
    (Actually, the infinite-dimensional case is the case we are most interested
    on.)
 \end{remark}
+%\begin{remark}
+%   Property~\ref{item:norm2} is inmportant to ensure that the topology induced
+%   by the norm is \emph{Haussdorff}. If~\ref{item:norm2} is relaxed, the
+%   application is called ``semi-norm'' on $X$.
+%\end{remark}
 
 A ``normed vector space'' is a vector space equipped with a norm, as formalized
 by the following definition.
 
 \begin{definition}[normed vector space]
    A 
-   \graffito{Normed vector space}
    ``normed vector space'' over $\K$ is a pair $(X, \norm{\cdot})$ where $X$ is a
    vector  space over $\K$ and $\norm{\cdot}$ is any norm on $X$.
 \end{definition}
@@ -110,15 +113,16 @@ If $(X, \norm{\cdot})$ is a normed vector space, the norm $\norm{\cdot}$
 This is proved by the following theorem.
 
 \begin{theorem}
-   Let 
    \label{thm:distance-norm}
-   \graffito{Distance induced by a norm}
+   Let 
    $(X, \norm{\cdot})$ be any normed vector space over $\K$.
    Let $\fullfunction{d}{X \times X}{\R}$ be the function defined by
    \begin{dmath}[label={distance-norm},frame]
       d( \varphi, \psi) = \norm{\varphi - \psi}
-      \condition*{\forall (\varphi,\psi)\in X\times X}
-   \end{dmath}.
+%      \condition*{\forall (\varphi,\psi)\in X\times X}
+   \end{dmath},
+   for very pair of vectors 
+$(\varphi,\psi)\in X\times X$.
    Then,  $(X,d)$ is a metric space.
    The metric in \cref{eq:distance-norm} is called the ``metric induced by the
    norm'' on $X$.
@@ -126,9 +130,11 @@ This is proved by the following theorem.
 
 \begin{proof}
    %\begin{enumerate}[(a)]
-   Remember  that, given a set $X$ and an application $\fullfunction{d}{X\times
-      X}{\interval[open right]{0}{+\infty}}$, $d$ is called a ``metric'' (or
-   ``distance'') on $X$ by definition if it satisfies the following properties:
+   Remember  that, given a set $X$, a ``metric'' (or ``distance'') over $X$ is
+   (by definition)
+   any application $\fullfunction{d}{X\times
+      X}{\interval[open right]{0}{+\infty}}$, obeying 
+   the following properties:
    \begin{enumerate} [label=(\alph*)]
       \item 
 	 \label{item:distance1}
@@ -160,7 +166,7 @@ This is proved by the following theorem.
 	 \end{math} (the so-called ``triangle inequality'').
    \end{enumerate}
    Let's show that $d$ in \cref{eq:distance-norm} 
-   satisfies
+   satisfies all
    \cref{item:distance1,item:distance2,item:distance3,item:distance4} above.
    \Cref{item:distance1} follows from property~\ref{item:norm1} of the norm.
    \Cref{item:distance2} follows from property~\ref{item:norm2} of the norm,
@@ -204,7 +210,7 @@ the proof of which is straightforward and is left to the Reader as exercise:
       (homogeneity),
 \end{enumerate}
 for all 
-	    $(\varphi, \psi,\eta)\in X\times X$ and $\lambda\in\K$.
+	    $(\varphi, \psi,\eta)\in X\times X \times X$ and $\lambda\in\K$.
 
 	    \begin{exercise}
 	       Prove
@@ -240,7 +246,6 @@ Among these concepts are: continuity, limits, convergence, compactness, complete
 
 \begin{lemma}
 Let
-\graffito{Inverse triangle inequality}
 $(X, \norm{\cdot})$ be a normed vector space over $\K$.
 The following holds:
 \begin{dmath}[label={norm-continuity}]
@@ -279,11 +284,11 @@ Thus,
 which can be recasted in the single expression \cref{eq:norm-continuity}.
 \end{proof}
 
-\Cref{eq:norm-continuity} implies the continuity of the norm.
+\Cref{eq:norm-continuity} implies the continuity of the norm, as stated in the
+following theorem.
 \begin{theorem}
 Let
-\graffito{Continuity of the norm}
-$(X, \norm{\cdot})$ be a normed vector space over $\K$.
+$(X, \norm{\cdot})$ be any normed vector space over $\K$.
 The norm $\norm{\cdot}$ is continuous on $X$ (with respect to the metric
 induced by the norm).
 \end{theorem}
@@ -752,7 +757,6 @@ For every fixed $(\varphi, \psi) \in X \times X $, consider
 
 \begin{theorem}
    Let 
-   \graffito{Continuity of inner product}
    $(X, \braket{\cdot|\cdot})$ be an inner product space over $\K$. 
    $\braket{\cdot}{\cdot}$ is a continuous function 
    of both arguments
