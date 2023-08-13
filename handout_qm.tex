@@ -2,6 +2,7 @@
 
 \newcommand{\myName}{Alessandro Candolini}
 \newcommand{\myTitle}{Quantum Mechanics}
+\newcommand{\mySubTitle}{}
 \newcommand{\myLocation}{London}
 \newcommand{\myTime}{\today}
 
@@ -145,6 +146,7 @@ natbib,ibidtracker=false]{biblatex}
 \newtheorem{lemma}{Lemma}[chapter]
 \newtheorem{definition}{Definition}[chapter]
 \newtheorem*{homework}{Homework}
+\newtheorem{exercise}{Exercise}[chapter]
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 \renewcommand{\qedsymbol}{\rule{.5em}{.5em}}
@@ -166,6 +168,131 @@ natbib,ibidtracker=false]{biblatex}
 \usepackage{cleveref}
 \crefname{chapter}{\S}{\S}
 \Crefname{chapter}{\S}{\S}
+
+
+
+%%%% Other things
+
+\newcommand*\openquote{\makebox(25,-12){\color{lightgray}\scalebox{5}{``}}}
+\newcommand*\closequote{\makebox(25,-22){\color{lightgray}\scalebox{5}{''}}}
+
+\usepackage{lettrine}
+\usepackage{paralist}
+\usepackage{enumitem}                          % Url.
+
+% Costumizing  
+\newcommand{\nto}[3]{#1 = #2, \ldots, #3}
+\newcommand{\fullfunction}[3]{#1\colon#2\to#3}
+
+% Intervals 
+\usepackage{interval}
+\newcommand{\commutator}[2]{\interval[scaled]{#1}{#2}}
+\newcommand{\anticommutator}[2]{\interval[left closed fence={\{}, right closed fence={\}}, scaled]{#1}{#2}}
+
+
+
+\usepackage{cancel}
+
+
+\NewDocumentCommand\K{}{\ensuremath{\mathbb{K}}}
+\DeclareDocumentCommand\ii{}{\ensuremath{\__skmath_imaginary_unit:n{i}}}
+\DeclareDocumentCommand\jj{}{\ensuremath{\__skmath_imaginary_unit:n{j}}}
+% Cando's addition: k for quaternions
+\DeclareDocumentCommand\kk{}{\ensuremath{\__skmath_imaginary_unit:n{k}}}
+\DeclareDocumentCommand\ee{}{\ensuremath{\__skmath_imaginary_unit:n{e}}}
+
+% Cando's addition: L spaces (add stared version without left /right
+  \NewDocumentCommand\LspaceSet{}{\ensuremath{\mathrm{L}}}
+  \NewDocumentCommand\lspaceSet{}{\ensuremath{l}}
+\DeclareDocumentCommand\lspace{m}{%
+	 \ensuremath{\lspaceSet^{#1}}
+}
+
+\DeclareDocumentCommand\Lspace{sd<>om}{%
+  \IfBooleanTF{#1}{
+      \IfNoValueTF{#2}
+      {
+	 \IfNoValueTF{#3}
+	 {\ensuremath{\LspaceSet^{#4}}}
+	 {\ensuremath{\LspaceSet^{#4}\left( #3\right)  }}
+      }{
+	 \IfNoValueTF{#3}
+	 {\ensuremath{#2}^{#4}}
+	 {\ensuremath{#2^{#4}\left( #3\right)  }}
+      }
+   }
+   {
+      \IfNoValueTF{#2}
+      {
+	 \IfNoValueTF{#3}
+	 {\ensuremath{\LspaceSet^{#4}}}
+	 {\ensuremath{\LspaceSet^{#4}( #3)  }}
+      }{
+	 \IfNoValueTF{#3}
+	 {\ensuremath{#2}^{#4}}
+	 {\ensuremath{#2^{#4}( #3)  }}
+      }
+   }
+}
+
+
+
+% Cando's addition: Norm with optional macro argument
+\DeclareDocumentCommand\norm{som}{%
+  \IfBooleanTF{#1}{
+     \IfNoValueTF{#2} {
+     	 \ensuremath{\Vert#3\Vert}
+     }{
+      	\ensuremath{\Vert#3\Vert\c_math_subscript_token{#2}}%
+     }
+  }{
+     \IfNoValueTF{#2} {
+     	 \ensuremath{\left\Vert#3\right\Vert}
+     }{
+      	\ensuremath{\left\Vert#3\right\Vert\c_math_subscript_token{#2}}%
+     }
+  }
+}
+% Cando's addition: Norm with optional macro argument
+\DeclareDocumentCommand\abs{som}{%
+  \IfBooleanTF{#1}{
+     \IfNoValueTF{#2} {
+     	 \ensuremath{\vert#3\vert}
+     }{
+      	\ensuremath{\vert#3\vert\c_math_subscript_token{#2}}%
+     }
+  }{
+     \IfNoValueTF{#2} {
+     	 \ensuremath{\left\vert#3\right\vert}
+     }{
+      	\ensuremath{\left\vert#3\right\vert\c_math_subscript_token{#2}}%
+     }
+  }
+}
+
+% Cando's addition: complex conjugation
+\DeclareDocumentCommand\conj{sm}{%
+   \IfBooleanTF{#1}{
+      \ensuremath{\left(#2\right)^{*}}%
+  }{
+      \ensuremath{#2^{*}}%
+  }
+}
+
+% Cando's addition: Adjoint
+\DeclareDocumentCommand\adj{sm}{%
+   \IfBooleanTF{#1}{
+      \ensuremath{\left(#2\right)^{\dagger}}%
+  }{
+      \ensuremath{#2^{\dagger}}%
+  }
+}
+
+
+
+
+
+
 % *****************************************************************************
 % Main
 % *****************************************************************************
