@@ -2,7 +2,7 @@
 
 \newcommand{\myName}{Alessandro Candolini}
 \newcommand{\myTitle}{Quantum Mechanics}
-\newcommand{\mySubTitle}{}
+\newcommand{\mySubTitle}{A Non-Relativistic Primer}
 \newcommand{\myLocation}{London}
 \newcommand{\myTime}{\today}
 
@@ -45,6 +45,7 @@ style=philosophy-modern,
 scauthorsbib,
 hyperref,backref,
 backend=biber,
+refsection=chapter,
 square,
 natbib,ibidtracker=false]{biblatex}
 
@@ -288,7 +289,28 @@ natbib,ibidtracker=false]{biblatex}
   }
 }
 
+% *****************************************************************************
+% 	Biblatex 
+% *****************************************************************************
 
+\renewcommand{\nameyeardelim}{, }
+
+\defbibheading{bibliography}{%
+\cleardoublepage
+\manualmark
+\phantomsection
+%\ifminitoc
+%\mtcaddchapter[\numberline{}\tocEntry{\bibname}]
+%\else
+\addtocontents{toc}{\protect\vspace{\beforebibskip}}
+\addcontentsline{toc}{chapter}{\numberline{}\tocEntry{\bibname}}
+%\fi
+\myChapter*{\bibname\markboth{\spacedlowsmallcaps{\bibname}}
+{\spacedlowsmallcaps{\bibname}}}}     
+
+
+\defbibheading{subbibliography}{%
+   \section*{References for \cref{refsection:\therefsection}}}
 
 
 

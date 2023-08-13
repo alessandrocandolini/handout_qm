@@ -8,27 +8,81 @@
 \myChapter{Linear operators in Hilbert spaces}
 
 \begin{refsection}
-Operator formulation of standard non-relativistic quantum mechanics heavily
-relies on the
-theory of linear operators in Hilber spaces.
-In particular, the spectral decomposition of self-adjoint operators (bounded and
-unbounded ones) is a key
-ingredient in formulating the basic rules of quantum mechanics.
-This chapter is aimed at providing the necessary mathematical background of functional
-analysis employed by non-relativistic quantum mechanics. 
-It is a chapter on mathematics, not on quantum physics;
-for this reason care has been made to mathematical rigous more than what
-will be customary in later chapters.
-The Reader interested in how functional analysis applies to the formulation of quantum
-mechanics should jump to the next chapters. 
-As we shall see, physicists are customary to employ Dirac's notation, a powerful
-mnemonic tool which naively speaking however lacks mathematical rigour; a
-dictionary is possible to translate Dirac notation to the rigorous theorems of
-functional analysis; more on this later on.
 
-This chapter is mostly based on \textcite{Reed.Simon:1980}. 
+
+The operator formulation of standard non-relativistic quantum mechanics is rooted in the spectral theory of linear operators in complex Hilbert spaces.
+In particular, the spectral decomposition of self-adjoint operators (whether bounded or unbounded) is a key
+ingredient in formulating some of the basic rules of quantum mechanics.
+This chapter aims to provide the necessary mathematical groundwork in functional analysis to approach non-relativistic quantum mechanics in full generality. 
+This chapter primarily focuses on the mathematical aspects rather than the physical implications.
+Readers already acquainted with these concepts may choose to skip this chapter.
+  Familiarity with basic linear algebra (in particular, lineas spaces) is assumed. 
+
+In formulating quantum mechanics, physicists often rely on Dirac's notation, a potent mnemonic technique that, at first glance, lacks strict mathematical rigor. Nonetheless, it is feasible to create a correspondence between Dirac's notation and the rigorous theorems of functional analysis, as we will delve into in subsequent sections.
+
+This chapter is based on \textcite{Reed.Simon:1980}. 
 Some other books that have been helpful while writing this chapter includes:
 \textcite{Teschl:2009,Berberian:1976,Hutson.Pym:1980,Debnath.Mikusinski:2005,Helmberg:1969}.
+
+
+  \section{Metrics space}
+
+Metrics spaces are sets endowed with an additional algebraic structure that attaches significance to the concept of ``distance'' between each pair of elements in the set.
+Metric spaces provide a natural context in which to develop concepts like continuity, convergence, and more.
+
+  \begin{definition}[distance]
+    Let $A$ be a set. 
+    A ``distance'' (or ``metrics'') over $A$ is
+   any application $\fullfunction{d}{A\times
+      A}{\interval[open right]{0}{+\infty}}$, satisfying the following requirements: 
+   \begin{enumerate} [label=(\alph*)]
+      \item 
+	 \label{item:distance1}
+	 \begin{math}
+	    d(\varphi,\psi) \geq 0 \condition{$\forall (\varphi,\psi)\in A
+	       \times A$}
+	 \end{math}
+	 (nonnegativity);
+      \item 
+	 \label{item:distance2}
+       $d(\varphi,\psi) = 0$ \emph{if and only if} $\varphi = \psi$
+	 (\ie, the only element in $A$ at zero distance from
+	 $\psi$ is $\psi$ itself);
+      \item 
+	 \label{item:distance3}
+	 \begin{math}
+	    d(\varphi,\psi) = d(\psi,\varphi) \condition{$\forall
+	       (\varphi,\psi)\in A 
+	       \times A$}
+	 \end{math}
+	 (\ie, the distance is a symmetric function of its arguments);
+      \item 
+	 \label{item:distance4}
+	 \begin{math}
+	    d(\varphi,\psi) \leq  d(\psi,\eta) + d(\eta,
+	    \psi)\condition{$\forall (\varphi,\psi,\eta)\in A
+	       \times A\times A $}
+	 \end{math} (the so-called ``triangle inequality'').
+   \end{enumerate}
+  \end{definition}
+
+  Elements of $A$ are often referred to as ``points'' in this context. 
+
+  The next sections will provide concrete examples of metrics spaces where the distance arises from other algebraic structures (\ie, norms and inner products). Without pretending to extensively develop the theory of metrics spaces in this section, it's worth noting how the familiar notions of continuity, convergence, etc can be entirely formulated in the context of metrics spaces.
+
+  \begin{definition}[continuity]
+    Let $(A,d)$ and $(A', d')$ be metric spaces and $\fullfunction{f}{A}{A'}$ a function.
+    $f$ is ``continuous'' at a point $\varphi\in A$  (with respect to the given metrics) if for any positive real number $\varepsilon > 0$, there exists a positive real number $\delta > 0 $ such that for every $\psi \in A$, $d(\varphi, \psi) < \delta$ implies $d'(f(\varphi), f(\psi) ) < \varepsilon$. Formally, 
+    \begin{dmath}[label={eq:continuity}]
+      (\forall \varepsilon > 0)
+      (\exists \delta > 0 )
+      (\forall \psi \in A) 
+      (d(\varphi, \psi) < \delta \Rightarrow (d'(f(\varphi), f(\psi)) < \varepsilon )
+    \end{dmath}.
+  \end{definition}
+  The notion can be further generalised to functions between \emph{topological spaces} in which there is generally no formal notion of distance.
+    
+
 \section{Banach and Hilber spaces}
 
 Unless stated otherwise, let $\K $ denote either the field of real numbers
@@ -130,41 +184,6 @@ $(\varphi,\psi)\in X\times X$.
 
 \begin{proof}
    %\begin{enumerate}[(a)]
-   Remember  that, given a set $X$, a ``metric'' (or ``distance'') over $X$ is
-   (by definition)
-   any application $\fullfunction{d}{X\times
-      X}{\interval[open right]{0}{+\infty}}$, obeying 
-   the following properties:
-   \begin{enumerate} [label=(\alph*)]
-      \item 
-	 \label{item:distance1}
-	 \begin{math}
-	    d(\varphi,\psi) \geq 0 \condition{$\forall (\varphi,\psi)\in X
-	       \times X$}
-	 \end{math}
-	 (nonnegativity);
-      \item 
-	 \label{item:distance2}
-	 $d(\varphi,\psi) = 0$ if and only if $\varphi = \psi$
-	 (\ie, the only point of $X$ at zero distance from
-	 $\psi$ is $\psi$ itself);
-      \item 
-	 \label{item:distance3}
-%	    $d(\varphi,\psi) = d(\psi,\varphi)$ for all 
-	 \begin{math}
-	    d(\varphi,\psi) = d(\psi,\varphi) \condition{$\forall
-	       (\varphi,\psi)\in X
-	       \times X$}
-	 \end{math}
-	 (the distance is a symmetric function of its arguments);
-      \item 
-	 \label{item:distance4}
-	 \begin{math}
-	    d(\varphi,\psi) \leq  d(\psi,\eta) + d(\eta,
-	    \psi)\condition{$\forall (\varphi,\psi,\eta)\in X
-	       \times X\times X $}
-	 \end{math} (the so-called ``triangle inequality'').
-   \end{enumerate}
    Let's show that $d$ in \cref{eq:distance-norm} 
    satisfies all
    \cref{item:distance1,item:distance2,item:distance3,item:distance4} above.
