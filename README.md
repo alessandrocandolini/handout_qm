@@ -1,6 +1,8 @@
+[![CI](https://github.com/alessandrocandolini/handout_qm/actions/workflows/ci.yml/badge.svg)](https://github.com/alessandrocandolini/handout_qm/actions/workflows/ci.yml)
+
 # handout_qm
 
-Fill description
+Old notes of quantum mechanics from 2015, currently revamped 
 
 ## Install latex
 
