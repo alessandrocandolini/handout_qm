@@ -10,13 +10,11 @@
 \begin{refsection}
 
 
-The operator formulation of standard non-relativistic quantum mechanics is rooted in the spectral theory of linear operators in complex Hilbert spaces.
-In particular, the spectral decomposition of self-adjoint operators (whether bounded or unbounded) is a key
-ingredient in formulating some of the basic rules of quantum mechanics.
-This chapter aims to provide the necessary mathematical groundwork in functional analysis to approach non-relativistic quantum mechanics in full generality. 
-This chapter primarily focuses on the mathematical aspects rather than the physical implications.
-Readers already acquainted with these concepts may choose to skip this chapter.
-  Familiarity with basic linear algebra and real analysis is assumed. 
+%\lettrine{T}{he} 
+The operator formulation of standard non-relativistic quantum mechanics is based on the spectral theory of linear self-ajoint operators (bound or unbound) in complex separable Hilbert spaces.
+This chapter provides the necessary mathematical groundwork in functional analysis to approach non-relativistic quantum mechanics in full generality. 
+Readers already acquainted with these concepts may choose to jump to the next chapter to see how the mathematical theory is applied in quantum mechanics. 
+  Familiarity with basic linear algebra (eg, at the level of) and real analysis (\eg, at the level of) is assumed. 
 
 % In formulating quantum mechanics, physicists often rely on Dirac's notation, a potent mnemonic technique that, at first glance, lacks strict mathematical rigor. Nonetheless, it is feasible to create a correspondence between Dirac's notation and the rigorous theorems of functional analysis, as we will delve into in subsequent sections.
 
@@ -25,9 +23,9 @@ Some other books that have been helpful while writing this chapter includes:
 \textcite{Teschl:2009,Berberian:1976,Hutson.Pym:1980,Debnath.Mikusinski:2005,Helmberg:1969}.
 
 
-  \section{Metrics space}
+  \section{Metric spaces}
 
-Metrics spaces are sets endowed with an additional algebraic structure that attaches significance to the concept of ``distance'' between each pair of elements in the set.
+Metric spaces are sets endowed with an additional algebraic structure that attaches significance to the concept of ``distance'' between each pair of elements in the set.
 Metric spaces provide a natural context in which to develop concepts like continuity, convergence, and more.
 
   \begin{definition}[distance]
@@ -46,8 +44,8 @@ Metric spaces provide a natural context in which to develop concepts like contin
       \item 
 	 \label{item:distance2}
        $d(\varphi,\psi) = 0$ \emph{if and only if} $\varphi = \psi$
-	 (\ie, the only element in $A$ at zero distance from
-	 $\psi$ is $\psi$ itself);
+	 (\ie, for every $\psi \in A$, the distance from itself is always zero and $\psi$ is also the only element in $A$ at zero distance from
+	 $\psi$);
       \item 
 	 \label{item:distance3}
 	 \begin{math}
@@ -66,9 +64,14 @@ Metric spaces provide a natural context in which to develop concepts like contin
    \end{enumerate}
   \end{definition}
 
-  Elements of $A$ are often referred to as ``points'' in this context. 
+  \begin{definition}[metric space]
+    A ``metric space'' is an ordered pair $(A, d)$, where $A$is a set and $\fullfunction{d}{A\times A}{A}$ is a distance on $A$.
+  \end{definition}
 
-  The next sections will provide concrete examples of metrics spaces where the distance arises from other algebraic structures (\ie, norms and inner products). Without pretending to extensively develop the theory of metrics spaces in this section, it's worth noting how the familiar notions of continuity, convergence, etc can be entirely formulated in the context of metrics spaces.
+
+  Given a metric space $(A,d)$, the elements of $A$ are often referred to as ``points'' in this context. 
+
+  The next sections will provide examples of metrics spaces where the distance arises from other algebraic structures (\ie, norms and inner products). Without pretending to extensively develop the theory of metrics spaces in this section, it's worth briefly summarising elements of topology of metric spaces. In particular, the notions of continuity, convergence, etc can be formulated quite generally in the context of metrics spaces.
 
   \begin{definition}[continuity]
     Let $(A,d)$ and $(A', d')$ be metric spaces and $\fullfunction{f}{A}{A'}$ a function.
@@ -81,7 +84,14 @@ Metric spaces provide a natural context in which to develop concepts like contin
     \end{dmath}.
   \end{definition}
   The notion can be further generalised to functions between \emph{topological spaces} in which there is generally no formal notion of distance.
-    
+   
+
+  \section{Topology of metrics spaces}
+
+  \subsection{Completeness}
+
+  \subsection{Compactness} 
+
 
 \section{Banach and Hilber spaces}
 
