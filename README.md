@@ -2,7 +2,7 @@
 
 # handout_qm
 
-Old notes of quantum mechanics from 2015, currently revamped 
+Old notes of quantum mechanics from 2015, that i've now (2023) started to revamp 
 
 ## Install latex
 
