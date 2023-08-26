@@ -96,35 +96,77 @@ Metric spaces provide a natural context where to develop concepts like continuit
 
   First of all, few propedeutic definitions to build terminology: open balls, neighbourhoods, isolated points, dense subsets, open and closed metric spaces. 
 
-  \begin{definition}[open ball]
+  \begin{definition}[open and closed ball]
     Let $(A,d)$ be a metric space.
     Given $\rho > 0$ and $\varphi\in A$, 
-    the ``open ball'' $B_{\rho}(\varphi)$ of ``center'' $\varphi$ and ``radius'' $\rho$ is the subset of $A$ defined by 
+    the ``open ball'' $B_{\rho}(\varphi)$ and the ``closed ball'' 
+      $\overline{B}_{\rho}(\varphi)$
+    of ``center'' $\varphi$ and ``radius'' $\rho$ are the subset of $A$ defined respectively by 
     \begin{dmath}
       B_{\rho}(\varphi) = \Set { \psi \in A | d (\varphi, \psi) < \rho } 
     \end{dmath},
-    \ie, it's the subset of \emph{all and only} the points of $A$ at a distance less than $\rho$ from $\varphi$.
+    and 
+    \begin{dmath}
+      \overline{B}_{\rho}(\varphi) = \Set { \psi \in A | d (\varphi, \psi) < \rho } 
+    \end{dmath}.
+    \ie, the subset of \emph{all and only} the points of $A$ at a distance respectively strictly less and less or equal to $\rho$ from $\varphi$.
   \end{definition} 
+  The terminology ``open'' and ``closed'' will become clear after we introduce the concept of open and closed metric spaces. 
 
   \begin{definition}[neighbourhood]
     Let $(A,d)$ be a metric space. 
     A ``neighbourhood'' of a point $\varphi\in A$ is any 
-    non empty subset  $A' \subset A$ with the property that 
+    subset  $A' \subset A$ for which there exists a open ball entirely contained in $A'$, \ie, 
     there exist $\rho > 0 $ such that $B_{\rho}(\varphi) \subseteq A'$.
   \end{definition}
-  \begin{definition}[isolated point]
-    Let $(A,d)$ be a metric space. 
-    A point  $\varphi\in A$ is ``isolated'' if there exists $\rho > 0$ such that $B_{\rho}(\varphi) \cap A \backslash \{ \varphi \} = \varnothing$ (\ie, there are no other points of $A$ closer to $\varphi$ for less than $\rho$).
-  \end{definition}
-
+  
   \begin{definition}[open metric space] 
     A metric space $(A,d)$ is ``open'' if $A$ is a neighbourhood of every point of $A$, \ie, if for every $\varphi \in A$ there exists some $\rho > 0 $ such that $B_{\rho}(\varphi) \subseteq A$. 
   \end{definition}
 
-  Given a metric space $(A,d)$, every $A' \subseteq A$ can be turned into a metric space $(A', d')$ where $\fullfunction{d'}{A' \times A'}{\R}$ is the ``restriction'' of $d$ to $A'$, \ie, $d' (\varphi,  \psi) = d (\varphi, \psi)$ for all $(\varphi, \psi) \in A' \times A'$. Because of this, it's meaningful to talk about ``open subsets'' of $A$. 
+  Given a metric space $(A,d)$, every subset of $A$ is a metric space with respect to the ``restriction'' of $d$ to $A'$. It's thus meaningful to talk about ``open subsets'' of $A$. 
 
+  The following justifies the previous terminology for open balls. 
+  
+  \begin{proposition}
+     Every open ball is open.
+  \end{proposition}
+\begin{proof}
+  Let $(A,d)$ be a metric space, and consider the open ball $B_{\rho}(\varphi)$. The goal is to prove that for every $\psi \in B_{\rho}(\varphi)$, there exists $\rho' > 0$ such that $B_{\rho'}(\psi) \subseteq B_{\rho} (\varphi)$. Let $\rho' = \rho - d(\varphi, \psi)$, then for every $\xi \in B_{\rho'}(\psi)$ using the triangle disequality we have $d(\xi, \varphi) \leq d(\xi , \psi) + d(\psi, \varphi) < \rho - d(\varphi, \psi) + d(\psi, \varphi) = \rho$. 
+\end{proof}
+
+
+
+\begin{definition}[accumulation and isolated point]
+    Let $(A,d)$ be a metric space. 
+    A point  $\varphi\in A$ is an ``accumulation'' point of $A$ if \emph{every} neighbourhood of $\varphi$ contains at least one point of $A$
+different from $\varphi$ itself. 
+    Every $\varphi \in A$ that is \emph{not} an accumulation point is a ``isolated'' point.
+  \end{definition}
+
+  \begin{definition}[limit]
+    Let $(A,d)$ and $(A', d')$ be metric spaces, $D\subseteq A$ a subset, $\fullfunction{f}{D}{A'}$ a function on $D$ and $\varphi$ an accumulation point of $D$. 
+    An element $l \in A'$ is called the 
+    ``limit'' of $f$ as $\psi$ approaches $\varphi$, and it's written $\lim_{\psi \rightarrow \varphi} f$, if 
+   \begin{dmath}[label={eq:limit}]
+      (\forall \varepsilon > 0)
+      (\exists \delta > 0 )
+      (\forall \psi \in D) 
+      (\psi \neq \varphi) 
+      \left(d(\varphi, \psi) < \delta \Rightarrow d'(l, f(\psi)) < \varepsilon \right)
+    \end{dmath}.
+
+  \end{definition}
+
+  Notice: the function $f$ does not need to be defined at $\varphi$, however $\varphi$ needs to be an accumulation point of the domain of $f$.
+    
 
   \section{Topology of metric spaces}
+
+
+
+
+
 
   \begin{definition}[Cauchy sequence]
     Let $(A,d)$ be a metric space. 
