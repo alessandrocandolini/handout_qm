@@ -70,6 +70,8 @@ Metric spaces provide a natural context where to develop concepts like continuit
 
   Whether to include or not the empty set $\varnothing$ as part of the definition is a matter of convention. Here, \cref{def:metric_space} includes the empty case, but it will be uninteresting in what follows. 
 
+  Given a metric space $(A,d)$, every subset $U\subseteq A$ is a metric space with respect to the ``restriction'' of $d$ to $U$. 
+  
   \begin{exercise}[discrete metric space]
     Every set $A$ can be turned into a metric space by defining $\fullfunction{d}{A\times A}{\R}$ as 
     \begin{dmath*}
@@ -79,7 +81,7 @@ Metric spaces provide a natural context where to develop concepts like continuit
   \end{exercise}
 
 
-  The next sections will provide examples of metric spaces where the distance arises from additional structure (\ie, norm, inner product). Without pretending to extensively develop the theory of metric spaces in this section, it's worth briefly mentioning that notions such as continuity, convergence, and more can be formulated quite generally in the context of metric spaces.
+  The next section deals with  metric spaces where the distance arises from additional structure (\ie, norm, inner product). Without pretending to extensively develop the theory of metric spaces in this section, it's worth mentioning that notions such as continuity, convergence, and more can be formulated quite generally in the context of metric spaces.
 
   \begin{definition}[continuity]
     Let $(A,d)$ and $(A', d')$ be metric spaces and $\fullfunction{f}{A}{A'}$ a function.
@@ -91,10 +93,9 @@ Metric spaces provide a natural context where to develop concepts like continuit
       \left(d(\varphi, \psi) < \delta \Rightarrow d'(f(\varphi), f(\psi)) < \varepsilon \right)
     \end{dmath}.
   \end{definition}
-  The notion of continuity can be further generalised to functions between \emph{topological spaces}, where there is generally no formal notion of distance.
-  Equivalent characterisations of continuity in metric spaces will be presented shortly, after discussing the ``topology'' of metric spaces. 
-
-  First of all, few propedeutic definitions to build terminology: open balls, neighbourhoods, isolated points, dense subsets, open and closed metric spaces. 
+  The notion of continuity can be generalised to functions between \emph{topological spaces}, where there is generally no notion of distance.
+  Equivalent characterisations of continuity in metric spaces will be presented shortly.
+  Before, let's introduce some terminology. 
 
   \begin{definition}[open and closed ball]
     Let $(A,d)$ be a metric space.
@@ -115,16 +116,15 @@ Metric spaces provide a natural context where to develop concepts like continuit
 
   \begin{definition}[neighbourhood]
     Let $(A,d)$ be a metric space. 
-    A ``neighbourhood'' of a point $\varphi\in A$ is any 
-    subset  $A' \subset A$ for which there exists a open ball entirely contained in $A'$, \ie, 
-    there exist $\rho > 0 $ such that $B_{\rho}(\varphi) \subseteq A'$.
+    A ``neighbourhood'' of $\varphi\in A$ is any 
+    subset  $U \subseteq A$ such that there exists an open ball entirely contained in $U$, \ie, 
+    there exist $\rho > 0 $ such that $B_{\rho}(\varphi) \subseteq U$.
   \end{definition}
   
-  \begin{definition}[open metric space] 
-    A metric space $(A,d)$ is ``open'' if $A$ is a neighbourhood of every point of $A$, \ie, if for every $\varphi \in A$ there exists some $\rho > 0 $ such that $B_{\rho}(\varphi) \subseteq A$. 
+  \begin{definition}[open subset] 
+    Let $(A,d)$ be a metric space. 
+    A subset $U \subseteq A$ is ``open'' if  every point of $U$ has a neighborhood contained in $U$.
   \end{definition}
-
-  Given a metric space $(A,d)$, every subset of $A$ is a metric space with respect to the ``restriction'' of $d$ to $A'$. It's thus meaningful to talk about ``open subsets'' of $A$. 
 
   The following justifies the previous terminology for open balls. 
   
@@ -132,9 +132,20 @@ Metric spaces provide a natural context where to develop concepts like continuit
      Every open ball is open.
   \end{proposition}
 \begin{proof}
-  Let $(A,d)$ be a metric space, and consider the open ball $B_{\rho}(\varphi)$. The goal is to prove that for every $\psi \in B_{\rho}(\varphi)$, there exists $\rho' > 0$ such that $B_{\rho'}(\psi) \subseteq B_{\rho} (\varphi)$. Let $\rho' = \rho - d(\varphi, \psi)$, then for every $\xi \in B_{\rho'}(\psi)$ using the triangle disequality we have $d(\xi, \varphi) \leq d(\xi , \psi) + d(\psi, \varphi) < \rho - d(\varphi, \psi) + d(\psi, \varphi) = \rho$. 
+  Let $(A,d)$ be a metric space and $B_{\rho}(\varphi)$ an open ball. The goal is to prove that for every $\psi \in B_{\rho}(\varphi)$, there exists $\rho' > 0$ such that $B_{\rho'}(\psi) \subseteq B_{\rho} (\varphi)$. Set $\rho' \eqdef \rho - d(\varphi, \psi)$. Then, for every $\xi \in B_{\rho'}(\psi)$ the triangle inequality implies $d(\xi, \varphi) \leq d(\xi , \psi) + d(\psi, \varphi) < \rho - d(\varphi, \psi) + d(\psi, \varphi) = \rho$. 
 \end{proof}
 
+\begin{theorem}[topology of a metric space]
+  \label{theorem:topology_metric_space}
+    Let $(A,d)$ be a metric space. Then
+    \begin{itemize}
+      \item $A$ and $\varnothing$ are open;
+      \item any finite, countable, or uncountable union of open subsets of $A$  is open;
+      \item Any \emph{finite} intersection of open subsets of $A$ is open.
+    \end{itemize}
+\end{theorem}
+
+Proof is left as exercise. Proof that countable intersection don't need to be open is also left as an exercise. \Cref{theorem:topology_metric_space} defines a structure of ``topological space'' on $A$, \ie, a ordered pair of $(A, \tau)$ where $\tau$ is a set of subsets of $A$ closed under arbitrary unions and finite intersections. 
 
 
 \begin{definition}[accumulation and isolated point]
@@ -145,6 +156,7 @@ different from $\varphi$ itself.
   \end{definition}
 
   \begin{definition}[limit]
+    \label{def:limit}
     Let $(A,d)$ and $(A', d')$ be metric spaces, $D\subseteq A$ a subset, $\fullfunction{f}{D}{A'}$ a function on $D$ and $\varphi$ an accumulation point of $D$. 
     An element $l \in A'$ is called the 
     ``limit'' of $f$ as $\psi$ approaches $\varphi$, and it's written $\lim_{\psi \rightarrow \varphi} f$, if 
@@ -159,12 +171,18 @@ different from $\varphi$ itself.
   \end{definition}
 
   Notice: the function $f$ does not need to be defined at $\varphi$, however $\varphi$ needs to be an accumulation point of the domain of $f$.
+
+  \Cref{def:limit} might not look practically useful: if there's a candidate $l$, the definition determines unambiguously whether $l$ is or is not the limit, but the identification of a target $l$ needs to happen by other means. It's possible to develop a calculus by \begin{inparaenum}[a)] 
+  \item develop an ``alphabet'' of known limits for the simplest possible cases of practical relevance, relying solely on \cref{def:limit};
+  \item develop a number of higher level ``combinators'' to reduce the calculation of limits of more complex expressions to some combination of the simplest known ones.  
+  \end{inparaenum}
     
 
   \section{Topology of metric spaces}
 
 
 
+  \subsection{Completeness}
 
 
 
@@ -173,8 +191,57 @@ different from $\varphi$ itself.
     A sequence $(\varphi_{n})_{n\in\N} : \N \rightarrow A$ is called a Cauchy sequence 
   \end{definition}
 
+  \begin{proposition}
+    \label{prop:convergence=>cauchy}
+    Let $(A,d)$ be a metric space. Any convergent sequence $(\varphi_{n})_{n\in\N}$ in $A$ is also a Cauchy
+sequence.
+  \end{proposition}
 
-  \subsection{Completeness}
+Intuitively, \cref{prop:convergence=>cauchy} follows from the fact that $\varphi_n$ and $\varphi_m$ are both ``close'' to the limit of the sequence, so their distance is somehow bound. To make the argument rigorous, we will rely on the triangle inequality.
+
+  \begin{proof}
+    Let $\varphi = \lim_{n} \varphi_{n}$. By definition of convergence, 
+   \begin{dmath*}
+      (\forall \varepsilon > 0)
+      (\exists N \in \N)
+      \left( n > N \Rightarrow d (\varphi, \varphi_n) < \epsilon \right) 
+    \end{dmath*}.
+    We want to prove that exists $M \in \N$ such that 
+   \begin{dmath*}
+      (\forall \varepsilon > 0)
+      (\exists M > 0 )
+      \left(n, m > M \Rightarrow d (\varphi_m, \varphi_n) < \epsilon \right) 
+    \end{dmath*}.
+    Take any $M > N$, then 
+   \begin{dmath*}
+     d \left( \varphi_m, \varphi_n \right) \leq d \left(\varphi_m, \varphi \right) + d \left( \varphi, \varphi_n \right) 
+    \end{dmath*},
+    \ie, $d ( \varphi_m, \varphi_n ) < \varepsilon + \varepsilon$. 
+  \end{proof}
+
+
+The converse  of \cref{prop:convergence=>cauchy} is not true in general, \ie, there 
+exists metric spaces where some Cauchy sequences do not converge.
+\begin{approfondimento}
+   A typical counter-example works as follow.
+   Let $(\varphi_{n})_{n\geq 1}$ be a sequence in $\R$ such that for every $n\geq 1 $
+   we have: $\varphi_{n} \in \Q$ and 
+   \begin{math}
+      \sqrt{2} - \frac{1}{n} < \varphi_{n} < \sqrt{2} + \frac{1}{n} 
+   \end{math}.
+   (It is always possible to construct such sequence since $\Q$ is dense in
+   $\R$.)
+   It is possible to prove that $\lim_{n\rightarrow+\infty} \varphi_{n} = \sqrt{2}$.
+   Being convergent in $\R$, $\varphi_{n}$ is of Cauchy type in $\R$.
+   The same sequence can be defined in $\Q$ and it is of Cauchy type in $\Q$,
+   but it is not convergent in $\Q$ since $\sqrt{2} \in \R \backslash \Q$.
+\end{approfondimento}
+
+\begin{definition}[completeness]
+A metric space is ``complete'' if \emph{every} Cauchy
+sequency is convergent. 
+\end{definition}
+
 
   \subsection{Compactness} 
 
@@ -478,27 +545,6 @@ norms are equivalent and we need to specify which norm we are using.
 
 
 Let us recall an important fact about Cauchy sequencies.
-\graffito{Completeness of a metric space}
-Give any metric space $(X,d)$, a convergent sequence in $X$ is also a Cauchy
-sequence.
-The converse of this statement is not generally true  however, \ie, there
-exists metric spaces where some Cauchy sequences do not need to converge.
-\begin{approfondimento}
-   A typical counter-example works as follow.
-   Let $(x_{n})_{n\geq 1}$ be a sequence in $\R$ such that for every $n\geq 1 $
-   we have: $x_{n} \in \Q$ and 
-   \begin{math}
-      \sqrt{2} - \frac{1}{n} < x_{n} < \sqrt{2} + \frac{1}{n} 
-   \end{math}.
-   (It is always possible to construct such sequence since $\Q$ is dense in
-   $\R$.)
-   It is possible to prove that $\lim_{n\rightarrow+\infty} x_{n} = \sqrt{2}$.
-   Being convergent in $\R$, $x_{n}$ is of Cauchy type in $\R$.
-   The same sequence can be defined in $\Q$ and it is of Cauchy type in $\Q$,
-   but it is not convergent in $\Q$ since $\sqrt{2} \in \R \backslash \Q$.
-\end{approfondimento}
-A metric space is ``complete'' if \emph{all} Cauchy
-sequencies are convergent. 
 
 \begin{definition}[Banach space]
    Let
