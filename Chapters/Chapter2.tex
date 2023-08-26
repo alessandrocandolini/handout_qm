@@ -11,10 +11,11 @@
 
 
 %\lettrine{T}{he} 
-The operator formulation of standard non-relativistic quantum mechanics is based on the spectral theory of linear self-ajoint operators (bound or unbound) in complex separable Hilbert spaces.
-This chapter provides the necessary mathematical groundwork in functional analysis to approach non-relativistic quantum mechanics in full generality. 
-Readers already acquainted with these concepts may choose to jump to the next chapter to see how the mathematical theory is applied in quantum mechanics. 
+The operator formulation of non-relativistic quantum mechanics is rooted in the spectral theory of linear self-ajoint operators (bound or unbound) in complex separable Hilbert spaces.
+This chapter provides the necessary mathematical background in functional analysis to approach non-relativistic quantum mechanics in full generality. 
+Readers already acquainted with these concepts can jump to the next chapter to see how the mathematical theory is applied to quantum mechanics. 
   Familiarity with basic linear algebra (eg, at the level of) and real analysis (\eg, at the level of) is assumed. 
+  Some of these notions are formalied in Agda in \cref{appendix:agda}.
 
 % In formulating quantum mechanics, physicists often rely on Dirac's notation, a potent mnemonic technique that, at first glance, lacks strict mathematical rigor. Nonetheless, it is feasible to create a correspondence between Dirac's notation and the rigorous theorems of functional analysis, as we will delve into in subsequent sections.
 
@@ -22,17 +23,16 @@ This chapter is based on \textcite{Reed.Simon:1980}.
 Some other books that have been helpful while writing this chapter includes:
 \textcite{Teschl:2009,Berberian:1976,Hutson.Pym:1980,Debnath.Mikusinski:2005,Helmberg:1969}.
 
-
   \section{Metric spaces}
 
-Metric spaces are sets endowed with an additional algebraic structure that attaches significance to the concept of ``distance'' between each pair of elements in the set.
-Metric spaces provide a natural context in which to develop concepts like continuity, convergence, and more.
+  Metric spaces are sets endowed with a notion of ``distance'' between every pair of elements in the set.
+Metric spaces provide a natural context where to develop concepts like continuity, convergence, and more.
 
   \begin{definition}[distance]
     Let $A$ be a set. 
-    A ``distance'' (or ``metrics'') over $A$ is
+    A ``distance'' (or ``metric'') on $A$ is
    any application $\fullfunction{d}{A\times
-      A}{\interval[open right]{0}{+\infty}}$, satisfying the following requirements: 
+      A}{\R}$, satisfying the following laws: 
    \begin{enumerate} [label=(\alph*)]
       \item 
 	 \label{item:distance1}
@@ -43,9 +43,7 @@ Metric spaces provide a natural context in which to develop concepts like contin
 	 (nonnegativity);
       \item 
 	 \label{item:distance2}
-       $d(\varphi,\psi) = 0$ \emph{if and only if} $\varphi = \psi$
-	 (\ie, for every $\psi \in A$, the distance from itself is always zero and $\psi$ is also the only element in $A$ at zero distance from
-	 $\psi$);
+       $d(\varphi,\psi) = 0$ \emph{if and only if} $\varphi = \psi$);
       \item 
 	 \label{item:distance3}
 	 \begin{math}
@@ -53,29 +51,39 @@ Metric spaces provide a natural context in which to develop concepts like contin
 	       (\varphi,\psi)\in A 
 	       \times A$}
 	 \end{math}
-	 (\ie, the distance is a symmetric function of its arguments);
+       (\ie, symmetry);
       \item 
 	 \label{item:distance4}
 	 \begin{math}
 	    d(\varphi,\psi) \leq  d(\psi,\eta) + d(\eta,
 	    \psi)\condition{$\forall (\varphi,\psi,\eta)\in A
 	       \times A\times A $}
-	 \end{math} (the so-called ``triangle inequality'').
+	 \end{math} (the ``triangle inequality'').
    \end{enumerate}
   \end{definition}
 
   \begin{definition}[metric space]
-    A ``metric space'' is an ordered pair $(A, d)$, where $A$is a set and $\fullfunction{d}{A\times A}{A}$ is a distance on $A$.
+    \label{def:metric_space}
+    A ``metric space'' is an ordered pair $(A, d)$, where $A$ is a set and $\fullfunction{d}{A\times A}{A}$ is a distance on $A$.
+    The elements of $A$ are often referred to as ``points'' in this context. 
   \end{definition}
 
+  Whether to include or not the empty set $\varnothing$ as part of the definition is a matter of convention. Here, \cref{def:metric_space} includes the empty case, but it will be uninteresting in what follows. 
 
-  Given a metric space $(A,d)$, the elements of $A$ are often referred to as ``points'' in this context. 
+  \begin{exercise}[discrete metric space]
+    Every set $A$ can be turned into a metric space by defining $\fullfunction{d}{A\times A}{\R}$ as 
+    \begin{dmath*}
+      d(\varphi, \psi) = \begin{cases} 1 & \text{if } \varphi = \psi \\ 0 & \text{otherwise} \end{cases}
+    \end{dmath*}.
+    Prove that such $d$ satisfies all the properties of a distance.
+  \end{exercise}
 
-  The next sections will provide examples of metrics spaces where the distance arises from other algebraic structures (\ie, norms and inner products). Without pretending to extensively develop the theory of metrics spaces in this section, it's worth briefly summarising elements of topology of metric spaces. In particular, the notions of continuity, convergence, etc can be formulated quite generally in the context of metrics spaces.
+
+  The next sections will provide examples of metric spaces where the distance arises from additional structure (\ie, norm, inner product). Without pretending to extensively develop the theory of metric spaces in this section, it's worth briefly mentioning that notions such as continuity, convergence, and more can be formulated quite generally in the context of metric spaces.
 
   \begin{definition}[continuity]
     Let $(A,d)$ and $(A', d')$ be metric spaces and $\fullfunction{f}{A}{A'}$ a function.
-    $f$ is ``continuous'' at a point $\varphi\in A$  (with respect to the given metrics) if for any positive real number $\varepsilon > 0$, there exists a positive real number $\delta > 0 $ such that for every $\psi \in A$, $d(\varphi, \psi) < \delta$ implies $d'(f(\varphi), f(\psi) ) < \varepsilon$. Formally, 
+    $f$ is ``continuous'' at a point $\varphi\in A$  (with respect to the given metric) if for any positive real number $\varepsilon > 0$, there exists a positive real number $\delta > 0 $ such that for every $\psi \in A$, $d(\varphi, \psi) < \delta$ implies $d'(f(\varphi), f(\psi) ) < \varepsilon$. Formally, 
     \begin{dmath}[label={eq:continuity}]
       (\forall \varepsilon > 0)
       (\exists \delta > 0 )
@@ -83,10 +91,46 @@ Metric spaces provide a natural context in which to develop concepts like contin
       \left(d(\varphi, \psi) < \delta \Rightarrow d'(f(\varphi), f(\psi)) < \varepsilon \right)
     \end{dmath}.
   \end{definition}
-  The notion can be further generalised to functions between \emph{topological spaces} in which there is generally no formal notion of distance.
-   
+  The notion of continuity can be further generalised to functions between \emph{topological spaces}, where there is generally no formal notion of distance.
+  Equivalent characterisations of continuity in metric spaces will be presented shortly, after discussing the ``topology'' of metric spaces. 
 
-  \section{Topology of metrics spaces}
+  First of all, few propedeutic definitions to build terminology: open balls, neighbourhoods, isolated points, dense subsets, open and closed metric spaces. 
+
+  \begin{definition}[open ball]
+    Let $(A,d)$ be a metric space.
+    Given $\rho > 0$ and $\varphi\in A$, 
+    the ``open ball'' $B_{\rho}(\varphi)$ of ``center'' $\varphi$ and ``radius'' $\rho$ is the subset of $A$ defined by 
+    \begin{dmath}
+      B_{\rho}(\varphi) = \Set { \psi \in A | d (\varphi, \psi) < \rho } 
+    \end{dmath},
+    \ie, it's the subset of \emph{all and only} the points of $A$ at a distance less than $\rho$ from $\varphi$.
+  \end{definition} 
+
+  \begin{definition}[neighbourhood]
+    Let $(A,d)$ be a metric space. 
+    A ``neighbourhood'' of a point $\varphi\in A$ is any 
+    non empty subset  $A' \subset A$ with the property that 
+    there exist $\rho > 0 $ such that $B_{\rho}(\varphi) \subseteq A'$.
+  \end{definition}
+  \begin{definition}[isolated point]
+    Let $(A,d)$ be a metric space. 
+    A point  $\varphi\in A$ is ``isolated'' if there exists $\rho > 0$ such that $B_{\rho}(\varphi) \cap A \backslash \{ \varphi \} = \varnothing$ (\ie, there are no other points of $A$ closer to $\varphi$ for less than $\rho$).
+  \end{definition}
+
+  \begin{definition}[open metric space] 
+    A metric space $(A,d)$ is ``open'' if $A$ is a neighbourhood of every point of $A$, \ie, if for every $\varphi \in A$ there exists some $\rho > 0 $ such that $B_{\rho}(\varphi) \subseteq A$. 
+  \end{definition}
+
+  Given a metric space $(A,d)$, every $A' \subseteq A$ can be turned into a metric space $(A', d')$ where $\fullfunction{d'}{A' \times A'}{\R}$ is the ``restriction'' of $d$ to $A'$, \ie, $d' (\varphi,  \psi) = d (\varphi, \psi)$ for all $(\varphi, \psi) \in A' \times A'$. Because of this, it's meaningful to talk about ``open subsets'' of $A$. 
+
+
+  \section{Topology of metric spaces}
+
+  \begin{definition}[Cauchy sequence]
+    Let $(A,d)$ be a metric space. 
+    A sequence $(\varphi_{n})_{n\in\N} : \N \rightarrow A$ is called a Cauchy sequence 
+  \end{definition}
+
 
   \subsection{Completeness}
 
