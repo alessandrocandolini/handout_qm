@@ -84,6 +84,7 @@ Metric spaces provide a natural context where to develop concepts like continuit
   The next section deals with  metric spaces where the distance arises from additional structure (\ie, norm, inner product). Without pretending to extensively develop the theory of metric spaces in this section, it's worth mentioning that notions such as continuity, convergence, and more can be formulated quite generally in the context of metric spaces.
 
   \begin{definition}[continuity]
+    \label{def:continuity}
     Let $(A,d)$ and $(A', d')$ be metric spaces and $\fullfunction{f}{A}{A'}$ a function.
     $f$ is ``continuous'' at a point $\varphi\in A$  (with respect to the given metric) if for any positive real number $\varepsilon > 0$, there exists a positive real number $\delta > 0 $ such that for every $\psi \in A$, $d(\varphi, \psi) < \delta$ implies $d'(f(\varphi), f(\psi) ) < \varepsilon$. Formally, 
     \begin{dmath}[label={eq:continuity}]
@@ -159,8 +160,8 @@ different from $\varphi$ itself.
     \label{def:limit}
     Let $(A,d)$ and $(A', d')$ be metric spaces, $D\subseteq A$ a subset, $\fullfunction{f}{D}{A'}$ a function on $D$ and $\varphi$ an accumulation point of $D$. 
     An element $l \in A'$ is called the 
-    ``limit'' of $f$ as $\psi$ approaches $\varphi$, and it's written $\lim_{\psi \rightarrow \varphi} f$, if 
-   \begin{dmath}[label={eq:limit}]
+    ``limit of $f$ at $\varphi$'', and it's written $\lim_{\psi \rightarrow \varphi} f$, if 
+   \begin{dmath}[label={limit}]
       (\forall \varepsilon > 0)
       (\exists \delta > 0 )
       (\forall \psi \in D) 
@@ -172,8 +173,8 @@ different from $\varphi$ itself.
 
   Notice: the function $f$ does not need to be defined at $\varphi$, however $\varphi$ needs to be an accumulation point of the domain of $f$.
 
-  \Cref{def:limit} might not look practically useful: if there's a candidate $l$, the definition determines unambiguously whether $l$ is or is not the limit, but the identification of a target $l$ needs to happen by other means. It's possible to develop a calculus by \begin{inparaenum}[a)] 
-  \item develop an ``alphabet'' of known limits for the simplest possible cases of practical relevance, relying solely on \cref{def:limit};
+  \Cref{def:continuity,def:limit} might not look particularly useful in practice. In the case of \cref{def:limit}, while \eqref{eq:limit} determines unambiguously whether a candidate $l$ is or is not the limit, the identification of a target $l$ itself needs to happen by some other mean. It's possible to develop a calculus of limits and continuous functions by \begin{inparaenum}[a)] 
+  \item develop an ``alphabet'' of known limits for the simplest possible cases of practical relevance, relying solely on \eqref{def:limit};
   \item develop a number of higher level ``combinators'' to reduce the calculation of limits of more complex expressions to some combination of the simplest known ones.  
   \end{inparaenum}
     
